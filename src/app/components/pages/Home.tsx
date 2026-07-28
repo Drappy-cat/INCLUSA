@@ -25,32 +25,36 @@ import {
 } from "../../data/content";
 import { useContent, isPublished } from "../../data/ContentStore";
 import { useLanguage } from "../../data/LanguageContext";
+import heroSlide1 from "../../../assets/hero-slide-1.png";
+import heroSlide2 from "../../../assets/hero-slide-2.png";
+import heroSlide3 from "../../../assets/hero-slide-3.png";
+import heroSlide4 from "../../../assets/hero-slide-4.png";
 
 /* ─────────────── HERO SLIDESHOW DATA ─────────────── */
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80",
+    image: heroSlide1,
     badge: "INCLUSA Institute · Indonesia",
     heading: "Membangun Pembangunan\nInklusif melalui Data,\nRiset & Kolaborasi",
     highlight: "Riset & Kolaborasi",
     sub: "Lembaga independen yang berfokus pada pemberdayaan anak, perempuan, dan penyandang disabilitas melalui pendekatan berbasis bukti di Indonesia.",
   },
   {
-    image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1600&q=80",
+    image: heroSlide2,
     badge: "INCLUSA Academy",
     heading: "Meningkatkan Kapasitas\nProfesional untuk\nInklusi Sosial",
     highlight: "Inklusi Sosial",
     sub: "Program pelatihan intensif untuk tenaga kesehatan, pendidik, fasilitator komunitas, dan pemimpin organisasi di seluruh Indonesia.",
   },
   {
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80",
+    image: heroSlide3,
     badge: "INCLUSA Data Center",
     heading: "Observatori Data\nNasional untuk\nKehidupan yang Lebih Baik",
     highlight: "Kehidupan yang Lebih Baik",
     sub: "Mengumpulkan, menganalisis, dan menyebarluaskan data inklusif nasional untuk mendukung pengambilan kebijakan yang berbasis bukti.",
   },
   {
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80",
+    image: heroSlide4,
     badge: "INCLUSA Research Center",
     heading: "Riset Ilmiah untuk\nPerubahan Sosial\nyang Nyata",
     highlight: "Perubahan Sosial",
