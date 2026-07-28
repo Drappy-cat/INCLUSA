@@ -79,7 +79,7 @@ const strategicAreas = [
     desc: "Pelatihan & capacity building profesional untuk tenaga kesehatan, pendidik, dan fasilitator komunitas.",
     to: "/academy",
     color: "bg-[#17787d]",
-    status: "Aktif",
+    status: "Coming Soon",
   },
   {
     icon: FlaskConical,
