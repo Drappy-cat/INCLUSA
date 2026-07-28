@@ -101,28 +101,28 @@ export function TentangKami() {
       </section>
 
       {/* 2. Section About Us */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-20 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-2">
             <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div>
-                <h2 className="font-display text-3xl font-bold text-brand-blue-deep">Visi & Misi</h2>
+                <h2 className="font-display text-3xl font-bold text-brand-blue-deep dark:text-white">Visi & Misi</h2>
                 <div className="mt-6 space-y-6">
-                  <div className="rounded-2xl border border-border bg-brand-cream p-6">
+                  <div className="rounded-2xl border border-border bg-brand-cream p-6 dark:bg-slate-900 dark:border-slate-800">
                     <div className="flex items-center gap-3">
-                      <Eye className="h-6 w-6 text-brand-blue" />
-                      <h3 className="font-display text-lg font-bold text-brand-blue-deep">Visi</h3>
+                      <Eye className="h-6 w-6 text-brand-blue dark:text-brand-teal" />
+                      <h3 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">Visi</h3>
                     </div>
-                    <p className="mt-3 text-brand-blue-deep/80 leading-relaxed">
+                    <p className="mt-3 text-brand-blue-deep/80 leading-relaxed dark:text-slate-300">
                       Mewujudkan Sidoarjo yang inklusif dan bebas stigma HIV/AIDS, di mana setiap individu memperoleh akses informasi, edukasi, dan layanan kesehatan yang setara.
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-border bg-brand-cream-deep p-6">
+                  <div className="rounded-2xl border border-border bg-brand-cream-deep p-6 dark:bg-slate-900 dark:border-slate-800">
                     <div className="flex items-center gap-3">
                       <Target className="h-6 w-6 text-brand-coral" />
-                      <h3 className="font-display text-lg font-bold text-brand-blue-deep">Misi</h3>
+                      <h3 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">Misi</h3>
                     </div>
-                    <ul className="mt-3 space-y-2 text-brand-blue-deep/80 leading-relaxed">
+                    <ul className="mt-3 space-y-2 text-brand-blue-deep/80 leading-relaxed dark:text-slate-300">
                       <li>• Menyediakan informasi HIV/AIDS yang akurat dan tepercaya.</li>
                       <li>• Memperkuat kolaborasi lintas sektor dan fasilitas kesehatan.</li>
                       <li>• Menghadirkan edukasi kesehatan reproduksi sesuai jenjang usia.</li>
@@ -132,8 +132,8 @@ export function TentangKami() {
                 </div>
               </div>
               <div>
-                <h2 className="font-display text-3xl font-bold text-brand-blue-deep">Latar Belakang & Tujuan</h2>
-                <p className="mt-4 text-brand-blue-deep/80 leading-relaxed">
+                <h2 className="font-display text-3xl font-bold text-brand-blue-deep dark:text-white">Latar Belakang & Tujuan</h2>
+                <p className="mt-4 text-brand-blue-deep/80 leading-relaxed dark:text-slate-300">
                   INCLUSA lahir dari kebutuhan akan sebuah ekosistem digital yang tidak hanya memberikan informasi, tetapi juga menghubungkan berbagai pihak dalam penanggulangan HIV/AIDS di Kabupaten Sidoarjo. Kami membangun platform ini untuk memecah batasan informasi, mengurangi stigma, dan memastikan bahwa setiap individu, terlepas dari status kesehatan mereka, mendapatkan dukungan yang mereka butuhkan secara holistik dan berkelanjutan.
                 </p>
               </div>
@@ -193,25 +193,25 @@ export function TentangKami() {
       </section>
 
       {/* 4. Section Our Team */}
-      <section id="our-team" className="bg-white py-20 scroll-mt-16">
+      <section id="our-team" className="bg-white py-20 scroll-mt-16 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow="Tim Kami" title="Meet Our Team" subtitle="Kolaborasi para akademisi dan pengembang muda yang berdedikasi tinggi." />
           
           <div className="mt-16">
-            <h3 className="text-center font-display text-2xl font-bold text-brand-blue-deep mb-8">Founder</h3>
+            <h3 className="text-center font-display text-2xl font-bold text-brand-blue-deep mb-8 dark:text-white">Founder</h3>
             <div className="flex justify-center">
-              <div className="group w-full max-w-[280px] rounded-3xl border border-border bg-white overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div className="aspect-[3/4] bg-brand-cream relative overflow-hidden">
+              <div className="group w-full max-w-[280px] rounded-3xl border border-border bg-white overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
+                <div className="aspect-[3/4] bg-brand-cream relative overflow-hidden dark:bg-slate-800">
                    <img src={founderImg} alt="Kharizha Krishnandya, S.H., M.H." className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                    <div className="absolute inset-0 bg-brand-blue/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </div>
-                <div className="p-5 pt-6 text-center relative z-20 bg-white">
-                  <h4 className="font-display text-lg font-bold text-brand-blue-deep">Kharizha Krishnandya, S.H., M.H.</h4>
-                  <p className="mt-1 text-sm font-medium text-brand-blue">Founder & Penasihat Ahli</p>
-                  <p className="mt-3 text-xs text-muted-foreground line-clamp-3">Mengarahkan visi dan memastikan keberjalanan program-program inklusi sesuai dengan tujuan strategis organisasi.</p>
+                <div className="p-5 pt-6 text-center relative z-20 bg-white dark:bg-slate-900">
+                  <h4 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">Kharizha Krishnandya, S.H., M.H.</h4>
+                  <p className="mt-1 text-sm font-medium text-brand-blue dark:text-brand-teal">Founder & Penasihat Ahli</p>
+                  <p className="mt-3 text-xs text-muted-foreground line-clamp-3 dark:text-slate-300">Mengarahkan visi dan memastikan keberjalanan program-program inklusi sesuai dengan tujuan strategis organisasi.</p>
                   <div className="mt-5 flex justify-center gap-4">
-                    <a href="#" aria-label="LinkedIn" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white"><Linkedin className="h-5 w-5" /></a>
-                    <a href="#" aria-label="Email" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white"><Mail className="h-5 w-5" /></a>
+                    <a href="#" aria-label="LinkedIn" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-brand-blue"><Linkedin className="h-5 w-5" /></a>
+                    <a href="#" aria-label="Email" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-brand-blue"><Mail className="h-5 w-5" /></a>
                   </div>
                 </div>
               </div>
@@ -219,23 +219,23 @@ export function TentangKami() {
           </div>
 
           <div className="mt-16">
-            <h3 className="text-center font-display text-2xl font-bold text-brand-blue-deep mb-8">Development Team</h3>
+            <h3 className="text-center font-display text-2xl font-bold text-brand-blue-deep mb-8 dark:text-white">Development Team</h3>
             <div className="mx-auto max-w-4xl grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {devTeam.map((member, i) => (
-                <div key={member.id ?? i} className="group rounded-3xl border border-border bg-white overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div key={member.id ?? i} className="group rounded-3xl border border-border bg-white overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
                   <div className={`aspect-[3/4] flex items-center justify-center relative overflow-hidden ${avatarTone[member.tone] ?? "bg-brand-blue"}`}>
                      <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                      <div className="relative z-10 text-6xl font-display font-bold text-white transition-transform duration-300 group-hover:scale-110">
                        {member.initials}
                      </div>
                   </div>
-                  <div className="p-5 text-center bg-white">
-                    <h4 className="font-display text-lg font-bold text-brand-blue-deep">{member.name}</h4>
+                  <div className="p-5 text-center bg-white dark:bg-slate-900">
+                    <h4 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">{member.name}</h4>
                     <p className="mt-1 text-sm font-medium text-brand-coral">{member.role}</p>
-                    <p className="mt-3 text-xs text-muted-foreground line-clamp-2">{member.focus}</p>
+                    <p className="mt-3 text-xs text-muted-foreground line-clamp-2 dark:text-slate-300">{member.focus}</p>
                     <div className="mt-5 flex justify-center gap-4">
-                      <a href="#" aria-label="LinkedIn" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white"><Linkedin className="h-4 w-4" /></a>
-                      <a href="#" aria-label="Email" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white"><Mail className="h-4 w-4" /></a>
+                      <a href="#" aria-label="LinkedIn" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-brand-blue"><Linkedin className="h-4 w-4" /></a>
+                      <a href="#" aria-label="Email" className="rounded-full bg-brand-cream p-2 text-muted-foreground transition-colors hover:bg-brand-blue hover:text-white dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-brand-blue"><Mail className="h-4 w-4" /></a>
                     </div>
                   </div>
                 </div>
@@ -246,15 +246,15 @@ export function TentangKami() {
       </section>
 
       {/* 5. Timeline Pengembangan */}
-      <section className="bg-brand-cream-deep py-20 overflow-hidden">
+      <section className="bg-brand-cream-deep py-20 overflow-hidden dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow="Perjalanan Kami" title="Timeline Pengembangan" subtitle="Tahapan dari ide hingga menjadi platform inklusif terpadu." />
           <div className="mt-20">
             <div className="relative">
               {/* horizontal line for desktop */}
-              <div className="hidden md:block absolute top-8 left-10 right-10 h-1 bg-border" />
+              <div className="hidden md:block absolute top-8 left-10 right-10 h-1 bg-border dark:bg-slate-800" />
               {/* vertical line for mobile */}
-              <div className="md:hidden absolute left-8 top-8 bottom-8 w-1 bg-border" />
+              <div className="md:hidden absolute left-8 top-8 bottom-8 w-1 bg-border dark:bg-slate-800" />
               
               <div className="grid gap-10 md:grid-cols-6 md:gap-4 relative z-10">
                 {[
@@ -266,12 +266,12 @@ export function TentangKami() {
                   { icon: RefreshCw, title: "Improvement", desc: "Evaluasi dan iterasi" },
                 ].map((step, i) => (
                   <div key={i} className="group relative flex md:flex-col items-center md:text-center gap-6 md:gap-4 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${i * 150}ms`, animationFillMode: 'both' }}>
-                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 border-brand-cream-deep bg-white text-brand-blue shadow-md md:mx-auto transition-transform duration-300 group-hover:scale-110 group-hover:border-brand-blue/20">
+                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 border-brand-cream-deep bg-white text-brand-blue shadow-md md:mx-auto transition-transform duration-300 group-hover:scale-110 group-hover:border-brand-blue/20 dark:bg-slate-900 dark:border-slate-800 dark:text-brand-teal">
                        <step.icon className="h-7 w-7" />
                      </div>
                      <div>
-                       <h4 className="font-display font-bold text-brand-blue-deep">{step.title}</h4>
-                       <p className="mt-1 text-xs text-muted-foreground">{step.desc}</p>
+                       <h4 className="font-display font-bold text-brand-blue-deep dark:text-white">{step.title}</h4>
+                       <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">{step.desc}</p>
                      </div>
                   </div>
                 ))}
@@ -282,7 +282,7 @@ export function TentangKami() {
       </section>
 
       {/* 6. Core Values */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-20 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow="Nilai Utama" title="Prinsip INCLUSA" subtitle="Landasan kami dalam berkarya dan melayani masyarakat." />
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -292,12 +292,12 @@ export function TentangKami() {
               { icon: Lightbulb, title: "Innovation", desc: "Terus berinovasi dengan solusi digital terdepan masa kini." },
               { icon: Leaf, title: "Sustainability", desc: "Membangun ekosistem yang mandiri dan berkelanjutan secara terus menerus." },
             ].map((v, i) => (
-              <div key={i} className="group rounded-3xl border border-border bg-brand-cream p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
-                <span className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-brand-blue shadow-sm transition-transform duration-500 group-hover:rotate-[15deg] group-hover:scale-110">
+              <div key={i} className="group rounded-3xl border border-border bg-brand-cream p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4 dark:bg-slate-900 dark:border-slate-800" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
+                <span className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-brand-blue shadow-sm transition-transform duration-500 group-hover:rotate-[15deg] group-hover:scale-110 dark:bg-slate-800 dark:text-brand-teal">
                   <v.icon className="h-8 w-8" />
                 </span>
-                <h3 className="font-display text-xl font-bold text-brand-blue-deep">{v.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{v.desc}</p>
+                <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{v.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">{v.desc}</p>
               </div>
             ))}
           </div>

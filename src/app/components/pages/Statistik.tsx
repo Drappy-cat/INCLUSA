@@ -76,9 +76,9 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 
 function ChartCard({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-white p-6">
-      <h3 className="font-display text-lg font-bold text-brand-blue-deep">{title}</h3>
-      {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
+    <div className="rounded-2xl border border-border bg-white p-6 dark:bg-slate-900 dark:border-slate-800">
+      <h3 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">{title}</h3>
+      {subtitle && <p className="mt-1 text-sm text-muted-foreground dark:text-slate-300">{subtitle}</p>}
       <div className="mt-6 h-72">{children}</div>
     </div>
   );

@@ -39,12 +39,12 @@ export function CariFasilitas() {
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative w-full sm:max-w-md">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground dark:text-slate-400" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Cari nama faskes atau kecamatan..."
-              className="w-full rounded-full border border-border bg-white py-2.5 pl-10 pr-4 text-sm outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20"
+              className="w-full rounded-full border border-border bg-white py-2.5 pl-10 pr-4 text-sm outline-none input-focus-glow dark:bg-slate-800 dark:text-white dark:border-slate-700"
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -54,33 +54,33 @@ export function CariFasilitas() {
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">{filtered.length} fasilitas ditemukan</p>
+        <p className="mt-6 text-sm text-muted-foreground dark:text-slate-400">{filtered.length} fasilitas ditemukan</p>
 
         <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((f) => {
             const Icon = typeIcon[f.type];
             return (
-              <div key={f.id} className="flex flex-col rounded-2xl border border-border bg-white p-5 transition-shadow hover:shadow-md">
+              <div key={f.id} className="flex flex-col rounded-2xl border border-border bg-white p-5 transition-shadow hover:shadow-md dark:bg-slate-900 dark:border-slate-800">
                 <div className="flex items-start justify-between">
                   <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${typeColor[f.type]}`}>
                     <Icon className="h-5 w-5" />
                   </span>
                   <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${typeColor[f.type]}`}>{f.type}</span>
                 </div>
-                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep">{f.name}</h3>
-                <p className="mt-2 flex items-start gap-1.5 text-sm text-muted-foreground">
+                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep dark:text-white">{f.name}</h3>
+                <p className="mt-2 flex items-start gap-1.5 text-sm text-muted-foreground dark:text-slate-300">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {f.address}
                 </p>
-                <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+                <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground dark:text-slate-300">
                   <Phone className="h-4 w-4 shrink-0" /> {f.phone}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {f.services.map((s) => (
-                    <span key={s} className="rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-brand-blue">{s}</span>
+                    <span key={s} className="rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{s}</span>
                   ))}
                 </div>
                 <div className="mt-4 flex gap-2">
-                  <button className="flex-1 rounded-full border border-brand-blue py-2 text-sm font-semibold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white">
+                  <button className="flex-1 rounded-full border border-brand-blue py-2 text-sm font-semibold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white dark:border-brand-teal dark:text-brand-teal dark:hover:bg-brand-teal dark:hover:text-slate-950">
                     Lihat Detail
                   </button>
                   <a

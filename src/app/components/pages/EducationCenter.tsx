@@ -107,15 +107,15 @@ export function EducationCenter() {
         </div>
 
         {/* About Academy */}
-        <div className="mt-14 rounded-3xl bg-brand-cream p-8 sm:p-10">
+        <div className="mt-14 rounded-3xl bg-brand-cream p-8 sm:p-10 dark:bg-slate-900">
           <SectionHeading
             eyebrow="Tentang INCLUSA Academy"
             title="Apa Itu INCLUSA Academy?"
           />
           <div className="mt-6 grid gap-8 lg:grid-cols-2">
-            <div className="space-y-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+            <div className="space-y-4 text-[0.95rem] leading-relaxed text-muted-foreground dark:text-slate-300">
               <p>
-                <strong className="text-brand-blue-deep">INCLUSA Academy</strong> adalah unit pelatihan profesional
+                <strong className="text-brand-blue-deep dark:text-white">INCLUSA Academy</strong> adalah unit pelatihan profesional
                 di bawah INCLUSA Institute yang berfokus pada peningkatan kapasitas sumber daya manusia dalam
                 bidang pembangunan inklusif.
               </p>
@@ -125,7 +125,7 @@ export function EducationCenter() {
                 berpengalaman di bidangnya.
               </p>
               <p>
-                Semua pelatihan bersifat <strong className="text-brand-blue-deep">praktis dan langsung dapat
+                Semua pelatihan bersifat <strong className="text-brand-blue-deep dark:text-white">praktis dan langsung dapat
                 diterapkan</strong> di lapangan — bukan sekadar teori.
               </p>
             </div>
@@ -137,9 +137,9 @@ export function EducationCenter() {
                 "Sertifikat resmi INCLUSA Institute",
                 "Jaringan alumni & komunitas praktisi",
               ].map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-xl bg-white p-4 shadow-sm">
+                <div key={item} className="flex items-start gap-3 rounded-xl bg-white p-4 shadow-sm dark:bg-slate-800">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                  <span className="text-sm font-medium text-brand-blue-deep">{item}</span>
+                  <span className="text-sm font-medium text-brand-blue-deep dark:text-white">{item}</span>
                 </div>
               ))}
             </div>
@@ -157,10 +157,10 @@ export function EducationCenter() {
             {programs.map((prog) => (
               <div
                 key={prog.title}
-                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:border-slate-800"
               >
                 <div className="flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">
                     <prog.icon className="h-6 w-6" />
                   </span>
                   <span
@@ -174,14 +174,14 @@ export function EducationCenter() {
                   </span>
                 </div>
 
-                <h3 className="mt-4 font-display text-lg font-bold text-brand-blue-deep">
+                <h3 className="mt-4 font-display text-lg font-bold text-brand-blue-deep dark:text-white">
                   {prog.title}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
                   {prog.desc}
                 </p>
 
-                <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
+                <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground dark:text-slate-400">
                   <span className="flex items-center gap-1">
                     <Users className="h-3.5 w-3.5" /> {prog.audience}
                   </span>

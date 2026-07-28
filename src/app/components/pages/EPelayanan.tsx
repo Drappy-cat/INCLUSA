@@ -51,15 +51,15 @@ export function EPelayanan() {
       />
 
       <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-border bg-white p-7 sm:p-10">
+        <div className="rounded-3xl border border-border bg-white p-7 sm:p-10 dark:bg-slate-900 dark:border-slate-800">
           {/* progress */}
           {step > 0 && step <= total && (
             <>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <div className="flex items-center justify-between text-sm text-muted-foreground dark:text-slate-400">
                 <span>Pertanyaan {step} dari {total}</span>
                 <span>{Math.round(((step - 1) / total) * 100)}%</span>
               </div>
-              <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-accent">
+              <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-accent dark:bg-slate-800">
                 <div className="h-full rounded-full bg-brand-blue transition-all" style={{ width: `${((step - 1) / total) * 100}%` }} />
               </div>
             </>
@@ -68,11 +68,11 @@ export function EPelayanan() {
           {/* intro */}
           {step === 0 && (
             <div className="text-center">
-              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue">
+              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">
                 <ShieldCheck className="h-8 w-8" />
               </span>
-              <h2 className="mt-5 font-display text-2xl font-bold text-brand-blue-deep">Mulai Skrining Mandiri</h2>
-              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              <h2 className="mt-5 font-display text-2xl font-bold text-brand-blue-deep dark:text-white">Mulai Skrining Mandiri</h2>
+              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
                 Terdiri dari {total} pertanyaan ya/tidak. Jawaban Anda tidak disimpan dan tidak dibagikan.
                 Hasilnya bersifat indikatif untuk membantu Anda mengambil langkah selanjutnya.
               </p>
@@ -88,19 +88,19 @@ export function EPelayanan() {
           {/* questions */}
           {step > 0 && step <= total && (
             <div className="mt-8">
-              <h2 className="font-display text-xl font-bold leading-snug text-brand-blue-deep">
+              <h2 className="font-display text-xl font-bold leading-snug text-brand-blue-deep dark:text-white">
                 {questions[step - 1].text}
               </h2>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <button
                   onClick={() => answer(true)}
-                  className="rounded-xl border-2 border-border py-5 font-semibold text-brand-blue-deep transition-colors hover:border-brand-red hover:bg-brand-red/5"
+                  className="rounded-xl border-2 border-border py-5 font-semibold text-brand-blue-deep transition-colors hover:border-brand-red hover:bg-brand-red/5 dark:border-slate-700 dark:text-white dark:hover:border-brand-red"
                 >
                   Ya
                 </button>
                 <button
                   onClick={() => answer(false)}
-                  className="rounded-xl border-2 border-border py-5 font-semibold text-brand-blue-deep transition-colors hover:border-brand-teal hover:bg-brand-teal/10"
+                  className="rounded-xl border-2 border-border py-5 font-semibold text-brand-blue-deep transition-colors hover:border-brand-teal hover:bg-brand-teal/10 dark:border-slate-700 dark:text-white dark:hover:border-brand-teal"
                 >
                   Tidak
                 </button>
@@ -108,7 +108,7 @@ export function EPelayanan() {
               {step > 1 && (
                 <button
                   onClick={() => setStep((s) => s - 1)}
-                  className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-brand-blue"
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-brand-blue dark:text-slate-400 dark:hover:text-brand-teal"
                 >
                   <ArrowLeft className="h-4 w-4" /> Kembali
                 </button>
@@ -119,15 +119,15 @@ export function EPelayanan() {
           {/* result */}
           {step > total && (
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Estimasi Tingkat Risiko</p>
+              <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground dark:text-slate-400">Estimasi Tingkat Risiko</p>
               <p className={`mt-2 font-display text-4xl font-extrabold ${levelColor}`}>{level}</p>
-              <div className="mx-auto mt-5 h-3 w-full max-w-sm overflow-hidden rounded-full bg-accent">
+              <div className="mx-auto mt-5 h-3 w-full max-w-sm overflow-hidden rounded-full bg-accent dark:bg-slate-800">
                 <div
                   className={`h-full rounded-full ${level === "Tinggi" ? "bg-brand-red" : level === "Sedang" ? "bg-brand-coral" : "bg-brand-teal"}`}
                   style={{ width: `${Math.max(pct, 8)}%` }}
                 />
               </div>
-              <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
+              <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
                 {level === "Rendah"
                   ? "Risiko Anda tergolong rendah. Tetap jaga perilaku sehat dan lakukan tes HIV secara berkala."
                   : "Kami menyarankan Anda melakukan tes VCT di fasilitas kesehatan terdekat. Tes bersifat gratis, rahasia, dan ramah."}
@@ -136,11 +136,11 @@ export function EPelayanan() {
                 <Link to="/faskes" className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white">
                   Cari Faskes untuk Tes <ArrowRight className="h-4 w-4" />
                 </Link>
-                <button onClick={reset} className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-brand-blue-deep hover:bg-accent">
+                <button onClick={reset} className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-brand-blue-deep hover:bg-accent dark:border-slate-700 dark:text-white dark:hover:bg-slate-800">
                   <RotateCcw className="h-4 w-4" /> Ulangi
                 </button>
               </div>
-              <p className="mt-6 text-xs text-muted-foreground">
+              <p className="mt-6 text-xs text-muted-foreground dark:text-slate-400">
                 * Hasil ini bersifat indikatif dan bukan diagnosis medis.
               </p>
             </div>
@@ -150,12 +150,12 @@ export function EPelayanan() {
         {/* service pillars */}
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {services.map((s) => (
-            <div key={s.title} className="rounded-2xl border border-border bg-white p-5 text-center">
-              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cream text-brand-blue">
+            <div key={s.title} className="rounded-2xl border border-border bg-white p-5 text-center dark:bg-slate-900 dark:border-slate-800">
+              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cream text-brand-blue dark:bg-slate-800 dark:text-brand-teal">
                 <s.icon className="h-5 w-5" />
               </span>
-              <h3 className="mt-3 font-display text-sm font-bold text-brand-blue-deep">{s.title}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">{s.desc}</p>
+              <h3 className="mt-3 font-display text-sm font-bold text-brand-blue-deep dark:text-white">{s.title}</h3>
+              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">{s.desc}</p>
             </div>
           ))}
         </div>

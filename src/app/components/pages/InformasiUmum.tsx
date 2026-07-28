@@ -37,7 +37,7 @@ export function InformasiUmum() {
                   key={t.id}
                   onClick={() => setActive(t.id)}
                   className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors ${
-                    isActive ? "bg-brand-blue text-white shadow-sm" : "bg-white text-brand-blue-deep/70 ring-1 ring-border hover:bg-accent"
+                    isActive ? "bg-brand-blue text-white shadow-sm" : "bg-white text-brand-blue-deep/70 ring-1 ring-border hover:bg-accent dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700"
                   }`}
                 >
                   <TIcon className="h-5 w-5 shrink-0" /> {t.title}
@@ -47,17 +47,17 @@ export function InformasiUmum() {
           </aside>
 
           {/* content */}
-          <div className="rounded-2xl border border-border bg-white p-7 sm:p-9">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue">
+          <div className="rounded-2xl border border-border bg-white p-7 sm:p-9 dark:bg-slate-900 dark:border-slate-800">
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">
               <Icon className="h-7 w-7" />
             </span>
-            <h2 className="mt-5 font-display text-2xl font-bold text-brand-blue-deep">{current.title}</h2>
-            <p className="mt-3 text-[0.98rem] leading-relaxed text-muted-foreground">{current.summary}</p>
+            <h2 className="mt-5 font-display text-2xl font-bold text-brand-blue-deep dark:text-white">{current.title}</h2>
+            <p className="mt-3 text-[0.98rem] leading-relaxed text-muted-foreground dark:text-slate-300">{current.summary}</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {current.points.map((p) => (
-                <div key={p} className="flex items-start gap-3 rounded-xl bg-brand-cream p-4">
+                <div key={p} className="flex items-start gap-3 rounded-xl bg-brand-cream p-4 dark:bg-slate-800">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                  <span className="text-sm text-brand-blue-deep/85">{p}</span>
+                  <span className="text-sm text-brand-blue-deep/85 dark:text-slate-200">{p}</span>
                 </div>
               ))}
             </div>
@@ -66,32 +66,32 @@ export function InformasiUmum() {
       </section>
 
       {/* myth vs fact */}
-      <section className="bg-brand-cream py-14">
+      <section className="bg-brand-cream py-14 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow="Luruskan Stigma" title="Mitos vs Fakta" subtitle="Stigma sering lahir dari informasi yang keliru. Mari luruskan bersama." />
           <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
             {mythFacts.map((m) => (
-              <div key={m.myth} className="overflow-hidden rounded-2xl bg-white shadow-sm">
-                <div className="flex items-start gap-3 bg-brand-red/5 p-4">
+              <div key={m.myth} className="overflow-hidden rounded-2xl bg-white shadow-sm dark:bg-slate-900 border border-transparent dark:border-slate-800">
+                <div className="flex items-start gap-3 bg-brand-red/5 p-4 dark:bg-brand-red/10">
                   <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-red" />
                   <div>
                     <p className="text-xs font-semibold uppercase text-brand-red">Mitos</p>
-                    <p className="text-sm text-brand-blue-deep/80">{m.myth}</p>
+                    <p className="text-sm text-brand-blue-deep/80 dark:text-slate-300">{m.myth}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
                   <div>
-                    <p className="text-xs font-semibold uppercase text-[#17787d]">Fakta</p>
-                    <p className="text-sm text-brand-blue-deep/80">{m.fact}</p>
+                    <p className="text-xs font-semibold uppercase text-[#17787d] dark:text-brand-teal">Fakta</p>
+                    <p className="text-sm text-brand-blue-deep/80 dark:text-slate-300">{m.fact}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mx-auto mt-8 flex max-w-4xl items-center gap-3 rounded-2xl bg-brand-maize/40 p-5">
-            <AlertTriangle className="h-6 w-6 shrink-0 text-[#b9880a]" />
-            <p className="text-sm text-brand-blue-deep/90">
+          <div className="mx-auto mt-8 flex max-w-4xl items-center gap-3 rounded-2xl bg-brand-maize/40 p-5 dark:bg-brand-maize/20 border border-transparent dark:border-brand-maize/30">
+            <AlertTriangle className="h-6 w-6 shrink-0 text-[#b9880a] dark:text-brand-maize" />
+            <p className="text-sm text-brand-blue-deep/90 dark:text-slate-200">
               Ingat prinsip <strong>U = U</strong> (Undetectable = Untransmittable): ODHIV dengan viral load tak terdeteksi
               <strong> tidak menularkan</strong> HIV melalui hubungan seksual.
             </p>

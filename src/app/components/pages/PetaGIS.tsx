@@ -47,14 +47,14 @@ export function PetaGIS() {
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
           {/* map grid */}
-          <div className="rounded-3xl border border-border bg-brand-cream p-6">
+          <div className="rounded-3xl border border-border bg-brand-cream p-6 dark:bg-slate-900 dark:border-slate-800">
             <div className="flex items-center justify-between">
-              <h3 className="font-display font-bold text-brand-blue-deep">Kabupaten Sidoarjo</h3>
-              <div className="flex items-center gap-1 rounded-full bg-white p-1 ring-1 ring-border">
+              <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Kabupaten Sidoarjo</h3>
+              <div className="flex items-center gap-1 rounded-full bg-white p-1 ring-1 ring-border dark:bg-slate-800 dark:ring-slate-700">
                 <button
                   onClick={() => setView("map")}
                   className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                    view === "map" ? "bg-brand-blue text-white" : "text-brand-blue-deep/70"
+                    view === "map" ? "bg-brand-blue text-white" : "text-brand-blue-deep/70 dark:text-slate-300"
                   }`}
                 >
                   <MapIcon className="h-3.5 w-3.5" /> Peta
@@ -62,7 +62,7 @@ export function PetaGIS() {
                 <button
                   onClick={() => setView("grid")}
                   className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                    view === "grid" ? "bg-brand-blue text-white" : "text-brand-blue-deep/70"
+                    view === "grid" ? "bg-brand-blue text-white" : "text-brand-blue-deep/70 dark:text-slate-300"
                   }`}
                 >
                   <LayoutGrid className="h-3.5 w-3.5" /> Grid
@@ -71,7 +71,7 @@ export function PetaGIS() {
             </div>
 
             {view === "map" ? (
-              <div className="mt-5 h-[420px] overflow-hidden rounded-2xl ring-1 ring-border">
+              <div className="mt-5 h-[420px] overflow-hidden rounded-2xl ring-1 ring-border dark:ring-slate-800">
                 <SidoarjoMap selected={selected} onSelect={setSelected} />
               </div>
             ) : (
@@ -96,8 +96,8 @@ export function PetaGIS() {
             )}
 
             {/* legend */}
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-              <span className="font-semibold text-brand-blue-deep">Intensitas kasus:</span>
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-muted-foreground dark:text-slate-400">
+              <span className="font-semibold text-brand-blue-deep dark:text-white">Intensitas kasus:</span>
               {[
                 { c: "bg-brand-maize/60", l: "Rendah" },
                 { c: "bg-brand-teal", l: "Sedang" },
@@ -113,28 +113,28 @@ export function PetaGIS() {
           </div>
 
           {/* detail panel */}
-          <div className="rounded-3xl border border-border bg-white p-6">
+          <div className="rounded-3xl border border-border bg-white p-6 dark:bg-slate-900 dark:border-slate-800">
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue text-white">
                 <MapPin className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Kecamatan</p>
-                <h3 className="font-display text-xl font-bold text-brand-blue-deep">{selected.name}</h3>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground dark:text-slate-400">Kecamatan</p>
+                <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{selected.name}</h3>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
               {[
                 { icon: Activity, label: "Total Kasus", value: selected.cases, tone: "text-brand-red" },
-                { icon: Building2, label: "ODHIV", value: selected.odhiv, tone: "text-brand-blue" },
-                { icon: Syringe, label: "Dalam ARV", value: selected.arv, tone: "text-[#17787d]" },
+                { icon: Building2, label: "ODHIV", value: selected.odhiv, tone: "text-brand-blue dark:text-brand-teal" },
+                { icon: Syringe, label: "Dalam ARV", value: selected.arv, tone: "text-[#17787d] dark:text-brand-teal" },
                 { icon: Hospital, label: "Faskes", value: selected.faskes, tone: "text-brand-coral" },
               ].map((s) => (
-                <div key={s.label} className="rounded-xl bg-brand-cream p-4">
+                <div key={s.label} className="rounded-xl bg-brand-cream p-4 dark:bg-slate-800">
                   <s.icon className={`h-5 w-5 ${s.tone}`} />
                   <p className={`mt-2 font-display text-2xl font-extrabold ${s.tone}`}>{s.value}</p>
-                  <p className="text-xs text-muted-foreground">{s.label}</p>
+                  <p className="text-xs text-muted-foreground dark:text-slate-400">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -153,28 +153,28 @@ export function PetaGIS() {
               </ResponsiveContainer>
             </div>
 
-            <p className="mt-4 rounded-xl bg-accent p-3 text-xs text-brand-blue-deep/80">
+            <p className="mt-4 rounded-xl bg-accent p-3 text-xs text-brand-blue-deep/80 dark:bg-slate-800 dark:text-slate-200">
               Cakupan ARV di {selected.name}: <strong>{Math.round((selected.arv / selected.odhiv) * 100)}%</strong> dari total ODHIV.
             </p>
 
             {/* healthcare facilities in this district */}
             <div className="mt-6">
-              <h4 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep">
-                <Hospital className="h-4 w-4 text-brand-blue" /> Fasilitas Kesehatan
+              <h4 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep dark:text-white">
+                <Hospital className="h-4 w-4 text-brand-blue dark:text-brand-teal" /> Fasilitas Kesehatan
               </h4>
               {districtFacilities.length === 0 ? (
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-2 text-sm text-muted-foreground dark:text-slate-300">
                   Data fasilitas terperinci untuk {selected.name} belum tersedia.
                 </p>
               ) : (
                 <ul className="mt-3 space-y-2">
                   {districtFacilities.map((f) => (
-                    <li key={f.id} className="rounded-xl border border-border p-3">
+                    <li key={f.id} className="rounded-xl border border-border p-3 dark:border-slate-800">
                       <div className="flex items-center justify-between gap-2">
-                        <p className="font-semibold text-brand-blue-deep">{f.name}</p>
-                        <span className="shrink-0 rounded-full bg-accent px-2 py-0.5 text-[0.65rem] font-semibold text-brand-blue">{f.type}</span>
+                        <p className="font-semibold text-brand-blue-deep dark:text-white">{f.name}</p>
+                        <span className="shrink-0 rounded-full bg-accent px-2 py-0.5 text-[0.65rem] font-semibold text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{f.type}</span>
                       </div>
-                      <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Phone className="h-3 w-3" /> {f.phone}</p>
+                      <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground dark:text-slate-400"><Phone className="h-3 w-3" /> {f.phone}</p>
                     </li>
                   ))}
                 </ul>

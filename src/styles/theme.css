@@ -99,7 +99,8 @@
   color: #f8fafc !important;
 }
 
-.dark section.bg-brand-cream {
+.dark section.bg-brand-cream,
+.dark section.bg-brand-cream-deep {
   background-color: #0b1329 !important;
 }
 
@@ -108,11 +109,15 @@
   background-color: #070e1e !important;
 }
 
-/* Divs, Buttons & Containers with bg-white in Dark Mode */
+/* Divs, Cards, Buttons & Containers in Dark Mode */
 .dark div.bg-white,
 .dark button.bg-white,
 .dark article.bg-white,
-.dark a.bg-white {
+.dark a.bg-white,
+.dark section.bg-white,
+.dark div.bg-brand-cream,
+.dark div.bg-brand-cream-deep,
+.dark div.bg-brand-cream\/50 {
   background-color: #152238 !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #f8fafc !important;
