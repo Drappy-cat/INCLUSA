@@ -11,14 +11,14 @@ const todayLabel = () =>
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-semibold text-brand-blue-deep">{label}</span>
+      <span className="mb-1 block text-xs font-semibold text-brand-blue-deep dark:text-slate-200">{label}</span>
       {children}
     </label>
   );
 }
 
 const inputCls =
-  "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20";
+  "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-brand-blue-deep outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 dark:bg-slate-800 dark:text-white dark:border-slate-700";
 
 // Kontrol status terbit / draft.
 function StatusToggle({ value, onChange }: { value: ContentStatus; onChange: (v: ContentStatus) => void }) {
@@ -287,9 +287,9 @@ function ArticleManager() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
       {/* form */}
-      <div className="rounded-2xl border border-border bg-white p-6">
-        <h3 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep">
-          {editing ? <Pencil className="h-4 w-4 text-brand-blue" /> : <Plus className="h-4 w-4 text-brand-blue" />}
+      <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
+        <h3 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep dark:text-white">
+          {editing ? <Pencil className="h-4 w-4 text-brand-blue dark:text-brand-teal" /> : <Plus className="h-4 w-4 text-brand-blue dark:text-brand-teal" />}
           {editing ? "Edit Artikel" : "Tambah Artikel Baru"}
         </h3>
         <div className="mt-4 space-y-3">
@@ -322,11 +322,11 @@ function ArticleManager() {
           <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} />
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">
-            <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white">
+            <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white hover:bg-brand-blue-dark">
               <Check className="h-4 w-4" /> {editing ? "Simpan Perubahan" : "Simpan Artikel"}
             </button>
             {editing && (
-              <button onClick={() => { setEditing(null); setForm({ ...emptyArticle }); }} className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-brand-blue-deep">
+              <button onClick={() => { setEditing(null); setForm({ ...emptyArticle }); }} className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-brand-blue-deep dark:text-white dark:border-slate-700">
                 Batal
               </button>
             )}
@@ -335,15 +335,15 @@ function ArticleManager() {
       </div>
 
       {/* list */}
-      <div className="rounded-2xl border border-border bg-white p-6">
+      <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
         <div className="flex items-center justify-between">
-          <h3 className="font-display font-bold text-brand-blue-deep">Daftar Artikel</h3>
-          <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-brand-blue">{articles.length} entri</span>
+          <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Daftar Artikel</h3>
+          <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{articles.length} entri</span>
         </div>
         <div className="mt-4 max-h-[560px] space-y-3 overflow-auto pr-1">
           {articles.map((a) => (
-            <div key={a.id} className="flex gap-3 rounded-xl border border-border p-3">
-              <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream">
+            <div key={a.id} className="flex gap-3 rounded-xl border border-border p-3 dark:border-slate-800 dark:bg-slate-900/60">
+              <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream dark:bg-slate-800">
                 {(a.images?.[0] || a.image) && <ImageWithFallback src={a.images?.[0] || a.image!} alt={a.title} className="h-full w-full object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
@@ -351,25 +351,25 @@ function ArticleManager() {
                   <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
                   <StatusBadge status={a.status} />
                   {a.images && a.images.length > 1 && (
-                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue">
+                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue dark:bg-brand-blue/30 dark:text-brand-teal">
                       {a.images.length} gambar
                     </span>
                   )}
                 </div>
-                <p className="line-clamp-1 font-semibold text-brand-blue-deep">{a.title}</p>
-                <p className="text-xs text-muted-foreground">{a.author || "—"} · {a.date}</p>
+                <p className="line-clamp-1 font-semibold text-brand-blue-deep dark:text-white">{a.title}</p>
+                <p className="text-xs text-muted-foreground dark:text-slate-300">{a.author || "—"} · {a.date}</p>
               </div>
               <div className="flex shrink-0 flex-col gap-1">
-                <button onClick={() => startEdit(a)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep hover:bg-accent" title="Edit">
+                <button onClick={() => startEdit(a)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep hover:bg-accent dark:text-white dark:border-slate-700 dark:hover:bg-slate-800" title="Edit">
                   <Pencil className="h-3.5 w-3.5" />
                 </button>
-                <button onClick={() => deleteArticle(a.id)} className="rounded-lg border border-border p-1.5 text-brand-red hover:bg-brand-red/10" title="Hapus">
+                <button onClick={() => deleteArticle(a.id)} className="rounded-lg border border-border p-1.5 text-brand-red hover:bg-brand-red/10 dark:border-slate-700 dark:hover:bg-red-950/40" title="Hapus">
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
           ))}
-          {articles.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground">Belum ada artikel.</p>}
+          {articles.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground dark:text-slate-400">Belum ada artikel.</p>}
         </div>
       </div>
     </div>
@@ -433,9 +433,9 @@ function NewsManager() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
       {/* form */}
-      <div className="rounded-2xl border border-border bg-white p-6">
-        <h3 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep">
-          {editing ? <Pencil className="h-4 w-4 text-brand-blue" /> : <Plus className="h-4 w-4 text-brand-blue" />}
+      <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
+        <h3 className="flex items-center gap-2 font-display font-bold text-brand-blue-deep dark:text-white">
+          {editing ? <Pencil className="h-4 w-4 text-brand-blue dark:text-brand-teal" /> : <Plus className="h-4 w-4 text-brand-blue dark:text-brand-teal" />}
           {editing ? "Edit Berita" : "Tambah Berita Baru"}
         </h3>
         <div className="mt-4 space-y-3">
@@ -473,11 +473,11 @@ function NewsManager() {
 
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">
-            <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white">
+            <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white hover:bg-brand-blue-dark">
               <Check className="h-4 w-4" /> {editing ? "Simpan Perubahan" : "Simpan Berita"}
             </button>
             {editing && (
-              <button onClick={() => { setEditing(null); setForm({ ...emptyNews }); }} className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-brand-blue-deep">
+              <button onClick={() => { setEditing(null); setForm({ ...emptyNews }); }} className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-brand-blue-deep dark:text-white dark:border-slate-700">
                 Batal
               </button>
             )}
@@ -486,41 +486,41 @@ function NewsManager() {
       </div>
 
       {/* list */}
-      <div className="rounded-2xl border border-border bg-white p-6">
+      <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
         <div className="flex items-center justify-between">
-          <h3 className="font-display font-bold text-brand-blue-deep">Daftar Berita</h3>
-          <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-brand-blue">{news.length} entri</span>
+          <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Daftar Berita</h3>
+          <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{news.length} entri</span>
         </div>
         <div className="mt-4 max-h-[560px] space-y-3 overflow-auto pr-1">
           {news.map((n) => (
-            <div key={n.id} className="flex gap-3 rounded-xl border border-border p-3">
-              <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream">
+            <div key={n.id} className="flex gap-3 rounded-xl border border-border p-3 dark:border-slate-800 dark:bg-slate-900/60">
+              <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream dark:bg-slate-800">
                 {(n.images?.[0] || n.image) && <ImageWithFallback src={n.images?.[0] || n.image!} alt={n.title} className="h-full w-full object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
+                  <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:text-brand-teal">{n.tag}</span>
                   <StatusBadge status={n.status} />
                   {n.images && n.images.length > 1 && (
-                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue">
+                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue dark:bg-brand-blue/30 dark:text-brand-teal">
                       {n.images.length} gambar
                     </span>
                   )}
                 </div>
-                <p className="line-clamp-1 font-semibold text-brand-blue-deep">{n.title}</p>
-                <p className="text-xs text-muted-foreground">{n.source} · {n.date}</p>
+                <p className="line-clamp-1 font-semibold text-brand-blue-deep dark:text-white">{n.title}</p>
+                <p className="text-xs text-muted-foreground dark:text-slate-300">{n.source} · {n.date}</p>
               </div>
               <div className="flex shrink-0 flex-col gap-1">
-                <button onClick={() => startEdit(n)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep hover:bg-accent" title="Edit">
+                <button onClick={() => startEdit(n)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep hover:bg-accent dark:text-white dark:border-slate-700 dark:hover:bg-slate-800" title="Edit">
                   <Pencil className="h-3.5 w-3.5" />
                 </button>
-                <button onClick={() => deleteNews(n.id)} className="rounded-lg border border-border p-1.5 text-brand-red hover:bg-brand-red/10" title="Hapus">
+                <button onClick={() => deleteNews(n.id)} className="rounded-lg border border-border p-1.5 text-brand-red hover:bg-brand-red/10 dark:border-slate-700 dark:hover:bg-red-950/40" title="Hapus">
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
           ))}
-          {news.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground">Belum ada berita.</p>}
+          {news.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground dark:text-slate-400">Belum ada berita.</p>}
         </div>
       </div>
     </div>

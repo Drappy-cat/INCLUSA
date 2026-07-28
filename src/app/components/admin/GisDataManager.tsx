@@ -4,7 +4,7 @@ import { useContent } from "../../data/ContentStore";
 import type { Kecamatan } from "../../data/content";
 
 const inputCls =
-  "w-24 rounded-lg border border-border bg-white px-2 py-1 text-sm outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20";
+  "w-24 rounded-lg border border-border bg-white px-2 py-1 text-sm text-brand-blue-deep outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 dark:bg-slate-800 dark:text-white dark:border-slate-700";
 
 const fields: { key: keyof Kecamatan; label: string }[] = [
   { key: "cases", label: "Kasus" },
@@ -30,12 +30,12 @@ export function GisDataManager() {
 
   return (
     <div>
-      <div className="mb-5 flex items-center gap-2 text-sm text-muted-foreground">
-        <MapIcon className="h-4 w-4 text-brand-blue" /> Perbarui data kasus per kecamatan. Perubahan langsung terlihat di Peta GIS, Statistik, dan Beranda.
+      <div className="mb-5 flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300">
+        <MapIcon className="h-4 w-4 text-brand-blue dark:text-brand-teal" /> Perbarui data kasus per kecamatan. Perubahan langsung terlihat di Peta GIS, Statistik, dan Beranda.
       </div>
-      <div className="overflow-hidden rounded-2xl border border-border bg-white">
+      <div className="overflow-hidden rounded-2xl border border-border bg-white dark:bg-slate-900 dark:border-slate-800">
         <table className="w-full text-sm">
-          <thead className="bg-brand-cream text-left text-xs uppercase tracking-wide text-muted-foreground">
+          <thead className="bg-brand-cream text-left text-xs uppercase tracking-wide text-muted-foreground dark:bg-slate-800 dark:text-slate-200">
             <tr>
               <th className="px-4 py-3 font-semibold">Kecamatan</th>
               {fields.map((f) => (
@@ -44,12 +44,12 @@ export function GisDataManager() {
               <th className="px-4 py-3 text-right font-semibold">Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border dark:divide-slate-800">
             {kecamatan.map((k) => {
               const isEdit = editing === k.name;
               return (
-                <tr key={k.name} className="border-t border-border">
-                  <td className="px-4 py-3 font-semibold text-brand-blue-deep">
+                <tr key={k.name} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td className="px-4 py-3 font-semibold text-brand-blue-deep dark:text-white">
                     <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-brand-coral" /> {k.name}</span>
                   </td>
                   {fields.map((f) => (
@@ -62,22 +62,22 @@ export function GisDataManager() {
                           className={inputCls}
                         />
                       ) : (
-                        <span className="text-brand-blue-deep/80">{k[f.key] as number}</span>
+                        <span className="text-brand-blue-deep/80 dark:text-slate-300">{k[f.key] as number}</span>
                       )}
                     </td>
                   ))}
                   <td className="px-4 py-3 text-right">
                     {isEdit ? (
                       <div className="flex justify-end gap-1">
-                        <button onClick={() => save(k.name)} className="rounded-lg bg-brand-blue p-1.5 text-white" title="Simpan">
+                        <button onClick={() => save(k.name)} className="rounded-lg bg-brand-blue p-1.5 text-white hover:bg-brand-blue-dark" title="Simpan">
                           <Check className="h-3.5 w-3.5" />
                         </button>
-                        <button onClick={() => setEditing(null)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep" title="Batal">
+                        <button onClick={() => setEditing(null)} className="rounded-lg border border-border p-1.5 text-brand-blue-deep dark:text-white dark:border-slate-700" title="Batal">
                           <X className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     ) : (
-                      <button onClick={() => startEdit(k)} className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-brand-blue-deep hover:bg-accent">
+                      <button onClick={() => startEdit(k)} className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-brand-blue-deep hover:bg-accent dark:text-white dark:border-slate-700 dark:hover:bg-slate-800">
                         <Pencil className="h-3.5 w-3.5" /> Edit
                       </button>
                     )}
