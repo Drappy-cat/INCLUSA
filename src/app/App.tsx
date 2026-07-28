@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { ContentProvider } from "./data/ContentStore";
 import { AuthProvider, useAuth } from "./data/AuthStore";
 import { Layout } from "./components/layout/Layout";
@@ -17,6 +17,7 @@ import { EPelayanan } from "./components/pages/EPelayanan";
 import { EducationCenter } from "./components/pages/EducationCenter";
 import { AdminDashboard } from "./components/pages/AdminDashboard";
 import { AdminLogin } from "./components/admin/AdminLogin";
+import { ComingSoon } from "./components/pages/ComingSoon";
 
 function AdminRoute() {
   const { user } = useAuth();
@@ -30,20 +31,38 @@ export default function App() {
       <ContentProvider>
       <Routes>
         <Route element={<Layout />}>
+          {/* ── Main ── */}
           <Route path="/" element={<Home />} />
+
+          {/* ── About ── */}
           <Route path="/tentang" element={<TentangKami />} />
-          <Route path="/informasi" element={<InformasiUmum />} />
-          <Route path="/artikel" element={<Artikel />} />
+          <Route path="/kontak" element={<ComingSoon title="Contact Us" desc="Halaman kontak sedang disiapkan. Sementara itu, hubungi kami melalui email: halo@inclusa.id" />} />
+
+          {/* ── Strategic Areas (new routes) ── */}
+          <Route path="/data-center" element={<Statistik />} />
+          <Route path="/policy-lab" element={<ComingSoon title="INCLUSA Policy Lab" desc="Halaman Policy Lab sedang disiapkan. Temukan riset kebijakan dan kemitraan INCLUSA di sini." />} />
+          <Route path="/academy" element={<EducationCenter />} />
+          <Route path="/research" element={<Artikel />} />
+          <Route path="/consulting" element={<ComingSoon title="INCLUSA Consulting" desc="Layanan advisory pembangunan inklusif — segera hadir. Hubungi kami untuk informasi lebih lanjut." />} />
+
+          {/* ── Redirects from old routes ── */}
+          <Route path="/statistik" element={<Navigate to="/data-center" replace />} />
+          <Route path="/peta" element={<Navigate to="/data-center" replace />} />
+          <Route path="/artikel" element={<Navigate to="/research" replace />} />
           <Route path="/artikel/:id" element={<ArtikelDetail />} />
-          <Route path="/berita" element={<Berita />} />
+          <Route path="/berita" element={<Navigate to="/research" replace />} />
           <Route path="/berita/:id" element={<BeritaDetail />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/statistik" element={<Statistik />} />
-          <Route path="/peta" element={<PetaGIS />} />
+          <Route path="/edukasi" element={<Navigate to="/academy" replace />} />
+
+          {/* ── HIV Project (kept, under consulting hierarchy) ── */}
+          <Route path="/informasi" element={<InformasiUmum />} />
           <Route path="/faskes" element={<CariFasilitas />} />
           <Route path="/e-pelayanan" element={<EPelayanan />} />
-          <Route path="/edukasi" element={<EducationCenter />} />
+          <Route path="/faq" element={<Faq />} />
+
+          {/* ── Admin ── */}
           <Route path="/admin" element={<AdminRoute />} />
+
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

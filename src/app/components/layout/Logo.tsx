@@ -28,7 +28,7 @@ export function Logo({
           <Wordmark className="text-[1.15rem]" />
           {subtitle && (
             <span className="mt-0.5 text-[0.58rem] font-medium tracking-wide text-muted-foreground">
-              Terpadu HIV/AIDS · Sidoarjo
+              Indonesia Institute for Children, Women, Disability and Inclusion
             </span>
           )}
         </span>

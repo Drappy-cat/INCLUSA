@@ -89,9 +89,9 @@ export function Statistik() {
   return (
     <>
       <PageHero
-        eyebrow="Dashboard Monitoring"
-        title="Statistik HIV/AIDS Sidoarjo"
-        subtitle="Data sebaran kasus, cakupan pengobatan, dan tren tahunan yang diperbarui secara berkala oleh Dinas Kesehatan Kabupaten Sidoarjo."
+        eyebrow="INCLUSA Data Center"
+        title="Dashboard Monitoring & Peta GIS Indonesia"
+        subtitle="Observatori data nasional untuk pembangunan inklusif — mencakup isu anak, perempuan, disabilitas, kesehatan, pendidikan, dan inklusi sosial. Data sedang dalam proses pengumpulan."
       />
 
       {/* realtime counters */}
