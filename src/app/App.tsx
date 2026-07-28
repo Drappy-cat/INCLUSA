@@ -15,6 +15,9 @@ import { PetaGIS } from "./components/pages/PetaGIS";
 import { CariFasilitas } from "./components/pages/CariFasilitas";
 import { EPelayanan } from "./components/pages/EPelayanan";
 import { EducationCenter } from "./components/pages/EducationCenter";
+import { PolicyLab } from "./components/pages/PolicyLab";
+import { Academy } from "./components/pages/Academy";
+import { Consulting } from "./components/pages/Consulting";
 import { AdminDashboard } from "./components/pages/AdminDashboard";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { ComingSoon } from "./components/pages/ComingSoon";
@@ -44,12 +47,12 @@ export default function App() {
           <Route path="/tentang" element={<TentangKami />} />
           <Route path="/kontak" element={<Kontak />} />
 
-          {/* ── Strategic Areas (new routes) ── */}
+          {/* ── Strategic Areas (5 Pilar) ── */}
           <Route path="/data-center" element={<Statistik />} />
-          <Route path="/policy-lab" element={<ComingSoon title="INCLUSA Policy Lab" desc="Halaman Policy Lab sedang disiapkan. Temukan riset kebijakan dan kemitraan INCLUSA di sini." />} />
-          <Route path="/academy" element={<EducationCenter />} />
+          <Route path="/policy-lab" element={<PolicyLab />} />
+          <Route path="/academy" element={<Academy />} />
           <Route path="/research" element={<Artikel />} />
-          <Route path="/consulting" element={<ComingSoon title="INCLUSA Consulting" desc="Layanan advisory pembangunan inklusif — segera hadir. Hubungi kami untuk informasi lebih lanjut." />} />
+          <Route path="/consulting" element={<Consulting />} />
 
           {/* ── Redirects from old routes ── */}
           <Route path="/statistik" element={<Navigate to="/data-center" replace />} />
