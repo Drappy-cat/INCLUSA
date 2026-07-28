@@ -21,6 +21,7 @@ export function SplashScreen({ onFinish }: { onFinish: () => void }) {
     const intervalMs = 30;
     const steps = totalDuration / intervalMs;
     let step = 0;
+    let finishTimeout: any;
 
     const timer = setInterval(() => {
       step++;
@@ -33,11 +34,14 @@ export function SplashScreen({ onFinish }: { onFinish: () => void }) {
       if (value >= 100) {
         clearInterval(timer);
         // Small pause at 100% before curtain slides up
-        setTimeout(() => setIsDone(true), 400);
+        finishTimeout = setTimeout(() => setIsDone(true), 400);
       }
     }, intervalMs);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (finishTimeout) clearTimeout(finishTimeout);
+    };
   }, []);
 
   // After exit animation completes, notify parent

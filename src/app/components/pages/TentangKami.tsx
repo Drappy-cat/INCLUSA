@@ -16,8 +16,9 @@ import slider1 from "../../../assets/about-slider-1.png";
 import slider2 from "../../../assets/about-slider-2.png";
 import slider3 from "../../../assets/about-slider-3.jpg";
 import slider4 from "../../../assets/about-slider-4.png";
-import { ImageSlider } from "../ui-kit/ImageSlider";
 import { useLanguage } from "../../data/LanguageContext";
+
+const bgImages = [slider1, slider2, slider3, slider4];
 
 const avatarTone: Record<string, string> = {
   blue: "bg-brand-blue",
@@ -64,7 +65,6 @@ export function TentangKami() {
   const supervisor = organization[0];
   const devTeam = organization.slice(1);
   const [bgIndex, setBgIndex] = useState(0);
-  const bgImages = [slider1, slider2, slider3, slider4];
 
   useEffect(() => {
     const timer = setInterval(() => {
