@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { ImagePlus, Trash2, Pencil, Plus, X, Check, Newspaper, FileText } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useContent, fileToDataUrl } from "../../data/ContentStore";
-import type { Article, ContentStatus, NewsItem } from "../../data/content";
+import type { Article, ContentStatus, ExternalLink, NewsItem } from "../../data/content";
 
 const todayLabel = () =>
   new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
@@ -53,63 +53,177 @@ function StatusBadge({ status }: { status?: ContentStatus }) {
   );
 }
 
-// ---------- Upload gambar (base64) ----------
-function ImageUpload({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+// ---------- Multi-Image Upload (Koleksi / Galeri Gambar Slide) ----------
+function MultiImageUpload({
+  images = [],
+  onChange,
+}: {
+  images: string[];
+  onChange: (imgs: string[]) => void;
+}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
+  const [urlInput, setUrlInput] = useState("");
 
-  const handleFile = async (file?: File) => {
-    if (!file) return;
+  const handleFiles = async (fileList?: FileList | null) => {
+    if (!fileList || fileList.length === 0) return;
     setBusy(true);
     try {
-      const url = await fileToDataUrl(file);
-      onChange(url);
+      const added: string[] = [];
+      for (let i = 0; i < fileList.length; i++) {
+        const url = await fileToDataUrl(fileList[i]);
+        added.push(url);
+      }
+      onChange([...images, ...added]);
     } finally {
       setBusy(false);
     }
   };
 
+  const addUrl = () => {
+    if (!urlInput.trim()) return;
+    onChange([...images, urlInput.trim()]);
+    setUrlInput("");
+  };
+
+  const removeImg = (idx: number) => {
+    onChange(images.filter((_, i) => i !== idx));
+  };
+
   return (
-    <div>
-      <span className="mb-1 block text-xs font-semibold text-brand-blue-deep">Gambar</span>
-      <div className="flex items-start gap-3">
-        <div className="flex h-24 w-32 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border bg-brand-cream">
-          {value ? (
-            <ImageWithFallback src={value} alt="Pratinjau" className="h-full w-full object-cover" />
-          ) : (
-            <ImagePlus className="h-6 w-6 text-muted-foreground" />
-          )}
+    <div className="space-y-2 rounded-xl border border-border bg-slate-50/70 p-3">
+      <span className="block text-xs font-semibold text-brand-blue-deep">
+        Galeri / Koleksi Gambar (Slide Carousel)
+      </span>
+
+      {/* Grid of uploaded thumbnails */}
+      {images.length > 0 && (
+        <div className="grid grid-cols-4 gap-2 mb-2">
+          {images.map((img, idx) => (
+            <div key={idx} className="relative group h-20 overflow-hidden rounded-lg border border-border bg-slate-100">
+              <ImageWithFallback src={img} alt={`Gambar ${idx + 1}`} className="h-full w-full object-cover" />
+              <button
+                type="button"
+                onClick={() => removeImg(idx)}
+                className="absolute top-1 right-1 h-5 w-5 flex items-center justify-center rounded-full bg-red-600 text-white opacity-90 transition-all hover:scale-110"
+                title="Hapus gambar ini"
+              >
+                <X className="h-3 w-3" />
+              </button>
+              <span className="absolute bottom-1 left-1 rounded bg-black/60 px-1 text-[0.6rem] font-bold text-white">
+                #{idx + 1}
+              </span>
+            </div>
+          ))}
         </div>
-        <div className="flex-1 space-y-2">
+      )}
+
+      {/* Controls: Upload & Add URL */}
+      <div className="flex flex-wrap gap-2">
+        <input
+          ref={inputRef}
+          type="file"
+          multiple
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => handleFiles(e.target.files)}
+        />
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-blue-dark"
+        >
+          <Plus className="h-3.5 w-3.5" /> {busy ? "Mengunggah..." : "+ Unggah Gambar (Bisa Pilih >1)"}
+        </button>
+      </div>
+
+      <div className="flex gap-2">
+        <input
+          value={urlInput}
+          onChange={(e) => setUrlInput(e.target.value)}
+          placeholder="atau tempel URL gambar di sini..."
+          className="flex-1 rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue"
+        />
+        <button
+          type="button"
+          onClick={addUrl}
+          className="rounded-lg border border-brand-blue bg-accent px-3 py-1.5 text-xs font-semibold text-brand-blue hover:bg-brand-blue/10"
+        >
+          + Tambah URL
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ---------- Multi-Link Input ----------
+function MultiLinkInput({
+  links = [],
+  onChange,
+}: {
+  links: ExternalLink[];
+  onChange: (links: ExternalLink[]) => void;
+}) {
+  const [label, setLabel] = useState("");
+  const [url, setUrl] = useState("");
+
+  const addLink = () => {
+    if (!url.trim()) return;
+    onChange([...links, { label: label.trim() || "Link Referensi", url: url.trim() }]);
+    setLabel("");
+    setUrl("");
+  };
+
+  const removeLink = (idx: number) => {
+    onChange(links.filter((_, i) => i !== idx));
+  };
+
+  return (
+    <div className="space-y-2 rounded-xl border border-border bg-slate-50/70 p-3">
+      <span className="block text-xs font-semibold text-brand-blue-deep">
+        Opsi Multi-Link Referensi / Sumber Asli
+      </span>
+
+      {links.length > 0 && (
+        <div className="space-y-1.5 mb-2">
+          {links.map((lnk, idx) => (
+            <div key={idx} className="flex items-center justify-between gap-2 rounded-lg border border-border bg-white px-3 py-1.5 text-xs shadow-sm">
+              <span className="font-semibold text-brand-blue-deep truncate max-w-[150px]">{lnk.label}</span>
+              <span className="text-muted-foreground truncate flex-1">{lnk.url}</span>
+              <button
+                type="button"
+                onClick={() => removeLink(idx)}
+                className="text-brand-red hover:underline p-1"
+                title="Hapus Link"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 gap-2">
+        <input
+          value={label}
+          onChange={(e) => setLabel(e.target.value)}
+          placeholder="Judul Link (mis. 'Dokumen PDF Rujukan')"
+          className="rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue"
+        />
+        <div className="flex gap-2">
           <input
-            ref={inputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => handleFile(e.target.files?.[0])}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://..."
+            className="flex-1 rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue"
           />
           <button
             type="button"
-            onClick={() => inputRef.current?.click()}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-3 py-1.5 text-xs font-semibold text-white"
+            onClick={addLink}
+            className="shrink-0 rounded-lg bg-brand-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-blue-dark"
           >
-            <ImagePlus className="h-3.5 w-3.5" /> {busy ? "Mengunggah…" : "Unggah Gambar"}
+            + Tambah Link
           </button>
-          {value && (
-            <button
-              type="button"
-              onClick={() => onChange("")}
-              className="ml-2 inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-brand-blue-deep"
-            >
-              <X className="h-3.5 w-3.5" /> Hapus
-            </button>
-          )}
-          <input
-            value={value.startsWith("data:") ? "" : value}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder="atau tempel URL gambar…"
-            className={inputCls}
-          />
         </div>
       </div>
     </div>
@@ -127,6 +241,8 @@ const emptyArticle = {
   date: "",
   readTime: "5 menit",
   image: "",
+  images: [] as string[],
+  links: [] as ExternalLink[],
   body: "",
   status: "published" as ContentStatus,
 };
@@ -136,11 +252,15 @@ function ArticleManager() {
   const [form, setForm] = useState({ ...emptyArticle });
   const [editing, setEditing] = useState<string | null>(null);
 
-  const set = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const set = (k: keyof typeof form, v: any) => setForm((f) => ({ ...f, [k]: v }));
 
   const submit = () => {
     if (!form.title.trim()) return;
-    const payload = { ...form, date: form.date.trim() || todayLabel() };
+    const payload = {
+      ...form,
+      image: form.images.length > 0 ? form.images[0] : form.image,
+      date: form.date.trim() || todayLabel(),
+    };
     if (editing) updateArticle(editing, payload);
     else addArticle(payload);
     setForm({ ...emptyArticle });
@@ -156,7 +276,9 @@ function ArticleManager() {
       author: a.author,
       date: a.date,
       readTime: a.readTime,
-      image: a.image,
+      image: a.image ?? "",
+      images: a.images ?? (a.image ? [a.image] : []),
+      links: a.links ?? [],
       body: a.body ?? "",
       status: a.status ?? "published",
     });
@@ -196,7 +318,8 @@ function ArticleManager() {
           <Field label="Isi Artikel">
             <textarea value={form.body} onChange={(e) => set("body", e.target.value)} rows={6} className={inputCls} placeholder="Tulis isi lengkap artikel di sini. Pisahkan paragraf dengan baris kosong…" />
           </Field>
-          <ImageUpload value={form.image} onChange={(v) => set("image", v)} />
+          <MultiImageUpload images={form.images} onChange={(imgs) => set("images", imgs)} />
+          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} />
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">
             <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white">
@@ -221,12 +344,17 @@ function ArticleManager() {
           {articles.map((a) => (
             <div key={a.id} className="flex gap-3 rounded-xl border border-border p-3">
               <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream">
-                {a.image && <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover" />}
+                {(a.images?.[0] || a.image) && <ImageWithFallback src={a.images?.[0] || a.image!} alt={a.title} className="h-full w-full object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
                   <StatusBadge status={a.status} />
+                  {a.images && a.images.length > 1 && (
+                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue">
+                      {a.images.length} gambar
+                    </span>
+                  )}
                 </div>
                 <p className="line-clamp-1 font-semibold text-brand-blue-deep">{a.title}</p>
                 <p className="text-xs text-muted-foreground">{a.author || "—"} · {a.date}</p>
@@ -251,18 +379,34 @@ function ArticleManager() {
 // ===========================================================================
 // Manajer Berita
 // ===========================================================================
-const emptyNews = { title: "", tag: "Program", source: "", url: "", excerpt: "", date: "", image: "", body: "", status: "published" as ContentStatus };
+const emptyNews = {
+  title: "",
+  tag: "Program",
+  source: "",
+  url: "",
+  excerpt: "",
+  date: "",
+  image: "",
+  images: [] as string[],
+  links: [] as ExternalLink[],
+  body: "",
+  status: "published" as ContentStatus,
+};
 
 function NewsManager() {
   const { news, addNews, updateNews, deleteNews } = useContent();
   const [form, setForm] = useState({ ...emptyNews });
   const [editing, setEditing] = useState<string | null>(null);
 
-  const set = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const set = (k: keyof typeof form, v: any) => setForm((f) => ({ ...f, [k]: v }));
 
   const submit = () => {
     if (!form.title.trim()) return;
-    const payload = { ...form, date: form.date.trim() || todayLabel() };
+    const payload = {
+      ...form,
+      image: form.images.length > 0 ? form.images[0] : form.image,
+      date: form.date.trim() || todayLabel(),
+    };
     if (editing) updateNews(editing, payload);
     else addNews(payload);
     setForm({ ...emptyNews });
@@ -271,7 +415,19 @@ function NewsManager() {
 
   const startEdit = (n: NewsItem) => {
     setEditing(n.id);
-    setForm({ title: n.title, tag: n.tag, source: n.source, url: n.url ?? "", excerpt: n.excerpt, date: n.date, image: n.image ?? "", body: n.body ?? "", status: n.status ?? "published" });
+    setForm({
+      title: n.title,
+      tag: n.tag,
+      source: n.source,
+      url: n.url ?? "",
+      excerpt: n.excerpt,
+      date: n.date,
+      image: n.image ?? "",
+      images: n.images ?? (n.image ? [n.image] : []),
+      links: n.links ?? [],
+      body: n.body ?? "",
+      status: n.status ?? "published",
+    });
   };
 
   return (
@@ -295,10 +451,10 @@ function NewsManager() {
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Nama Sumber">
+            <Field label="Nama Sumber Utama">
               <input value={form.source} onChange={(e) => set("source", e.target.value)} className={inputCls} placeholder="Dinas Kesehatan Sidoarjo" />
             </Field>
-            <Field label="Link Sumber Berita (URL Asli)">
+            <Field label="Link Sumber Utama (URL)">
               <input value={form.url} onChange={(e) => set("url", e.target.value)} className={inputCls} placeholder="https://..." />
             </Field>
           </div>
@@ -308,7 +464,13 @@ function NewsManager() {
           <Field label="Isi Berita">
             <textarea value={form.body} onChange={(e) => set("body", e.target.value)} rows={6} className={inputCls} placeholder="Tulis isi lengkap berita di sini. Pisahkan paragraf dengan baris kosong…" />
           </Field>
-          <ImageUpload value={form.image} onChange={(v) => set("image", v)} />
+
+          {/* Multi-Image Carousel Uploader */}
+          <MultiImageUpload images={form.images} onChange={(imgs) => set("images", imgs)} />
+
+          {/* Multi-Link External Resource Input */}
+          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} />
+
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">
             <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white">
@@ -333,12 +495,17 @@ function NewsManager() {
           {news.map((n) => (
             <div key={n.id} className="flex gap-3 rounded-xl border border-border p-3">
               <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-brand-cream">
-                {n.image && <ImageWithFallback src={n.image} alt={n.title} className="h-full w-full object-cover" />}
+                {(n.images?.[0] || n.image) && <ImageWithFallback src={n.images?.[0] || n.image!} alt={n.title} className="h-full w-full object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
                   <StatusBadge status={n.status} />
+                  {n.images && n.images.length > 1 && (
+                    <span className="rounded bg-brand-blue/10 px-1.5 py-0.5 text-[0.6rem] font-bold text-brand-blue">
+                      {n.images.length} gambar
+                    </span>
+                  )}
                 </div>
                 <p className="line-clamp-1 font-semibold text-brand-blue-deep">{n.title}</p>
                 <p className="text-xs text-muted-foreground">{n.source} · {n.date}</p>
@@ -368,9 +535,10 @@ export function ContentManager({ kind }: { kind: "article" | "news" }) {
     <div>
       <div className="mb-5 flex items-center gap-2 text-sm text-muted-foreground">
         {kind === "article" ? <FileText className="h-4 w-4 text-brand-blue" /> : <Newspaper className="h-4 w-4 text-brand-blue" />}
-        Kelola konten {kind === "article" ? "artikel" : "berita"} — tambah, unggah gambar, edit, atau hapus. Perubahan langsung tampil di halaman publik.
+        Kelola konten {kind === "article" ? "artikel" : "berita"} — tambah multi-gambar (slideshow), multi-link rujukan, edit, atau hapus. Perubahan langsung tampil di halaman publik.
       </div>
       {kind === "article" ? <ArticleManager /> : <NewsManager />}
     </div>
   );
 }
+

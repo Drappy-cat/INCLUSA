@@ -15,6 +15,8 @@ import {
   Clock,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ImageSlider } from "../ui-kit/ImageSlider";
+import { ExternalLink } from "lucide-react";
 import { useContent } from "../../data/ContentStore";
 
 export function ArtikelDetail() {
@@ -106,12 +108,13 @@ export function ArtikelDetail() {
               </span>
             </div>
 
-            {/* Featured Hero Image */}
-            {article.image && (
-              <div className="mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-border/50 shadow-sm">
-                <ImageWithFallback src={article.image} alt={article.title} className="h-full w-full object-cover" />
-              </div>
-            )}
+            {/* Multi-Image Slider Carousel or Single Featured Image */}
+            <ImageSlider
+              images={article.images}
+              fallbackImage={article.image}
+              alt={article.title}
+              className="mt-6 aspect-[16/9]"
+            />
 
             {/* Article Text Paragraphs */}
             <div className="mt-8 space-y-6 text-base leading-relaxed text-slate-800 dark:text-slate-200 sm:text-lg">
@@ -121,6 +124,31 @@ export function ArtikelDetail() {
                 </p>
               ))}
             </div>
+
+            {/* External Reference Links Box */}
+            {article.links && article.links.length > 0 && (
+              <div className="mt-10 rounded-2xl border border-brand-blue/30 bg-brand-cream p-6 shadow-sm dark:bg-slate-900 dark:border-brand-teal/30">
+                <span className="rounded-full bg-brand-blue/15 px-2.5 py-0.5 text-xs font-bold text-brand-blue dark:bg-brand-blue/30 dark:text-brand-teal">
+                  Link Referensi & Publikasi Rujukan
+                </span>
+                <h4 className="mt-1.5 font-display text-lg font-bold text-brand-blue-deep dark:text-white">
+                  Tautan & Dokumen Pendukung
+                </h4>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {article.links.map((lnk, i) => (
+                    <a
+                      key={i}
+                      href={lnk.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-white border border-brand-blue/30 px-5 py-2.5 text-xs font-semibold text-brand-blue-deep shadow-sm transition-all hover:bg-accent dark:bg-slate-800 dark:text-white dark:border-slate-700"
+                    >
+                      {lnk.label || `Dokumen ${i + 1}`} <ExternalLink className="h-3.5 w-3.5 text-brand-blue dark:text-brand-teal" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Social Share Buttons */}
             <div className="mt-10 border-t border-border/80 pt-6">

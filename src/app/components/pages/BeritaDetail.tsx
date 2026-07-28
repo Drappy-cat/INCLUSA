@@ -15,6 +15,7 @@ import {
   Newspaper,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ImageSlider } from "../ui-kit/ImageSlider";
 import { useContent } from "../../data/ContentStore";
 import { useLanguage } from "../../data/LanguageContext";
 
@@ -105,12 +106,13 @@ export function BeritaDetail() {
               </span>
             </div>
 
-            {/* Featured Hero Image */}
-            {item.image && (
-              <div className="mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-border/50 shadow-sm">
-                <ImageWithFallback src={item.image} alt={item.title} className="h-full w-full object-cover" />
-              </div>
-            )}
+            {/* Multi-Image Slider Carousel or Featured Image */}
+            <ImageSlider
+              images={item.images}
+              fallbackImage={item.image}
+              alt={item.title}
+              className="mt-6 aspect-[16/9]"
+            />
 
             {/* Article Text Paragraphs */}
             <div className="mt-8 space-y-6 text-base leading-relaxed text-slate-800 dark:text-slate-200 sm:text-lg">
@@ -126,33 +128,48 @@ export function BeritaDetail() {
               ))}
             </div>
 
-            {/* External Source Callout Box (if URL is provided) */}
-            {item.url && (
+            {/* External Source Callout Boxes (Multi-links or single URL) */}
+            {((item.links && item.links.length > 0) || item.url) && (
               <div className="mt-10 rounded-2xl border border-brand-blue/30 bg-brand-cream p-6 shadow-sm dark:bg-slate-900 dark:border-brand-teal/30">
                 <div className="flex items-start gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue text-white shadow">
                     <Newspaper className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-brand-blue/15 px-2.5 py-0.5 text-xs font-bold text-brand-blue dark:bg-brand-blue/30 dark:text-brand-teal">
-                        Sumber Berita Asli
-                      </span>
-                    </div>
+                    <span className="rounded-full bg-brand-blue/15 px-2.5 py-0.5 text-xs font-bold text-brand-blue dark:bg-brand-blue/30 dark:text-brand-teal">
+                      Link Referensi & Sumber Asli
+                    </span>
                     <h4 className="mt-1.5 font-display text-lg font-bold text-brand-blue-deep dark:text-white">
-                      Berita Bersumber dari {item.source}
+                      Sumber Berita & Dokumen Terkait
                     </h4>
-                    <p className="mt-1 text-sm text-muted-foreground dark:text-slate-300">
-                      Artikel berita ini pertama kali dipublikasikan oleh <span className="font-semibold text-brand-blue-deep dark:text-white">{item.source}</span>. Anda dapat membaca laporan selengkapnya langsung dari situs sumber resmi di bawah ini:
+                    <p className="mt-1 text-sm text-muted-foreground dark:text-slate-300 mb-4">
+                      Laporan atau informasi rujukan dapat diakses melalui tautan resmi di bawah ini:
                     </p>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow transition-all hover:bg-brand-blue-dark hover:shadow-md"
-                    >
-                      Kunjungi Sumber Berita Asli <ExternalLink className="h-4 w-4" />
-                    </a>
+
+                    <div className="flex flex-wrap gap-3">
+                      {item.url && (
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-xs font-semibold text-white shadow transition-all hover:bg-brand-blue-dark hover:shadow-md"
+                        >
+                          Sumber Utama ({item.source}) <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+
+                      {item.links?.map((lnk, i) => (
+                        <a
+                          key={i}
+                          href={lnk.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-white border border-brand-blue/30 px-5 py-2.5 text-xs font-semibold text-brand-blue-deep shadow-sm transition-all hover:bg-accent dark:bg-slate-800 dark:text-white dark:border-slate-700"
+                        >
+                          {lnk.label || `Link ${i + 1}`} <ExternalLink className="h-3.5 w-3.5 text-brand-blue dark:text-brand-teal" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
