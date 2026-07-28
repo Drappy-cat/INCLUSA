@@ -101,6 +101,11 @@ export const populationData = [
 
 export type ContentStatus = "published" | "draft";
 
+export type ExternalLink = {
+  label: string;
+  url: string;
+};
+
 export type Article = {
   id: string;
   title: string;
@@ -109,7 +114,24 @@ export type Article = {
   author: string;
   date: string;
   readTime: string;
-  image: string;
+  image?: string;
+  images?: string[];
+  links?: ExternalLink[];
+  body?: string;
+  status?: ContentStatus;
+};
+
+export type NewsItem = {
+  id: string;
+  title: string;
+  date: string;
+  source: string;
+  excerpt: string;
+  tag: string;
+  image?: string;
+  images?: string[];
+  links?: ExternalLink[];
+  url?: string;
   body?: string;
   status?: ContentStatus;
 };

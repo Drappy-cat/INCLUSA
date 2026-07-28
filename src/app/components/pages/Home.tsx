@@ -471,28 +471,24 @@ export function Home() {
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
+      {/* ===== TESTIMONIALS (Hidden until added by admin) ===== */}
+      {/* 
       <section className="bg-brand-blue-deep py-16 text-white dark:bg-[#070e1e]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow={t("testiEyebrow")} title={<span className="text-white">{t("testiTitle")}</span>} />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              { id: 1, text: "INCLUSA membantu kami menyusun program inklusi yang benar-benar tepat sasaran. Pendekatan berbasis data membuat setiap kebijakan terasa lebih percaya diri.", name: "Dr. Siti Rahmawati", role: "Kepala Dinas Sosial", program: "Policy Lab" },
-              { id: 2, text: "Pelatihan Academy INCLUSA mengubah cara kami mendampingi komunitas. Ilmunya langsung bisa diterapkan di lapangan.", name: "Agung Prasetyo", role: "Fasilitator Komunitas", program: "INCLUSA Academy" },
-              { id: 3, text: "Data Center INCLUSA menjadi referensi utama kami dalam menyusun proposal penelitian tentang disabilitas di Indonesia.", name: "Prof. Anis Kurniawan", role: "Peneliti Sosial", program: "Research Center" },
+              { id: 1, text: "INCLUSA membantu kami menyusun program inklusi yang benar-benar tepat sasaran.", name: "Dr. Siti Rahmawati", role: "Kepala Dinas Sosial" }
             ].map((t) => (
               <div key={t.id} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
                 <Quote className="h-8 w-8 text-brand-maize" />
                 <p className="mt-3 text-sm leading-relaxed text-white/85">{t.text}</p>
-                <div className="mt-5">
-                  <p className="font-display font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/60">{t.role} · {t.program}</p>
-                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+      */}
 
       {/* ===== LATEST NEWS ===== */}
       <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
@@ -541,8 +537,8 @@ export function Home() {
           {/* Marquee container */}
           <div className="relative mt-10">
             {/* Gradient fade edges */}
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent dark:from-[#0f1c30]" />
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent dark:from-[#0f1c30]" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 marquee-fade-left" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 marquee-fade-right" />
 
             {/* Scrolling track */}
             <div className="flex items-center gap-6 animate-marquee">

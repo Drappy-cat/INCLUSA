@@ -39,24 +39,100 @@ export const translations = {
     areaConsultingDesc: "Layanan advisory & pendampingan organisasi dalam mengimplementasikan program pembangunan inklusif.",
     btnMore: "Selengkapnya",
 
-    // ── GIS PREVIEW ──
+    // ── GIS PREVIEW & DATA CENTER PAGE ──
     gisEyebrow: "INCLUSA Data Center · Peta GIS",
     gisTitle: "Pantau data inklusif per wilayah di Indonesia",
     gisSubtitle: "Visualisasi data spasial membantu memetakan prioritas intervensi. Data Sidoarjo tersedia sebagai dataset awal; wilayah lain dalam proses pengumpulan data.",
     gisButton: "Buka Data Center",
     gisLow: "Rendah",
     gisHigh: "Tinggi",
+    gisPageTitle: "INCLUSA Data Center",
+    gisPageSub: "Observatori Data Inklusif berbasis Sistem Informasi Geografis (GIS) untuk memetakan statistik intervensi dan faskes di Indonesia.",
+    statTotalCases: "Total Kasus Terlaporkan",
+    statODHIV: "ODHIV Aktif",
+    statARV: "Cakupan ARV",
+    statFaskes: "Fasilitas Kesehatan",
 
-    // ── RESEARCH CENTER PREVIEW ──
+    // ── ABOUT PAGE (TENTANG) ──
+    aboutEyebrow: "Tentang INCLUSA",
+    aboutTitle: "Indonesia Institute for Children, Women, Disability and Inclusion",
+    aboutSub: "Lembaga independen berbasis riset yang berkomitmen memperjuangkan pembangunan inklusif, kesetaraan gender, dan hak-hak penyandang disabilitas di Indonesia.",
+    visionTitle: "Visi Kami",
+    visionDesc: "Terwujudnya Indonesia yang inklusif, adil, dan ramah bagi anak, perempuan, serta penyandang disabilitas berbasis data ilmiah dan kebijakan berbasis bukti.",
+    missionTitle: "Misi Kami",
+    mission1: "Menyediakan data spasial dan analisis inklusif yang akurat untuk mendukung perumusan kebijakan publik.",
+    mission2: "Meningkatkan kapasitas profesional tenaga kesehatan, pendidik, dan fasilitator komunitas.",
+    mission3: "Menjalin kemitraan strategis lintas sektor dengan pemerintah, universitas, dan institusi internasional.",
+    whatWeDoTitle: "Apa yang Kami Lakukan",
+    ourTeamTitle: "Pendiri & Tim Riset",
+
+    // ── POLICY LAB PAGE ──
+    policyTitle: "INCLUSA Policy Lab",
+    policySub: "Laboratorium riset kebijakan dan advokasi berbasis data untuk mendukung pembentukan undang-undang dan peraturan daerah yang inklusif.",
+    policyAdvocacy: "Advokasi Kebijakan",
+    policyNetwork: "Jejaring Kemitraan",
+
+    // ── ACADEMY PAGE ──
+    academyTitle: "INCLUSA Academy",
+    academySub: "Pusat pelatihan dan peningkatan kapasitas profesional untuk tenaga kesehatan, pendidik inklusif, dan pendamping komunitas.",
+
+    // ── RESEARCH CENTER (ARIKEL & BERITA) ──
     researchEyebrow: "Research Center",
     researchTitle: "Artikel & Publikasi Terbaru",
+    researchHeaderTitle: "Pusat Riset, Publikasi & Berita",
+    researchHeaderSub: "Knowledge hub independen yang menghimpun berita kegiatan lembaga serta publikasi, policy brief, dan artikel riset pembangunan inklusif di Indonesia.",
     researchAll: "Semua artikel",
+    tabPillar1: "Artikel & Publikasi Riset",
+    tabPillar2: "Berita & Kegiatan",
+    emptyArticlesTitle: "Belum Ada Artikel Dipublikasikan",
+    emptyArticlesSub: "Artikel riset dan publikasi ilmiah dapat ditambahkan secara manual melalui Admin Dashboard.",
+    emptyNewsTitle: "Belum Ada Berita Dipublikasikan",
+    emptyNewsSub: "Rilis pers, kabar kegiatan, dan program kemitraan dapat ditambahkan secara manual melalui Admin Dashboard.",
+    btnManageAdmin: "Kelola di Admin Dashboard",
 
-    // ── TESTIMONIALS ──
+    // ── CONSULTING PAGE ──
+    consultingTitle: "INCLUSA Consulting",
+    consultingSub: "Layanan penasihat strategis dan pendampingan organisasi dalam menyusun program pembangunan inklusif dan audit aksesibilitas.",
+
+    // ── CONTACT US PAGE (KONTAK) ──
+    contactHeroTag: "Gabung Bersama Kami",
+    contactHeroTitle: "Mari Berkolaborasi Demi Masa Depan Inklusif",
+    contactHeroSub: "Kami membuka pintu kemitraan bagi lembaga pemerintah, organisasi kemasyarakatan, universitas, dan profesional yang ingin berkontribusi.",
+    contactDirectWa: "Hubungi Langsung via WhatsApp",
+    contactFormTitle: "Kirim Pesan / Permohonan Kolaborasi",
+    contactEyebrow: "HUBUNGI KAMI",
+    contactHeading: "Kontak Resmi",
+    officeAddress: "Alamat Kantor",
+    partnershipEmail: "Email Kemitraan",
+    phoneWhatsapp: "Telepon / WhatsApp",
+    waFastResponse: "Ingin respon lebih cepat? Layanan chat WhatsApp kami aktif di jam kerja.",
+    chatViaWa: "Chat via WhatsApp",
+    formHeading: "Kirim Pesan atau Pertanyaan",
+    formSub: "Isi formulir di bawah ini untuk memulai pembicaraan kerja sama, riset, atau konsultasi.",
+    labelName: "Nama Lengkap",
+    labelCompany: "Instansi / Perusahaan / Universitas",
+    labelPhone: "Nomor Telepon",
+    labelEmail: "Email",
+    labelMessage: "Pesan Anda",
+    placeholderName: "Nama Lengkap Anda",
+    placeholderCompany: "Nama Perusahaan, Lembaga, atau Universitas",
+    placeholderPhone: "08123456789",
+    placeholderEmail: "nama@email.com",
+    placeholderMessage: "Tuliskan ide kolaborasi, pertanyaan, atau kebutuhan lembaga Anda di sini...",
+    btnSubmit: "Kirim Pesan",
+    submittedSuccess: "Pesan Anda Berhasil Terkirim!",
+    submittedSub: "Terima kasih telah menghubungi INCLUSA Institute. Tim kami akan segera meninjau pesan Anda dan merespon secepat mungkin.",
+    btnSendAnother: "Kirim Pesan Lain",
+    formName: "Nama Lengkap",
+    formEmail: "Alamat Email",
+    formInstitution: "Instansi / Organisasi",
+    formSubject: "Subjek Pesan",
+    formMessage: "Pesan Anda",
+    btnSendMsg: "Kirim Pesan",
+
+    // ── TESTIMONIALS & NEWS ──
     testiEyebrow: "Suara Mitra & Peserta",
     testiTitle: "Apa Kata Mereka",
-
-    // ── LATEST NEWS ──
     newsEyebrow: "Kabar Terkini",
     newsTitle: "Berita & Kegiatan INCLUSA",
     newsAll: "Semua berita",
@@ -68,13 +144,11 @@ export const translations = {
     partnerInterested: "Logo mitra akan segera ditampilkan. Tertarik menjadi mitra INCLUSA?",
     partnerContactLink: "Hubungi kami →",
 
-    // ── CTA BANNER ──
+    // ── CTA BANNER & FOOTER ──
     ctaTitle: "Siap berkolaborasi untuk Indonesia yang lebih inklusif?",
     ctaSub: "Bergabunglah dengan INCLUSA Institute — bersama kita wujudkan pembangunan inklusif yang berkelanjutan untuk anak, perempuan, dan penyandang disabilitas.",
     ctaBtnContact: "Hubungi Kami",
     ctaBtnData: "Jelajahi Data Center",
-
-    // ── FOOTER ──
     footerDesc: "Indonesia Institute for Children, Women, Disability and Inclusion. Lembaga independen berbasis riset untuk pembangunan inklusif yang berkelanjutan.",
     footerPillars: "5 STRATEGIC AREAS",
     footerAboutTitle: "TENTANG INCLUSA",
@@ -123,24 +197,100 @@ export const translations = {
     areaConsultingDesc: "Advisory services & organizational assistance in implementing inclusive development programs.",
     btnMore: "Learn More",
 
-    // ── GIS PREVIEW ──
+    // ── GIS PREVIEW & DATA CENTER PAGE ──
     gisEyebrow: "INCLUSA Data Center · GIS Map",
     gisTitle: "Monitor inclusive data across regions in Indonesia",
     gisSubtitle: "Spatial data visualization helps map intervention priorities. Sidoarjo data is available as an initial dataset; other regions are under data collection.",
     gisButton: "Open Data Center",
     gisLow: "Low",
     gisHigh: "High",
+    gisPageTitle: "INCLUSA Data Center",
+    gisPageSub: "Geographic Information System (GIS) Inclusive Data Observatory for mapping intervention statistics and health facilities in Indonesia.",
+    statTotalCases: "Total Reported Cases",
+    statODHIV: "Active Patients",
+    statARV: "ARV Coverage",
+    statFaskes: "Health Facilities",
 
-    // ── RESEARCH CENTER PREVIEW ──
+    // ── ABOUT PAGE (TENTANG) ──
+    aboutEyebrow: "About INCLUSA",
+    aboutTitle: "Indonesia Institute for Children, Women, Disability and Inclusion",
+    aboutSub: "An independent research-based institute committed to championing inclusive development, gender equality, and rights for persons with disabilities in Indonesia.",
+    visionTitle: "Our Vision",
+    visionDesc: "To realize an inclusive, fair, and friendly Indonesia for children, women, and persons with disabilities based on scientific data and evidence-based policy.",
+    missionTitle: "Our Mission",
+    mission1: "Provide accurate spatial data and inclusive analytics to support public policy formulation.",
+    mission2: "Enhance professional capacity of health workers, educators, and community facilitators.",
+    mission3: "Establish strategic cross-sector partnerships with government, universities, and international institutions.",
+    whatWeDoTitle: "What We Do",
+    ourTeamTitle: "Founder & Research Team",
+
+    // ── POLICY LAB PAGE ──
+    policyTitle: "INCLUSA Policy Lab",
+    policySub: "Data-driven policy research and advocacy lab supporting inclusive legislation and regional regulations.",
+    policyAdvocacy: "Policy Advocacy",
+    policyNetwork: "Partnership Network",
+
+    // ── ACADEMY PAGE ──
+    academyTitle: "INCLUSA Academy",
+    academySub: "Training and professional capacity building hub for health workers, inclusive educators, and community mentors.",
+
+    // ── RESEARCH CENTER (ARTIKEL & BERITA) ──
     researchEyebrow: "Research Center",
     researchTitle: "Latest Articles & Publications",
+    researchHeaderTitle: "Research Center, Publications & News",
+    researchHeaderSub: "Independent knowledge hub gathering institute activity news as well as scientific publications, policy briefs, and inclusive development research articles in Indonesia.",
     researchAll: "All articles",
+    tabPillar1: "Research Articles & Publications",
+    tabPillar2: "News & Activities",
+    emptyArticlesTitle: "No Articles Published Yet",
+    emptyArticlesSub: "Scientific research articles and publications can be added manually via the Admin Dashboard.",
+    emptyNewsTitle: "No News Published Yet",
+    emptyNewsSub: "Press releases, activity news, and partnership programs can be added manually via the Admin Dashboard.",
+    btnManageAdmin: "Manage in Admin Dashboard",
 
-    // ── TESTIMONIALS ──
+    // ── CONSULTING PAGE ──
+    consultingTitle: "INCLUSA Consulting",
+    consultingSub: "Strategic advisory and organizational assistance services in designing inclusive development programs and accessibility audits.",
+
+    // ── CONTACT US PAGE (KONTAK) ──
+    contactHeroTag: "Join Us",
+    contactHeroTitle: "Let's Collaborate for an Inclusive Future",
+    contactHeroSub: "We welcome partnerships with government agencies, civil society organizations, universities, and professionals eager to contribute.",
+    contactDirectWa: "Contact Directly via WhatsApp",
+    contactFormTitle: "Send a Message / Collaboration Request",
+    contactEyebrow: "CONTACT US",
+    contactHeading: "Official Contact",
+    officeAddress: "Office Address",
+    partnershipEmail: "Partnership Email",
+    phoneWhatsapp: "Phone / WhatsApp",
+    waFastResponse: "Need a faster response? Our WhatsApp chat service is active during business hours.",
+    chatViaWa: "Chat via WhatsApp",
+    formHeading: "Send a Message or Inquiry",
+    formSub: "Fill out the form below to start a conversation about collaboration, research, or consulting.",
+    labelName: "Full Name",
+    labelCompany: "Company / Organization / University",
+    labelPhone: "Phone Number",
+    labelEmail: "Email Address",
+    labelMessage: "Your Message",
+    placeholderName: "Your Full Name",
+    placeholderCompany: "Company, Institution, or University Name",
+    placeholderPhone: "+62 812 3456 789",
+    placeholderEmail: "name@email.com",
+    placeholderMessage: "Write down collaboration ideas, inquiries, or organizational needs here...",
+    btnSubmit: "Submit Message",
+    submittedSuccess: "Your Message Has Been Sent!",
+    submittedSub: "Thank you for contacting INCLUSA Institute. Our team will review your message and respond as soon as possible.",
+    btnSendAnother: "Send Another Message",
+    formName: "Full Name",
+    formEmail: "Email Address",
+    formInstitution: "Institution / Organization",
+    formSubject: "Message Subject",
+    formMessage: "Your Message",
+    btnSendMsg: "Send Message",
+
+    // ── TESTIMONIALS & NEWS ──
     testiEyebrow: "Partner & Participant Voices",
     testiTitle: "What They Say",
-
-    // ── LATEST NEWS ──
     newsEyebrow: "Latest News",
     newsTitle: "INCLUSA News & Activities",
     newsAll: "All news",
@@ -152,13 +302,11 @@ export const translations = {
     partnerInterested: "Partner logos will be displayed soon. Interested in becoming an INCLUSA partner?",
     partnerContactLink: "Contact us →",
 
-    // ── CTA BANNER ──
+    // ── CTA BANNER & FOOTER ──
     ctaTitle: "Ready to collaborate for a more inclusive Indonesia?",
     ctaSub: "Join INCLUSA Institute — together let's build sustainable inclusive development for children, women, and persons with disabilities.",
     ctaBtnContact: "Contact Us",
     ctaBtnData: "Explore Data Center",
-
-    // ── FOOTER ──
     footerDesc: "Indonesia Institute for Children, Women, Disability and Inclusion. An independent research-based institute for sustainable inclusive development.",
     footerPillars: "5 STRATEGIC AREAS",
     footerAboutTitle: "ABOUT INCLUSA",

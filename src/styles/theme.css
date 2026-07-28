@@ -284,8 +284,44 @@
   }
 
   input {
-    font-size: var(--text-base);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+}
+
+/* ────────────── HIDE GOOGLE TRANSLATE BANNER FOR CLEAN UI ────────────── */
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-te-spinner-pos,
+.VIpgJd-yOverview-SKL2lh {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ────────────── MARQUEE GRADIENT FADE OVERLAY FIX ────────────── */
+.marquee-fade-left {
+  background: linear-gradient(to right, #ffffff 0%, transparent 100%);
+}
+
+.marquee-fade-right {
+  background: linear-gradient(to left, #ffffff 0%, transparent 100%);
+}
+
+.dark .marquee-fade-left {
+  background: linear-gradient(to right, #0f1c30 0%, transparent 100%) !important;
+}
+
+.dark .marquee-fade-right {
+  background: linear-gradient(to left, #0f1c30 0%, transparent 100%) !important;
 }

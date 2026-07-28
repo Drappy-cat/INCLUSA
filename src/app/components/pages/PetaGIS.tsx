@@ -5,6 +5,7 @@ import { PageHero } from "../ui-kit/Shared";
 import { facilities, type Kecamatan } from "../../data/content";
 import { useContent } from "../../data/ContentStore";
 import { SidoarjoMap } from "./SidoarjoMap";
+import { useLanguage } from "../../data/LanguageContext";
 
 function heat(cases: number, max: number) {
   const r = cases / max;
@@ -16,6 +17,7 @@ function heat(cases: number, max: number) {
 }
 
 export function PetaGIS() {
+  const { t } = useLanguage();
   const { kecamatan: kecamatanData } = useContent();
   const max = Math.max(...kecamatanData.map((k) => k.cases));
   const [selectedName, setSelectedName] = useState<string>(kecamatanData[0].name);
@@ -37,9 +39,9 @@ export function PetaGIS() {
   return (
     <>
       <PageHero
-        eyebrow="Peta Sebaran (GIS)"
-        title="Peta Interaktif Kasus HIV/AIDS"
-        subtitle="Klik pada tiap kecamatan untuk melihat jumlah kasus, ODHIV, cakupan ARV, dan jumlah fasilitas kesehatan yang tersedia."
+        eyebrow="INCLUSA Data Center"
+        title={t("gisPageTitle")}
+        subtitle={t("gisPageSub")}
       />
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

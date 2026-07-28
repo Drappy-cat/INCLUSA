@@ -9,6 +9,7 @@ import { SectionHeading, Eyebrow } from "../ui-kit/Shared";
 import { markUrl } from "../layout/Logo";
 import { organization } from "../../data/content";
 import founderImg from "../../../assets/founder.jpg";
+import { useLanguage } from "../../data/LanguageContext";
 
 const avatarTone: Record<string, string> = {
   blue: "bg-brand-blue",
@@ -18,29 +19,30 @@ const avatarTone: Record<string, string> = {
 };
 
 export function TentangKami() {
+  const { t } = useLanguage();
   const supervisor = organization[0];
   const devTeam = organization.slice(1);
 
   return (
     <>
       {/* 1. Hero Section (About Us) */}
-      <section id="about-us" className="relative overflow-hidden bg-brand-cream pb-16 pt-24 sm:pt-32">
+      <section id="about-us" className="relative overflow-hidden bg-brand-cream pb-16 pt-24 sm:pt-32 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <Eyebrow>Tentang Kami</Eyebrow>
-              <h1 className="mt-4 font-display text-4xl font-bold tracking-tight text-brand-blue-deep sm:text-5xl">
-                Ruang Inklusif untuk Semua
+              <Eyebrow>{t("aboutEyebrow")}</Eyebrow>
+              <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-brand-blue-deep sm:text-4xl lg:text-5xl dark:text-white">
+                {t("aboutTitle")}
               </h1>
-              <p className="mt-6 text-lg leading-relaxed text-brand-blue-deep/80">
-                INCLUSA merupakan platform digital terpadu yang berfokus pada penyediaan informasi HIV/AIDS, edukasi masyarakat, kolaborasi antar stakeholder, layanan kesehatan digital, serta pemberdayaan masyarakat inklusif di Kabupaten Sidoarjo.
+              <p className="mt-6 text-lg leading-relaxed text-brand-blue-deep/80 dark:text-slate-300">
+                {t("aboutSub")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#what-we-do" className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-brand-blue-dark hover:shadow-md">
-                  Pelajari Lebih Lanjut
+                  {t("heroBtnExplore")}
                 </a>
-                <Link to="/kontak" className="inline-flex items-center gap-2 rounded-full border border-brand-blue-deep/20 bg-transparent px-6 py-3 text-sm font-semibold text-brand-blue-deep transition-all hover:-translate-y-0.5 hover:bg-brand-blue-deep/5">
-                  Hubungi Kami
+                <Link to="/kontak" className="inline-flex items-center gap-2 rounded-full border border-brand-blue-deep/20 bg-transparent px-6 py-3 text-sm font-semibold text-brand-blue-deep transition-all hover:-translate-y-0.5 hover:bg-brand-blue-deep/5 dark:text-white dark:border-slate-700">
+                  {t("navHubungiKami")}
                 </Link>
               </div>
             </div>
