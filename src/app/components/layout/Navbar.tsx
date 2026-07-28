@@ -71,6 +71,20 @@ export function Navbar() {
     setAboutOpen(false);
   }, [pathname]);
 
+  // Make hash links functional (smooth scroll to element)
+  const handleScrollTo = (hash: string) => {
+    setTimeout(() => {
+      if (!hash) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const el = document.getElementById(hash.replace("#", ""));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   const isActive = (to: string) => to === "/" ? pathname === "/" : pathname.startsWith(to);
 
   return (
@@ -121,7 +135,10 @@ export function Navbar() {
                     <Link
                       key={l.to}
                       to={l.to}
-                      onClick={() => setAboutOpen(false)}
+                      onClick={() => {
+                        setAboutOpen(false);
+                        handleScrollTo(l.hash);
+                      }}
                       className={`block rounded-lg px-3 py-2 text-sm font-medium ${isLinkActive ? "bg-accent text-brand-blue" : "text-brand-blue-deep/80 hover:bg-accent hover:text-brand-blue"}`}
                     >
                       {l.label}
@@ -212,7 +229,10 @@ export function Navbar() {
                   <Link 
                     key={l.to} 
                     to={l.to} 
-                    onClick={() => setMobileOpen(false)}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      handleScrollTo(l.hash);
+                    }}
                     className={`block rounded-lg px-5 py-2 text-sm ${isLinkActive ? "bg-accent font-medium text-brand-blue" : "text-brand-blue-deep/80 hover:bg-accent"}`}
                   >
                     {l.label}
