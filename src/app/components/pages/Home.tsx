@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Activity,
   Users,
+  Building2,
   HeartHandshake,
   Quote,
   CheckCircle2,
