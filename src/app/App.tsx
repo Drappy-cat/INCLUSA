@@ -20,6 +20,9 @@ import { AdminLogin } from "./components/admin/AdminLogin";
 import { ComingSoon } from "./components/pages/ComingSoon";
 import { Kontak } from "./components/pages/Kontak";
 
+import { ThemeProvider } from "./data/ThemeContext";
+import { LanguageProvider } from "./data/LanguageContext";
+
 function AdminRoute() {
   const { user } = useAuth();
   return user ? <AdminDashboard /> : <AdminLogin />;
@@ -27,11 +30,13 @@ function AdminRoute() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-      <ContentProvider>
-      <Routes>
-        <Route element={<Layout />}>
+    <ThemeProvider>
+      <LanguageProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <ContentProvider>
+              <Routes>
+                <Route element={<Layout />}>
           {/* ── Main ── */}
           <Route path="/" element={<Home />} />
 
@@ -70,5 +75,7 @@ export default function App() {
       </ContentProvider>
       </AuthProvider>
     </BrowserRouter>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

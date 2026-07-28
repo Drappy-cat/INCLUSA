@@ -22,6 +22,7 @@ import {
   collabStats,
 } from "../../data/content";
 import { useContent, isPublished } from "../../data/ContentStore";
+import { useLanguage } from "../../data/LanguageContext";
 
 /* ─────────────── HERO SLIDESHOW DATA ─────────────── */
 const heroSlides = [
@@ -103,6 +104,7 @@ const collabIcons = [Activity, Users, Building2, HeartHandshake];
 
 /* ─────────────── HERO SLIDESHOW COMPONENT ─────────────── */
 export function HeroSlideshow() {
+  const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
@@ -245,13 +247,13 @@ export function HeroSlideshow() {
                 to="/data-center"
                 className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-brand-blue/90 hover:shadow-xl"
               >
-                Jelajahi Program <ArrowRight className="h-4 w-4" />
+                {t("heroBtnExplore")} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/kontak"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/30 backdrop-blur-sm transition-colors hover:bg-white/20"
               >
-                Hubungi Kami <ChevronRight className="h-4 w-4" />
+                {t("heroBtnContact")} <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
@@ -260,9 +262,9 @@ export function HeroSlideshow() {
               className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/60"
               style={{ animation: "fadeSlideUp 500ms 500ms both" }}
             >
-              {["Lembaga Independen", "Berbasis Bukti", "Skala Nasional"].map((t) => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-maize" /> {t}
+              {[t("trust1"), t("trust2"), t("trust3")].map((trustItem) => (
+                <span key={trustItem} className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-brand-maize" /> {trustItem}
                 </span>
               ))}
             </div>
@@ -307,9 +309,21 @@ export function HeroSlideshow() {
 
 /* ─────────────── MAIN HOME COMPONENT ─────────────── */
 export function Home() {
+  const { t } = useLanguage();
   const { articles: allArticles, news: allNews, kecamatan: kecamatanData } = useContent();
   const articles = allArticles.filter(isPublished);
   const news = allNews.filter(isPublished);
+
+  const getAreaDesc = (key: string) => {
+    switch (key) {
+      case "Data Center": return t("areaDataCenterDesc");
+      case "Policy Lab": return t("areaPolicyLabDesc");
+      case "Academy": return t("areaAcademyDesc");
+      case "Research Center": return t("areaResearchDesc");
+      case "Consulting": return t("areaConsultingDesc");
+      default: return "";
+    }
+  };
 
   return (
     <>
@@ -317,20 +331,20 @@ export function Home() {
       <HeroSlideshow />
 
       {/* ===== 5 STRATEGIC AREAS ===== */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             center
-            eyebrow="5 Strategic Areas"
-            title="Lima Pilar Utama INCLUSA Institute"
-            subtitle="Satu institusi yang mengintegrasikan data, kebijakan, edukasi, riset, dan konsultasi untuk pembangunan inklusif Indonesia."
+            eyebrow={t("areasEyebrow")}
+            title={t("areasTitle")}
+            subtitle={t("areasSubtitle")}
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {strategicAreas.map((m) => (
               <Link
                 key={m.title}
                 to={m.to}
-                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:border-slate-800"
               >
                 <div className="flex items-center justify-between">
                   <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${m.color} text-white`}>
@@ -340,18 +354,20 @@ export function Home() {
                     className={`rounded-full px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide ${
                       m.status === "Coming Soon"
                         ? "bg-brand-maize/20 text-brand-maize"
-                        : "bg-accent text-brand-blue"
+                        : "bg-accent text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal"
                     }`}
                   >
-                    {m.status}
+                    {m.status === "Coming Soon" ? t("comingSoon") : t("active")}
                   </span>
                 </div>
-                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep">
+                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep dark:text-white">
                   INCLUSA {m.title}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{m.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">
-                  Selengkapnya <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
+                  {getAreaDesc(m.title) || m.desc}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue dark:text-brand-teal">
+                  {t("btnMore")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             ))}
@@ -359,44 +375,28 @@ export function Home() {
         </div>
       </section>
 
-      {/* ===== COLLAB STATS (Hidden per user request) ===== */}
-      {/* 
-      <section className="bg-brand-cream py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading center eyebrow="Dampak Kolaborasi" title="Bergerak Bersama untuk Indonesia yang Inklusif" />
-          <div className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
-            {collabStats.map((s, i) => {
-              const Icon = collabIcons[i];
-              return <StatCard key={s.label} item={s} icon={<Icon className="h-5 w-5" />} />;
-            })}
-          </div>
-        </div>
-      </section>
-      */}
-
       {/* ===== GIS PREVIEW ===== */}
-      <section className="bg-brand-cream py-16">
+      <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <Eyebrow>INCLUSA Data Center · Peta GIS</Eyebrow>
-              <h2 className="mt-3 font-display text-[1.8rem] font-bold leading-tight text-brand-blue-deep">
-                Pantau data inklusif per wilayah di Indonesia
+              <Eyebrow>{t("gisEyebrow")}</Eyebrow>
+              <h2 className="mt-3 font-display text-[1.8rem] font-bold leading-tight text-brand-blue-deep dark:text-white">
+                {t("gisTitle")}
               </h2>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">
-                Visualisasi data spasial membantu memetakan prioritas intervensi. Data Sidoarjo tersedia sebagai
-                dataset awal; wilayah lain dalam proses pengumpulan data.
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground dark:text-slate-300">
+                {t("gisSubtitle")}
               </p>
               <Link
                 to="/data-center"
                 className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
               >
-                Buka Data Center <ArrowRight className="h-4 w-4" />
+                {t("gisButton")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="rounded-2xl border border-border bg-white p-5 shadow-sm">
+            <div className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900 dark:border-slate-800">
               <div className="mb-3 flex items-center justify-between">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground dark:text-slate-400">
                   Sebaran Kasus · Sidoarjo (Contoh Dataset)
                 </p>
                 <span className="rounded-full bg-brand-maize/20 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-maize">
@@ -420,10 +420,10 @@ export function Home() {
                   );
                 })}
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                <span>Rendah</span>
+              <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground dark:text-slate-400">
+                <span>{t("gisLow")}</span>
                 <div className="mx-3 h-2 flex-1 rounded-full bg-gradient-to-r from-brand-teal/30 to-brand-blue" />
-                <span>Tinggi</span>
+                <span>{t("gisHigh")}</span>
               </div>
             </div>
           </div>
@@ -431,25 +431,25 @@ export function Home() {
       </section>
 
       {/* ===== ARTICLES (Research Center Preview) ===== */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
-            <SectionHeading eyebrow="Research Center" title="Artikel & Publikasi Terbaru" />
-            <Link to="/research" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
-              Semua artikel <ArrowRight className="h-4 w-4" />
+            <SectionHeading eyebrow={t("researchEyebrow")} title={t("researchTitle")} />
+            <Link to="/research" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
+              {t("researchAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {articles.slice(0, 3).map((a) => (
-              <article key={a.id} className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg">
+              <article key={a.id} className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
                 <div className="aspect-[16/10] overflow-hidden">
                   <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-5">
                   <span className="text-xs font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
-                  <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep">{a.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.excerpt}</p>
-                  <p className="mt-3 text-xs text-muted-foreground">{a.date} · {a.readTime}</p>
+                  <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep dark:text-white">{a.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground dark:text-slate-300">{a.excerpt}</p>
+                  <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{a.date} · {a.readTime}</p>
                 </div>
               </article>
             ))}
@@ -458,9 +458,9 @@ export function Home() {
       </section>
 
       {/* ===== TESTIMONIALS ===== */}
-      <section className="bg-brand-blue-deep py-16 text-white">
+      <section className="bg-brand-blue-deep py-16 text-white dark:bg-[#070e1e]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading center eyebrow="Suara Mitra & Peserta" title={<span className="text-white">Apa Kata Mereka</span>} />
+          <SectionHeading center eyebrow={t("testiEyebrow")} title={<span className="text-white">{t("testiTitle")}</span>} />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               { id: 1, text: "INCLUSA membantu kami menyusun program inklusi yang benar-benar tepat sasaran. Pendekatan berbasis data membuat setiap kebijakan terasa lebih percaya diri.", name: "Dr. Siti Rahmawati", role: "Kepala Dinas Sosial", program: "Policy Lab" },
@@ -481,21 +481,21 @@ export function Home() {
       </section>
 
       {/* ===== LATEST NEWS ===== */}
-      <section className="bg-brand-cream py-16">
+      <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
-            <SectionHeading eyebrow="Kabar Terkini" title="Berita & Kegiatan INCLUSA" />
-            <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
-              Semua berita <ArrowRight className="h-4 w-4" />
+            <SectionHeading eyebrow={t("newsEyebrow")} title={t("newsTitle")} />
+            <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
+              {t("newsAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {news.slice(0, 4).map((n) => (
-              <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
-                <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
-                <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue">{n.title}</h3>
-                <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{n.excerpt}</p>
-                <p className="mt-3 text-xs text-muted-foreground">{n.date} · {n.source}</p>
+              <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
+                <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{n.tag}</span>
+                <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue dark:text-white dark:group-hover:text-brand-teal">{n.title}</h3>
+                <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground dark:text-slate-300">{n.excerpt}</p>
+                <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{n.date} · {n.source}</p>
               </Link>
             ))}
           </div>
@@ -503,20 +503,20 @@ export function Home() {
       </section>
 
       {/* ===== COLLABORATION PARTNERS (Marquee Placeholder) ===== */}
-      <section className="bg-white py-16 overflow-hidden">
+      <section className="bg-white py-16 overflow-hidden dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             center
-            eyebrow="Mitra Kolaborasi"
-            title="Siap Menjalin Kemitraan Strategis"
-            subtitle="Kami terbuka untuk kolaborasi dengan pemerintah, universitas, organisasi internasional, sektor privat, dan komunitas. Bersama membangun Indonesia yang lebih inklusif."
+            eyebrow={t("partnerEyebrow")}
+            title={t("partnerTitle")}
+            subtitle={t("partnerSubtitle")}
           />
 
           {/* Marquee container */}
           <div className="relative mt-10">
             {/* Gradient fade edges */}
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-brand-cream to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-brand-cream to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent dark:from-[#0f1c30]" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent dark:from-[#0f1c30]" />
 
             {/* Scrolling track */}
             <div className="flex items-center gap-6 animate-marquee">
@@ -532,7 +532,6 @@ export function Home() {
                 "NGO Internasional",
                 "Lembaga Riset",
                 "Komunitas Lokal",
-                // Duplicate for seamless infinite loop
                 "Kementerian Sosial",
                 "UNICEF",
                 "Dinas Pendidikan",
@@ -546,13 +545,13 @@ export function Home() {
               ].map((name, i) => (
                 <div
                   key={`${name}-${i}`}
-                  className="flex h-20 w-44 shrink-0 flex-col items-center justify-center rounded-2xl border border-border/70 bg-white/90 px-3 shadow-sm transition-all hover:border-brand-teal/50 hover:shadow-md"
+                  className="flex h-20 w-44 shrink-0 flex-col items-center justify-center rounded-2xl border border-border/70 bg-white/90 px-3 shadow-sm transition-all hover:border-brand-teal/50 hover:shadow-md dark:bg-slate-800 dark:border-slate-700"
                 >
-                  <div className="h-5 w-16 rounded bg-gray-200/80 mb-1" />
-                  <span className="text-[0.68rem] font-bold text-brand-blue-deep text-center leading-tight">
+                  <div className="h-5 w-16 rounded bg-gray-200/80 dark:bg-slate-700 mb-1" />
+                  <span className="text-[0.68rem] font-bold text-brand-blue-deep dark:text-slate-100 text-center leading-tight">
                     {name}
                   </span>
-                  <span className="mt-1 flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[0.58rem] font-semibold text-emerald-700 ring-1 ring-emerald-600/20">
+                  <span className="mt-1 flex items-center gap-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 text-[0.58rem] font-semibold text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-600/20">
                     <span className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
                     Available Slot
                   </span>
@@ -561,10 +560,10 @@ export function Home() {
             </div>
           </div>
 
-          <p className="mt-6 text-center text-sm text-muted-foreground italic">
-            Logo mitra akan segera ditampilkan. Tertarik menjadi mitra INCLUSA?{" "}
-            <Link to="/kontak" className="font-semibold text-brand-blue not-italic hover:underline">
-              Hubungi kami →
+          <p className="mt-6 text-center text-sm text-muted-foreground dark:text-slate-400 italic">
+            {t("partnerInterested")}{" "}
+            <Link to="/kontak" className="font-semibold text-brand-blue dark:text-brand-teal not-italic hover:underline">
+              {t("partnerContactLink")}
             </Link>
           </p>
         </div>
@@ -585,27 +584,31 @@ export function Home() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-blue to-brand-blue-deep px-8 py-14 text-center text-white sm:px-14">
-          <h2 className="mx-auto max-w-2xl font-display text-[1.8rem] font-bold leading-tight sm:text-[2.2rem]">
-            Siap berkolaborasi untuk Indonesia yang lebih inklusif?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/80">
-            Bergabunglah dengan INCLUSA Institute — bersama kita wujudkan pembangunan inklusif yang berkelanjutan untuk anak, perempuan, dan penyandang disabilitas.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/kontak"
-              className="rounded-full bg-brand-maize px-6 py-3 font-semibold text-brand-blue-deep transition-transform hover:-translate-y-0.5"
-            >
-              Hubungi Kami
-            </Link>
-            <Link
-              to="/data-center"
-              className="rounded-full bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/30 transition-colors hover:bg-white/20"
-            >
-              Jelajahi Data Center
-            </Link>
+      <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-blue via-brand-blue-dark to-brand-blue-deep p-8 text-white shadow-xl sm:p-12">
+            <div className="relative z-10 max-w-2xl">
+              <h2 className="font-display text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl text-white">
+                {t("ctaTitle")}
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-white/90 sm:text-base">
+                {t("ctaSub")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/kontak"
+                  className="rounded-full bg-brand-maize px-7 py-3 text-sm font-bold text-brand-blue-deep shadow-md transition-all hover:bg-white hover:shadow-lg"
+                >
+                  {t("ctaBtnContact")}
+                </Link>
+                <Link
+                  to="/data-center"
+                  className="rounded-full bg-white/15 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur-sm transition-colors hover:bg-white/25"
+                >
+                  {t("ctaBtnData")}
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

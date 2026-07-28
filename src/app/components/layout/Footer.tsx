@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { Instagram, Youtube } from "lucide-react";
 import { markUrl, Wordmark } from "./Logo";
+import { useLanguage } from "../../data/LanguageContext";
 
 /* TikTok icon - Lucide doesn't have one, so we make a small inline SVG */
 function TikTokIcon({ className = "" }: { className?: string }) {
@@ -33,6 +34,8 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="mt-20 border-t border-border bg-brand-blue-deep text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
@@ -46,8 +49,7 @@ export function Footer() {
             <Wordmark className="text-xl" />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/70">
-            Indonesia Institute for Children, Women, Disability and Inclusion. Lembaga independen berbasis riset
-            untuk pembangunan inklusif yang berkelanjutan.
+            {t("footerDesc")}
           </p>
           <div className="mt-5 flex gap-3">
             {socialLinks.map(({ Icon, href, label }) => (
@@ -66,7 +68,7 @@ export function Footer() {
         {/* Column 2 — 5 Strategic Areas */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wide text-brand-maize">
-            5 Strategic Areas
+            {t("footerPillars")}
           </h4>
           <ul className="mt-4 space-y-2.5 text-sm">
             {strategicLinks.map((l) => (
@@ -82,7 +84,7 @@ export function Footer() {
         {/* Column 3 — About */}
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wide text-brand-maize">
-            Tentang INCLUSA
+            {t("footerAboutTitle")}
           </h4>
           <ul className="mt-4 space-y-2.5 text-sm">
             {aboutLinks.map((l) => (
@@ -95,9 +97,11 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Column 4 — Contact (placeholder data) */}
+        {/* Column 4 — Contact */}
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-wide text-brand-maize">Kontak</h4>
+          <h4 className="font-display text-sm font-semibold uppercase tracking-wide text-brand-maize">
+            {t("footerContactTitle")}
+          </h4>
           <ul className="mt-4 space-y-3 text-sm text-white/60 italic">
             <li>📍 Lokasi: <span className="text-white/40">Akan diperbarui</span></li>
             <li>📞 Telepon: <span className="text-white/40">Akan diperbarui</span></li>
