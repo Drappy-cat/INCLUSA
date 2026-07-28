@@ -16,6 +16,7 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Link, useSearchParams } from "react-router";
 import { PageHero, Chip, SectionHeading } from "../ui-kit/Shared";
 import { useContent, isPublished } from "../../data/ContentStore";
+import { useLanguage } from "../../data/LanguageContext";
 
 const tagColor: Record<string, string> = {
   Program: "bg-brand-blue/10 text-brand-blue",
@@ -25,6 +26,7 @@ const tagColor: Record<string, string> = {
 };
 
 export function Artikel() {
+  const { t } = useLanguage();
   const { articles: allArticles, news: allNews } = useContent();
   const [searchParams, setSearchParams] = useSearchParams();
 
