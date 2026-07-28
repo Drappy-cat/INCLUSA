@@ -317,47 +317,50 @@ export function Home() {
       <HeroSlideshow />
 
       {/* ===== 5 STRATEGIC AREAS ===== */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <SectionHeading
-          center
-          eyebrow="5 Strategic Areas"
-          title="Lima Pilar Utama INCLUSA Institute"
-          subtitle="Satu institusi yang mengintegrasikan data, kebijakan, edukasi, riset, dan konsultasi untuk pembangunan inklusif Indonesia."
-        />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {strategicAreas.map((m) => (
-            <Link
-              key={m.title}
-              to={m.to}
-              className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="flex items-center justify-between">
-                <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${m.color} text-white`}>
-                  <m.icon className="h-6 w-6" />
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            center
+            eyebrow="5 Strategic Areas"
+            title="Lima Pilar Utama INCLUSA Institute"
+            subtitle="Satu institusi yang mengintegrasikan data, kebijakan, edukasi, riset, dan konsultasi untuk pembangunan inklusif Indonesia."
+          />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {strategicAreas.map((m) => (
+              <Link
+                key={m.title}
+                to={m.to}
+                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${m.color} text-white`}>
+                    <m.icon className="h-6 w-6" />
+                  </span>
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide ${
+                      m.status === "Coming Soon"
+                        ? "bg-brand-maize/20 text-brand-maize"
+                        : "bg-accent text-brand-blue"
+                    }`}
+                  >
+                    {m.status}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep">
+                  INCLUSA {m.title}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{m.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">
+                  Selengkapnya <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-                <span
-                  className={`rounded-full px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide ${
-                    m.status === "Coming Soon"
-                      ? "bg-brand-maize/20 text-brand-maize"
-                      : "bg-accent text-brand-blue"
-                  }`}
-                >
-                  {m.status}
-                </span>
-              </div>
-              <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep">
-                INCLUSA {m.title}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{m.desc}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">
-                Selengkapnya <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ===== COLLAB STATS ===== */}
+      {/* ===== COLLAB STATS (Hidden per user request) ===== */}
+      {/* 
       <section className="bg-brand-cream py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading center eyebrow="Dampak Kolaborasi" title="Bergerak Bersama untuk Indonesia yang Inklusif" />
@@ -369,63 +372,66 @@ export function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ===== GIS PREVIEW ===== */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Eyebrow>INCLUSA Data Center · Peta GIS</Eyebrow>
-            <h2 className="mt-3 font-display text-[1.8rem] font-bold leading-tight text-brand-blue-deep">
-              Pantau data inklusif per wilayah di Indonesia
-            </h2>
-            <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">
-              Visualisasi data spasial membantu memetakan prioritas intervensi. Data Sidoarjo tersedia sebagai
-              dataset awal; wilayah lain dalam proses pengumpulan data.
-            </p>
-            <Link
-              to="/data-center"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
-            >
-              Buka Data Center <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="rounded-2xl border border-border bg-white p-5 shadow-sm">
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Sebaran Kasus · Sidoarjo (Contoh Dataset)
+      <section className="bg-brand-cream py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <Eyebrow>INCLUSA Data Center · Peta GIS</Eyebrow>
+              <h2 className="mt-3 font-display text-[1.8rem] font-bold leading-tight text-brand-blue-deep">
+                Pantau data inklusif per wilayah di Indonesia
+              </h2>
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">
+                Visualisasi data spasial membantu memetakan prioritas intervensi. Data Sidoarjo tersedia sebagai
+                dataset awal; wilayah lain dalam proses pengumpulan data.
               </p>
-              <span className="rounded-full bg-brand-maize/20 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-maize">
-                Data Aktif
-              </span>
+              <Link
+                to="/data-center"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
+              >
+                Buka Data Center <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-            <div className="grid grid-cols-3 gap-2">
-              {kecamatanData.slice(0, 9).map((k) => {
-                const max = Math.max(...kecamatanData.map((d) => d.cases));
-                const intensity = 0.2 + (k.cases / max) * 0.8;
-                return (
-                  <Link
-                    key={k.name}
-                    to="/data-center"
-                    className="group rounded-lg p-3 text-white transition-transform hover:scale-105"
-                    style={{ backgroundColor: `rgba(31, 154, 160, ${intensity})` }}
-                  >
-                    <p className="text-xs font-semibold leading-tight">{k.name}</p>
-                    <p className="mt-1 font-display text-lg font-bold">{k.cases}</p>
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-              <span>Rendah</span>
-              <div className="mx-3 h-2 flex-1 rounded-full bg-gradient-to-r from-brand-teal/30 to-brand-blue" />
-              <span>Tinggi</span>
+            <div className="rounded-2xl border border-border bg-white p-5 shadow-sm">
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Sebaran Kasus · Sidoarjo (Contoh Dataset)
+                </p>
+                <span className="rounded-full bg-brand-maize/20 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-maize">
+                  Data Aktif
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {kecamatanData.slice(0, 9).map((k) => {
+                  const max = Math.max(...kecamatanData.map((d) => d.cases));
+                  const intensity = 0.2 + (k.cases / max) * 0.8;
+                  return (
+                    <Link
+                      key={k.name}
+                      to="/data-center"
+                      className="group rounded-lg p-3 text-white transition-transform hover:scale-105"
+                      style={{ backgroundColor: `rgba(31, 154, 160, ${intensity})` }}
+                    >
+                      <p className="text-xs font-semibold leading-tight">{k.name}</p>
+                      <p className="mt-1 font-display text-lg font-bold">{k.cases}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+              <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+                <span>Rendah</span>
+                <div className="mx-3 h-2 flex-1 rounded-full bg-gradient-to-r from-brand-teal/30 to-brand-blue" />
+                <span>Tinggi</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== ARTICLES (Research Center Preview) ===== */}
-      <section className="bg-brand-cream py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
             <SectionHeading eyebrow="Research Center" title="Artikel & Publikasi Terbaru" />
@@ -475,27 +481,29 @@ export function Home() {
       </section>
 
       {/* ===== LATEST NEWS ===== */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between gap-4">
-          <SectionHeading eyebrow="Kabar Terkini" title="Berita & Kegiatan INCLUSA" />
-          <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
-            Semua berita <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {news.slice(0, 4).map((n) => (
-            <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
-              <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
-              <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue">{n.title}</h3>
-              <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{n.excerpt}</p>
-              <p className="mt-3 text-xs text-muted-foreground">{n.date} · {n.source}</p>
+      <section className="bg-brand-cream py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between gap-4">
+            <SectionHeading eyebrow="Kabar Terkini" title="Berita & Kegiatan INCLUSA" />
+            <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
+              Semua berita <ArrowRight className="h-4 w-4" />
             </Link>
-          ))}
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {news.slice(0, 4).map((n) => (
+              <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
+                <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
+                <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue">{n.title}</h3>
+                <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{n.excerpt}</p>
+                <p className="mt-3 text-xs text-muted-foreground">{n.date} · {n.source}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== COLLABORATION PARTNERS (Marquee Placeholder) ===== */}
-      <section className="bg-brand-cream py-14 overflow-hidden">
+      <section className="bg-white py-16 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             center
