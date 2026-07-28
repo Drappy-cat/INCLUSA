@@ -388,11 +388,11 @@ export type TeamMember = { id: string; name: string; role: string; focus: string
 
 export const organization: TeamMember[] = [
   { id: "o1", name: "Drg. Wulan Kartika", role: "Ketua Yayasan", focus: "Arah strategis & kemitraan lintas sektor", initials: "WK", tone: "blue" },
-  { id: "o2", name: "dr. Anindya Prameswari", role: "Koordinator Kesehatan", focus: "Program VCT, ARV & rujukan faskes", initials: "AP", tone: "teal" },
-  { id: "o3", name: "Rania Salsabila, M.Psi", role: "Koordinator Edukasi", focus: "Kurikulum & pendampingan sekolah", initials: "RS", tone: "coral" },
-  { id: "o4", name: "Bagas Nurhadi, S.Kom", role: "Koordinator Data & GIS", focus: "Dashboard monitoring & peta sebaran", initials: "BN", tone: "maize" },
-  { id: "o5", name: "Tim Konselor Sebaya", role: "Layanan Dukungan", focus: "Konseling & dukungan psikososial ODHIV", initials: "KS", tone: "blue" },
-  { id: "o6", name: "Relawan Komunitas", role: "Jaringan Lapangan", focus: "Penjangkauan & kampanye anti-stigma", initials: "RK", tone: "teal" },
+  { id: "o2", name: "[Nama Developer 1]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D1", tone: "teal" },
+  { id: "o3", name: "[Nama Developer 2]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D2", tone: "coral" },
+  { id: "o4", name: "[Nama Developer 3]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D3", tone: "maize" },
+  { id: "o5", name: "[Nama Developer 4]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D4", tone: "blue" },
+  { id: "o6", name: "[Nama Developer 5]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D5", tone: "teal" },
 ];
 
 // ===== Modul Education Center (Coming Soon) =====

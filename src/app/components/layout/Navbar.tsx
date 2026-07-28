@@ -12,9 +12,9 @@ const strategicAreas = [
 ];
 
 const aboutLinks = [
-  { to: "/tentang", label: "About Us" },
-  { to: "/tentang#what-we-do", label: "What We Do" },
-  { to: "/tentang#our-team", label: "Our Team" },
+  { to: "/tentang", label: "About Us", hash: "#about-us" },
+  { to: "/tentang#what-we-do", label: "What We Do", hash: "#what-we-do" },
+  { to: "/tentang#our-team", label: "Our Team", hash: "#our-team" },
 ];
 
 export function Navbar() {
@@ -22,15 +22,38 @@ export function Navbar() {
   const [areasOpen, setAreasOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
+  const [activeHash, setActiveHash] = useState("");
+  const { pathname, hash } = useLocation();
   const areasRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    setActiveHash(hash || "#about-us");
+  }, [pathname, hash]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      
+      // Scroll spy for About page
+      if (pathname === "/tentang") {
+        const sections = ["about-us", "what-we-do", "our-team"];
+        let current = "";
+        for (const section of sections) {
+          const el = document.getElementById(section);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 150) {
+              current = "#" + section;
+            }
+          }
+        }
+        if (current) setActiveHash(current);
+      }
+    };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   // Close dropdowns on outside click
   useEffect(() => {
@@ -92,15 +115,19 @@ export function Navbar() {
             </button>
             {aboutOpen && (
               <div className="absolute left-0 top-full mt-1 w-52 rounded-xl border border-border bg-white p-2 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
-                {aboutLinks.map((l) => (
-                  <Link
-                    key={l.to}
-                    to={l.to}
-                    className="block rounded-lg px-3 py-2 text-sm font-medium text-brand-blue-deep/80 hover:bg-accent hover:text-brand-blue"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
+                {aboutLinks.map((l) => {
+                  const isLinkActive = pathname === "/tentang" && activeHash === l.hash;
+                  return (
+                    <Link
+                      key={l.to}
+                      to={l.to}
+                      onClick={() => setAboutOpen(false)}
+                      className={`block rounded-lg px-3 py-2 text-sm font-medium ${isLinkActive ? "bg-accent text-brand-blue" : "text-brand-blue-deep/80 hover:bg-accent hover:text-brand-blue"}`}
+                    >
+                      {l.label}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -179,11 +206,19 @@ export function Navbar() {
               <p className="px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-widest text-muted-foreground">
                 About
               </p>
-              {aboutLinks.map((l) => (
-                <Link key={l.to} to={l.to} className="block rounded-lg px-5 py-2 text-sm text-brand-blue-deep/80 hover:bg-accent">
-                  {l.label}
-                </Link>
-              ))}
+              {aboutLinks.map((l) => {
+                const isLinkActive = pathname === "/tentang" && activeHash === l.hash;
+                return (
+                  <Link 
+                    key={l.to} 
+                    to={l.to} 
+                    onClick={() => setMobileOpen(false)}
+                    className={`block rounded-lg px-5 py-2 text-sm ${isLinkActive ? "bg-accent font-medium text-brand-blue" : "text-brand-blue-deep/80 hover:bg-accent"}`}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
             </div>
 
             <div>
