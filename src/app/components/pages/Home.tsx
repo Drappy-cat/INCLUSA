@@ -14,6 +14,7 @@ import {
   Quote,
   CheckCircle2,
   ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { SectionHeading, StatCard, Eyebrow } from "../ui-kit/Shared";
@@ -101,7 +102,7 @@ const strategicAreas = [
 const collabIcons = [Activity, Users, Building2, HeartHandshake];
 
 /* ─────────────── HERO SLIDESHOW COMPONENT ─────────────── */
-function HeroSlideshow() {
+export function HeroSlideshow() {
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
@@ -118,21 +119,22 @@ function HeroSlideshow() {
     }, 700);
   };
 
+  const handlePrev = () => {
+    const next = (current - 1 + heroSlides.length) % heroSlides.length;
+    goTo(next);
+  };
+
+  const handleNext = () => {
+    const next = (current + 1) % heroSlides.length;
+    goTo(next);
+  };
+
   useEffect(() => {
     timerRef.current = setInterval(() => {
-      setCurrent((c) => {
-        const next = (c + 1) % heroSlides.length;
-        setPrev(c);
-        setAnimating(true);
-        setTimeout(() => {
-          setPrev(null);
-          setAnimating(false);
-        }, 700);
-        return next;
-      });
+      handleNext();
     }, 5000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, []);
+  }, [current, animating]);
 
   const slide = heroSlides[current];
   const prevSlide = prev !== null ? heroSlides[prev] : null;
@@ -177,6 +179,24 @@ function HeroSlideshow() {
           <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/60 via-transparent to-transparent" />
         </div>
       </div>
+
+      {/* Left Navigation Arrow */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-6 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/5 text-white/80 ring-1 ring-white/10 backdrop-blur-sm transition-all hover:bg-white/15 hover:text-white hover:scale-105 active:scale-95"
+        aria-label="Slide Sebelumnya"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+
+      {/* Right Navigation Arrow */}
+      <button
+        onClick={handleNext}
+        className="absolute right-6 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/5 text-white/80 ring-1 ring-white/10 backdrop-blur-sm transition-all hover:bg-white/15 hover:text-white hover:scale-105 active:scale-95"
+        aria-label="Slide Selanjutnya"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
 
       {/* Content */}
       <div className="relative flex h-full items-center">

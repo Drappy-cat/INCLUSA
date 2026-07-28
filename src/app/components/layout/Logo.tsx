@@ -27,7 +27,7 @@ export function Logo({
         <span className="flex flex-col leading-none">
           <Wordmark className="text-[1.15rem]" />
           {subtitle && (
-            <span className="mt-0.5 text-[0.58rem] font-medium tracking-wide text-muted-foreground">
+            <span className="mt-0.5 text-[0.58rem] font-medium tracking-wide text-muted-foreground leading-tight max-w-[180px] sm:max-w-none">
               Indonesia Institute for Children, Women, Disability and Inclusion
             </span>
           )}

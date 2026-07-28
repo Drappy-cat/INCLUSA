@@ -17,6 +17,8 @@ const WHATSAPP_NUMBER = "6281100001234"; // TODO: Ganti dengan nomor WhatsApp re
 const WHATSAPP_MESSAGE = encodeURIComponent("Halo INCLUSA Academy, saya tertarik untuk mendaftar pelatihan. Mohon informasi lebih lanjut.");
 
 const programs = [
+  /* 
+  // Dinonaktifkan sementara sesuai instruksi pengguna:
   {
     icon: GraduationCap,
     title: "Teacher Training",
@@ -49,6 +51,7 @@ const programs = [
     duration: "1–2 Hari",
     status: "Segera Hadir",
   },
+  */
   {
     icon: Monitor,
     title: "Digital Course",
