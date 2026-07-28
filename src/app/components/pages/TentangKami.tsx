@@ -125,27 +125,44 @@ export function TentangKami() {
         </div>
       </section>
 
-      {/* 3. Section What We Do */}
-      <section id="what-we-do" className="bg-brand-cream py-20 scroll-mt-16">
+      {/* 3. Section What We Do (5 Pilar Utama - 3 Atas, 2 Bawah Center) */}
+      <section id="what-we-do" className="bg-brand-cream py-20 scroll-mt-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading center eyebrow="Apa yang Kami Lakukan" title="Fitur & Layanan Utama INCLUSA" />
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: BookOpen, color: "text-brand-blue", bg: "bg-brand-blue/10", title: "Pusat Informasi HIV/AIDS", desc: "Sumber informasi tepercaya, komprehensif, dan mudah dipahami seputar HIV/AIDS." },
-              { icon: Video, color: "text-brand-coral", bg: "bg-brand-coral/10", title: "Edukasi Masyarakat", desc: "Modul pembelajaran interaktif dan kampanye kesadaran untuk semua kalangan." },
-              { icon: Stethoscope, color: "text-brand-teal", bg: "bg-brand-teal/10", title: "Direktori Layanan Kesehatan", desc: "Kemudahan akses mencari fasilitas kesehatan dan layanan konseling terdekat." },
-              { icon: LineChart, color: "text-[#b9880a]", bg: "bg-brand-maize/20", title: "Dashboard Monitoring", desc: "Visualisasi data dan statistik terkini untuk mendukung pengambilan keputusan." },
-              { icon: Handshake, color: "text-brand-red", bg: "bg-brand-red/10", title: "Kolaborasi Stakeholder", desc: "Wadah sinergi antara pemerintah, institusi pendidikan, dan komunitas lokal." },
-              { icon: FlaskConical, color: "text-brand-blue-dark", bg: "bg-brand-blue-dark/10", title: "Research & Knowledge Hub", desc: "Pusat publikasi riset, kebijakan, dan inovasi terkait kesehatan masyarakat." },
-            ].map((feature, i) => (
-              <div key={i} className="group rounded-3xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
-                <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                  <feature.icon className="h-7 w-7" />
+          <SectionHeading center eyebrow="Apa yang Kami Lakukan" title="5 Pilar Utama INCLUSA" subtitle="Pendekatan holistik dan terpadu dalam mewujudkan pembangunan inklusif bagi anak, perempuan, dan penyandang disabilitas." />
+          
+          <div className="mt-16 space-y-6">
+            {/* Baris 1: 3 Pilar Atas */}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { icon: LineChart, color: "text-[#b9880a]", bg: "bg-brand-maize/20", title: "INCLUSA Data Center", desc: "Visualisasi data spasial GIS, kasus, dan statistik terkini untuk mendukung pemantauan dan pengambilan keputusan berbasis bukti." },
+                { icon: Handshake, color: "text-brand-coral", bg: "bg-brand-coral/10", title: "INCLUSA Policy Lab", desc: "Riset kebijakan berbasis bukti, penyusunan naskah akademik, dan advokasi peraturan daerah ramah disabilitas & gender." },
+                { icon: BookOpen, color: "text-brand-blue", bg: "bg-brand-blue/10", title: "INCLUSA Academy", desc: "Program pelatihan bersertifikat dan modul pengembangan kapasitas untuk nakes, pendidik inklusif, dan fasilitator masyarakat." },
+              ].map((feature, i) => (
+                <div key={i} className="group rounded-3xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4 dark:bg-[#0f1c30] dark:border-slate-800" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                    <feature.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{feature.title}</h3>
+                  <p className="mt-3 text-brand-blue-deep/70 leading-relaxed dark:text-slate-300">{feature.desc}</p>
                 </div>
-                <h3 className="font-display text-xl font-bold text-brand-blue-deep">{feature.title}</h3>
-                <p className="mt-3 text-brand-blue-deep/70 leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Baris 2: 2 Pilar Bawah (Ditengah / Centered) */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {[
+                { icon: FlaskConical, color: "text-brand-teal", bg: "bg-brand-teal/10", title: "INCLUSA Research & Knowledge Hub", desc: "Pusat publikasi riset, artikel pengetahuan, berita kegiatan, dan inovasi inklusi lintas sektor." },
+                { icon: Stethoscope, color: "text-brand-red", bg: "bg-brand-red/10", title: "INCLUSA Consulting", desc: "Layanan advisory pembangunan inklusif, pendampingan program CSR/ESG, dan audit aksesibilitas fasilitas publik." },
+              ].map((feature, i) => (
+                <div key={i} className="group w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-3xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4 dark:bg-[#0f1c30] dark:border-slate-800" style={{ animationDelay: `${(i + 3) * 100}ms`, animationFillMode: 'both' }}>
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                    <feature.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{feature.title}</h3>
+                  <p className="mt-3 text-brand-blue-deep/70 leading-relaxed dark:text-slate-300">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

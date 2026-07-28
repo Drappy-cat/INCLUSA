@@ -149,13 +149,27 @@
 }
 
 /* Text Colors in Dark Mode */
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5,
-.dark .text-brand-blue-deep {
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark [class*="text-brand-blue-deep"] {
   color: #f8fafc !important;
 }
 
-.dark .text-muted-foreground {
-  color: #94a3b8 !important;
+.dark p,
+.dark li,
+.dark td,
+.dark th,
+.dark label {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-muted-foreground,
+.dark p.text-muted-foreground,
+.dark span.text-muted-foreground {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-brand-blue:not(button):not(a) {
+  color: #34bec4 !important;
 }
 
 .dark .border-border {
