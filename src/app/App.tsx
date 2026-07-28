@@ -18,6 +18,7 @@ import { EducationCenter } from "./components/pages/EducationCenter";
 import { AdminDashboard } from "./components/pages/AdminDashboard";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { ComingSoon } from "./components/pages/ComingSoon";
+import { Kontak } from "./components/pages/Kontak";
 
 function AdminRoute() {
   const { user } = useAuth();
@@ -36,7 +37,7 @@ export default function App() {
 
           {/* ── About ── */}
           <Route path="/tentang" element={<TentangKami />} />
-          <Route path="/kontak" element={<ComingSoon title="Contact Us" desc="Halaman kontak sedang disiapkan. Sementara itu, hubungi kami melalui email: halo@inclusa.id" />} />
+          <Route path="/kontak" element={<Kontak />} />
 
           {/* ── Strategic Areas (new routes) ── */}
           <Route path="/data-center" element={<Statistik />} />
