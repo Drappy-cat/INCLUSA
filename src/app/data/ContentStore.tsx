@@ -17,7 +17,7 @@ import {
 // Ini pondasi front-end; siap ditingkatkan ke Supabase bila diperlukan.
 // ---------------------------------------------------------------------------
 
-const STORAGE_KEY = "inclusa:content:v2";
+const STORAGE_KEY = "inclusa:content:v3";
 
 export type FaqItem = Faq & { id: string };
 
@@ -69,8 +69,8 @@ export function fileToDataUrl(file: File): Promise<string> {
 
 function seed(): StoreData {
   return {
-    articles: seedArticles.map((a) => ({ ...a, status: a.status ?? "published" })),
-    news: seedNews.map((n) => ({ ...n, status: n.status ?? "published" })),
+    articles: [],
+    news: [],
     faqs: seedFaqs.map((f, i) => ({ ...f, id: f.id ?? `faq-seed-${i}` })),
     kecamatan: seedKecamatan.map((k) => ({ ...k })),
   };

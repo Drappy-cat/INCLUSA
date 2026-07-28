@@ -439,21 +439,35 @@ export function Home() {
               {t("researchAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.slice(0, 3).map((a) => (
-              <article key={a.id} className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
-                <div className="aspect-[16/10] overflow-hidden">
-                  <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="p-5">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
-                  <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep dark:text-white">{a.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground dark:text-slate-300">{a.excerpt}</p>
-                  <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{a.date} · {a.readTime}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+
+          {articles.length === 0 ? (
+            <div className="mt-8 rounded-2xl border border-dashed border-border bg-brand-cream/50 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
+              <BookOpen className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
+              <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Artikel Dipublikasikan</p>
+              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan artikel & publikasi riset baru melalui Admin Dashboard.</p>
+              <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
+                Tambah Artikel di Admin <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {articles.slice(0, 3).map((a) => (
+                <article key={a.id} className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
+                  {a.image && (
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
+                    <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep dark:text-white">{a.title}</h3>
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground dark:text-slate-300">{a.excerpt}</p>
+                    <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{a.date} · {a.readTime}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -489,16 +503,28 @@ export function Home() {
               {t("newsAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {news.slice(0, 4).map((n) => (
-              <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
-                <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{n.tag}</span>
-                <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue dark:text-white dark:group-hover:text-brand-teal">{n.title}</h3>
-                <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground dark:text-slate-300">{n.excerpt}</p>
-                <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{n.date} · {n.source}</p>
+
+          {news.length === 0 ? (
+            <div className="mt-8 rounded-2xl border border-dashed border-border bg-white/60 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
+              <Newspaper className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
+              <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Berita Dipublikasikan</p>
+              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan berita & kegiatan baru melalui Admin Dashboard.</p>
+              <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
+                Tambah Berita di Admin <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {news.slice(0, 4).map((n) => (
+                <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
+                  <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{n.tag}</span>
+                  <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue dark:text-white dark:group-hover:text-brand-teal">{n.title}</h3>
+                  <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground dark:text-slate-300">{n.excerpt}</p>
+                  <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{n.date} · {n.source}</p>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

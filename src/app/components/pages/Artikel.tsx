@@ -91,13 +91,13 @@ export function Artikel() {
             onClick={() => setPillar("artikel")}
             className={`group relative flex items-center gap-4 rounded-2xl border p-6 text-left transition-all ${
               activePillar === "artikel"
-                ? "border-brand-blue bg-white shadow-md ring-2 ring-brand-blue/20"
-                : "border-border bg-white/70 hover:bg-white hover:shadow-sm"
+                ? "border-brand-blue bg-white shadow-md ring-2 ring-brand-blue/20 dark:bg-slate-800 dark:border-brand-teal"
+                : "border-border bg-white/70 hover:bg-white hover:shadow-sm dark:bg-slate-900/60 dark:hover:bg-slate-800 dark:border-slate-800"
             }`}
           >
             <span
               className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-colors ${
-                activePillar === "artikel" ? "bg-brand-blue text-white" : "bg-brand-cream text-brand-blue"
+                activePillar === "artikel" ? "bg-brand-blue text-white" : "bg-brand-cream text-brand-blue dark:bg-slate-700 dark:text-brand-teal"
               }`}
             >
               <BookOpen className="h-7 w-7" />
@@ -106,10 +106,10 @@ export function Artikel() {
               <span className="text-[0.65rem] font-extrabold uppercase tracking-widest text-brand-coral">
                 Pilar 1
               </span>
-              <h3 className="font-display text-lg font-bold text-brand-blue-deep">
+              <h3 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">
                 Artikel & Publikasi Riset
               </h3>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">
                 Paper ilmiah, policy brief, dan artikel edukasi internal INCLUSA.
               </p>
             </div>
@@ -123,13 +123,13 @@ export function Artikel() {
             onClick={() => setPillar("berita")}
             className={`group relative flex items-center gap-4 rounded-2xl border p-6 text-left transition-all ${
               activePillar === "berita"
-                ? "border-brand-blue bg-white shadow-md ring-2 ring-brand-blue/20"
-                : "border-border bg-white/70 hover:bg-white hover:shadow-sm"
+                ? "border-brand-blue bg-white shadow-md ring-2 ring-brand-blue/20 dark:bg-slate-800 dark:border-brand-teal"
+                : "border-border bg-white/70 hover:bg-white hover:shadow-sm dark:bg-slate-900/60 dark:hover:bg-slate-800 dark:border-slate-800"
             }`}
           >
             <span
               className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-colors ${
-                activePillar === "berita" ? "bg-brand-blue text-white" : "bg-brand-cream text-brand-blue"
+                activePillar === "berita" ? "bg-brand-blue text-white" : "bg-brand-cream text-brand-blue dark:bg-slate-700 dark:text-brand-teal"
               }`}
             >
               <Newspaper className="h-7 w-7" />
@@ -138,10 +138,10 @@ export function Artikel() {
               <span className="text-[0.65rem] font-extrabold uppercase tracking-widest text-brand-teal">
                 Pilar 2
               </span>
-              <h3 className="font-display text-lg font-bold text-brand-blue-deep">
+              <h3 className="font-display text-lg font-bold text-brand-blue-deep dark:text-white">
                 Berita & Kegiatan
               </h3>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">
                 Rilis pers, kabar kegiatan, program kemitraan & rujukan sumber resmi.
               </p>
             </div>
@@ -175,8 +175,20 @@ export function Artikel() {
         {activePillar === "artikel" && (
           <div className="mt-8">
             {filteredArticles.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border bg-white py-16 text-center text-muted-foreground">
-                Tidak ada artikel atau paper riset yang cocok dengan pencarian Anda.
+              <div className="rounded-3xl border border-dashed border-border bg-white p-12 text-center shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <BookOpen className="mx-auto h-12 w-12 text-brand-blue dark:text-brand-teal" />
+                <h3 className="mt-4 font-display text-lg font-bold text-brand-blue-deep dark:text-white">
+                  Belum Ada Artikel Dipublikasikan
+                </h3>
+                <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground dark:text-slate-300">
+                  Artikel riset dan publikasi ilmiah dapat ditambahkan secara manual melalui Admin Dashboard.
+                </p>
+                <Link
+                  to="/admin"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-blue-dark"
+                >
+                  Kelola Artikel di Admin Dashboard <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             ) : (
               <>
@@ -278,8 +290,20 @@ export function Artikel() {
         {activePillar === "berita" && (
           <div className="mt-8">
             {filteredNews.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border bg-white py-16 text-center text-muted-foreground">
-                Tidak ada berita atau kegiatan yang cocok dengan pencarian Anda.
+              <div className="rounded-3xl border border-dashed border-border bg-white p-12 text-center shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <Newspaper className="mx-auto h-12 w-12 text-brand-blue dark:text-brand-teal" />
+                <h3 className="mt-4 font-display text-lg font-bold text-brand-blue-deep dark:text-white">
+                  Belum Ada Berita Dipublikasikan
+                </h3>
+                <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground dark:text-slate-300">
+                  Rilis pers, kabar kegiatan, dan program kemitraan dapat ditambahkan secara manual melalui Admin Dashboard.
+                </p>
+                <Link
+                  to="/admin"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-blue-dark"
+                >
+                  Kelola Berita di Admin Dashboard <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             ) : (
               <>
