@@ -457,11 +457,8 @@ export function Home() {
             <ScrollReveal delay={100}>
               <div className="mt-8 rounded-2xl border border-dashed border-border bg-brand-cream/50 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
                 <BookOpen className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
-                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Artikel Dipublikasikan</p>
-                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan artikel & publikasi riset baru melalui Admin Dashboard.</p>
-                <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
-                  Tambah Artikel di Admin <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">{t("emptyArticlesTitle")}</p>
+                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">{t("emptyArticlesSub")}</p>
               </div>
             </ScrollReveal>
           ) : (
@@ -523,11 +520,8 @@ export function Home() {
             <ScrollReveal delay={100}>
               <div className="mt-8 rounded-2xl border border-dashed border-border bg-white/60 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
                 <Newspaper className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
-                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Berita Dipublikasikan</p>
-                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan berita & kegiatan baru melalui Admin Dashboard.</p>
-                <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
-                  Tambah Berita di Admin <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">{t("emptyNewsTitle")}</p>
+                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">{t("emptyNewsSub")}</p>
               </div>
             </ScrollReveal>
           ) : (

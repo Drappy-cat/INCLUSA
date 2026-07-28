@@ -85,9 +85,9 @@ export const translations = {
     tabPillar1: "Artikel & Publikasi Riset",
     tabPillar2: "Berita & Kegiatan",
     emptyArticlesTitle: "Belum Ada Artikel Dipublikasikan",
-    emptyArticlesSub: "Artikel riset dan publikasi ilmiah dapat ditambahkan secara manual melalui Admin Dashboard.",
+    emptyArticlesSub: "Artikel riset dan publikasi ilmiah terbaru akan segera hadir di sini.",
     emptyNewsTitle: "Belum Ada Berita Dipublikasikan",
-    emptyNewsSub: "Rilis pers, kabar kegiatan, dan program kemitraan dapat ditambahkan secara manual melalui Admin Dashboard.",
+    emptyNewsSub: "Rilis pers dan kabar kegiatan terbaru akan segera hadir di sini.",
     btnManageAdmin: "Kelola di Admin Dashboard",
 
     // ── CONSULTING PAGE ──
@@ -243,9 +243,9 @@ export const translations = {
     tabPillar1: "Research Articles & Publications",
     tabPillar2: "News & Activities",
     emptyArticlesTitle: "No Articles Published Yet",
-    emptyArticlesSub: "Scientific research articles and publications can be added manually via the Admin Dashboard.",
+    emptyArticlesSub: "Latest research articles and publications will be available here soon.",
     emptyNewsTitle: "No News Published Yet",
-    emptyNewsSub: "Press releases, activity news, and partnership programs can be added manually via the Admin Dashboard.",
+    emptyNewsSub: "Latest press releases and activity news will be available here soon.",
     btnManageAdmin: "Manage in Admin Dashboard",
 
     // ── CONSULTING PAGE ──

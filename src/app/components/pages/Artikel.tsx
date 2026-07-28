@@ -181,14 +181,8 @@ export function Artikel() {
                   Belum Ada Artikel Dipublikasikan
                 </h3>
                 <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground dark:text-slate-300">
-                  Artikel riset dan publikasi ilmiah dapat ditambahkan secara manual melalui Admin Dashboard.
+                  {t("emptyArticlesSub")}
                 </p>
-                <Link
-                  to="/admin"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-blue-dark"
-                >
-                  Kelola Artikel di Admin Dashboard <ArrowRight className="h-4 w-4" />
-                </Link>
               </div>
             ) : (
               <>
@@ -296,14 +290,8 @@ export function Artikel() {
                   Belum Ada Berita Dipublikasikan
                 </h3>
                 <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground dark:text-slate-300">
-                  Rilis pers, kabar kegiatan, dan program kemitraan dapat ditambahkan secara manual melalui Admin Dashboard.
+                  {t("emptyNewsSub")}
                 </p>
-                <Link
-                  to="/admin"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-blue-dark"
-                >
-                  Kelola Berita di Admin Dashboard <ArrowRight className="h-4 w-4" />
-                </Link>
               </div>
             ) : (
               <>
