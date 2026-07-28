@@ -156,21 +156,60 @@ function MultiImageUpload({
   );
 }
 
+// ---------- DatePicker Field (Ketik / Pilih Kalender) ----------
+function DatePickerField({ value, onChange }: { value: string; onChange: (val: string) => void }) {
+  const handleCalendar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    if (!raw) return;
+    const parts = raw.split("-");
+    if (parts.length === 3) {
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      const dt = new Date(y, m, d);
+      const formatted = dt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+      onChange(formatted);
+    } else {
+      onChange(raw);
+    }
+  };
+
+  return (
+    <div className="flex gap-2">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={`${inputCls} flex-1`}
+        placeholder={`cth: ${todayLabel()}`}
+      />
+      <input
+        type="date"
+        onChange={handleCalendar}
+        className="rounded-lg border border-border bg-white px-2 py-2 text-xs text-brand-blue-deep outline-none focus:border-brand-blue dark:bg-slate-800 dark:text-white dark:border-slate-700 cursor-pointer"
+        title="Pilih tanggal dari kalender"
+      />
+    </div>
+  );
+}
+
 // ---------- Multi-Link Input ----------
 function MultiLinkInput({
   links = [],
   onChange,
+  label = "Link Referensi / Sumber Tambahan (Opsional)",
 }: {
   links: ExternalLink[];
   onChange: (links: ExternalLink[]) => void;
+  label?: string;
 }) {
-  const [label, setLabel] = useState("");
+  const [lbl, setLbl] = useState("");
   const [url, setUrl] = useState("");
 
   const addLink = () => {
     if (!url.trim()) return;
-    onChange([...links, { label: label.trim() || "Link Referensi", url: url.trim() }]);
-    setLabel("");
+    onChange([...links, { label: lbl.trim() || "Link Referensi", url: url.trim() }]);
+    setLbl("");
     setUrl("");
   };
 
@@ -179,52 +218,42 @@ function MultiLinkInput({
   };
 
   return (
-    <div className="space-y-2 rounded-xl border border-border bg-slate-50/70 p-3">
-      <span className="block text-xs font-semibold text-brand-blue-deep">
-        Opsi Multi-Link Referensi / Sumber Asli
+    <div className="rounded-xl border border-border bg-slate-50/50 p-3 dark:bg-slate-900/60 dark:border-slate-800">
+      <span className="block text-xs font-semibold text-brand-blue-deep dark:text-slate-200 mb-1">
+        {label}
       </span>
-
       {links.length > 0 && (
-        <div className="space-y-1.5 mb-2">
-          {links.map((lnk, idx) => (
-            <div key={idx} className="flex items-center justify-between gap-2 rounded-lg border border-border bg-white px-3 py-1.5 text-xs shadow-sm">
-              <span className="font-semibold text-brand-blue-deep truncate max-w-[150px]">{lnk.label}</span>
-              <span className="text-muted-foreground truncate flex-1">{lnk.url}</span>
-              <button
-                type="button"
-                onClick={() => removeLink(idx)}
-                className="text-brand-red hover:underline p-1"
-                title="Hapus Link"
-              >
-                <Trash2 className="h-3.5 w-3.5" />
+        <div className="space-y-1.5 mb-3">
+          {links.map((l, i) => (
+            <div key={i} className="flex items-center justify-between gap-2 rounded-lg bg-white p-2 text-xs border border-border dark:bg-slate-800 dark:border-slate-700">
+              <span className="font-semibold text-brand-blue dark:text-brand-teal line-clamp-1">{l.label}: <a href={l.url} target="_blank" rel="noreferrer" className="underline font-normal text-muted-foreground dark:text-slate-300">{l.url}</a></span>
+              <button type="button" onClick={() => removeLink(i)} className="text-red-500 hover:text-red-700 p-0.5">
+                <X className="h-3.5 w-3.5" />
               </button>
             </div>
           ))}
         </div>
       )}
-
-      <div className="grid grid-cols-2 gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
-          value={label}
-          onChange={(e) => setLabel(e.target.value)}
-          placeholder="Judul Link (mis. 'Dokumen PDF Rujukan')"
-          className="rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue"
+          value={lbl}
+          onChange={(e) => setLbl(e.target.value)}
+          placeholder="Nama/Judul Link (cth: Surat Keputusan / Jurnal)"
+          className="flex-1 rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue dark:bg-slate-800 dark:text-white dark:border-slate-700"
         />
-        <div className="flex gap-2">
-          <input
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://..."
-            className="flex-1 rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue"
-          />
-          <button
-            type="button"
-            onClick={addLink}
-            className="shrink-0 rounded-lg bg-brand-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-blue-dark"
-          >
-            + Tambah Link
-          </button>
-        </div>
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="https://..."
+          className="flex-1 rounded-lg border border-border bg-white px-3 py-1.5 text-xs outline-none focus:border-brand-blue dark:bg-slate-800 dark:text-white dark:border-slate-700"
+        />
+        <button
+          type="button"
+          onClick={addLink}
+          className="rounded-lg bg-brand-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-blue-dark shrink-0"
+        >
+          + Tambah Link
+        </button>
       </div>
     </div>
   );
@@ -305,11 +334,11 @@ function ArticleManager() {
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Penulis">
-              <input value={form.author} onChange={(e) => set("author", e.target.value)} className={inputCls} placeholder="Nama penulis" />
+            <Field label="Penulis (Opsional)">
+              <input value={form.author} onChange={(e) => set("author", e.target.value)} className={inputCls} placeholder="Nama penulis (Opsional)" />
             </Field>
-            <Field label="Tanggal">
-              <input value={form.date} onChange={(e) => set("date", e.target.value)} className={inputCls} placeholder={todayLabel()} />
+            <Field label="Tanggal (Dapat Ketik / Pilih Kalender)">
+              <DatePickerField value={form.date} onChange={(val) => set("date", val)} />
             </Field>
           </div>
           <Field label="Ringkasan">
@@ -319,7 +348,7 @@ function ArticleManager() {
             <textarea value={form.body} onChange={(e) => set("body", e.target.value)} rows={6} className={inputCls} placeholder="Tulis isi lengkap artikel di sini. Pisahkan paragraf dengan baris kosong…" />
           </Field>
           <MultiImageUpload images={form.images} onChange={(imgs) => set("images", imgs)} />
-          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} />
+          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} label="Link / Referensi Artikel (Opsional)" />
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">
             <button onClick={submit} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white hover:bg-brand-blue-dark">
@@ -446,16 +475,16 @@ function NewsManager() {
             <Field label="Tag">
               <input value={form.tag} onChange={(e) => set("tag", e.target.value)} className={inputCls} placeholder="Program" />
             </Field>
-            <Field label="Tanggal">
-              <input value={form.date} onChange={(e) => set("date", e.target.value)} className={inputCls} placeholder={todayLabel()} />
+            <Field label="Tanggal (Dapat Ketik / Pilih Kalender)">
+              <DatePickerField value={form.date} onChange={(val) => set("date", val)} />
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Nama Sumber Utama">
-              <input value={form.source} onChange={(e) => set("source", e.target.value)} className={inputCls} placeholder="Dinas Kesehatan Sidoarjo" />
+            <Field label="Nama Sumber Utama (Opsional)">
+              <input value={form.source} onChange={(e) => set("source", e.target.value)} className={inputCls} placeholder="cth: Dinas Kesehatan Sidoarjo (Opsional)" />
             </Field>
-            <Field label="Link Sumber Utama (URL)">
-              <input value={form.url} onChange={(e) => set("url", e.target.value)} className={inputCls} placeholder="https://..." />
+            <Field label="Link Sumber Utama / URL (Opsional)">
+              <input value={form.url} onChange={(e) => set("url", e.target.value)} className={inputCls} placeholder="https://... (Opsional)" />
             </Field>
           </div>
           <Field label="Ringkasan">
@@ -469,7 +498,7 @@ function NewsManager() {
           <MultiImageUpload images={form.images} onChange={(imgs) => set("images", imgs)} />
 
           {/* Multi-Link External Resource Input */}
-          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} />
+          <MultiLinkInput links={form.links} onChange={(lnks) => set("links", lnks)} label="Link / Referensi Tambahan Berita (Opsional)" />
 
           <StatusToggle value={form.status} onChange={(v) => set("status", v)} />
           <div className="flex gap-2 pt-1">

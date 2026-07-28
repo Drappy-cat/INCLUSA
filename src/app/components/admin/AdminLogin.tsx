@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ShieldCheck, LogIn, AlertCircle } from "lucide-react";
+import { Link } from "react-router";
+import { ShieldCheck, LogIn, AlertCircle, Home } from "lucide-react";
 import { useAuth, DEMO_ACCOUNTS } from "../../data/AuthStore";
 import { Wordmark } from "../layout/Logo";
 
@@ -22,8 +23,16 @@ export function AdminLogin() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-brand-cream px-4 py-12 dark:bg-[#070d18] transition-colors duration-200">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-brand-cream px-4 py-12 dark:bg-[#070d18] transition-colors duration-200">
       <div className="w-full max-w-md">
+        <div className="mb-4 flex justify-between items-center">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-xs font-semibold text-brand-blue-deep shadow-sm transition-all hover:bg-accent dark:bg-slate-800 dark:text-white dark:border-slate-700"
+          >
+            <Home className="h-4 w-4 text-brand-blue dark:text-brand-teal" /> Kembali ke Beranda Utama
+          </Link>
+        </div>
         <div className="rounded-3xl border border-border bg-white p-8 shadow-sm dark:bg-[#0f1c30] dark:border-slate-800">
           <div className="flex flex-col items-center text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue text-white shadow-md">

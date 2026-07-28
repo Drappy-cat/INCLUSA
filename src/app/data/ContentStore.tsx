@@ -17,7 +17,7 @@ import {
 // Ini pondasi front-end; siap ditingkatkan ke Supabase bila diperlukan.
 // ---------------------------------------------------------------------------
 
-const STORAGE_KEY = "inclusa:content:v4";
+const STORAGE_KEY = "inclusa:content:v5";
 
 export type FaqItem = Faq & { id: string };
 
@@ -83,6 +83,7 @@ function loadInitial(): StoreData {
       localStorage.removeItem("inclusa:content:v1");
       localStorage.removeItem("inclusa:content:v2");
       localStorage.removeItem("inclusa:content:v3");
+      localStorage.removeItem("inclusa:content:v4");
 
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {

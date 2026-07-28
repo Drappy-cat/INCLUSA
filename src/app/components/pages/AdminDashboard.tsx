@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import {
   LayoutDashboard, CheckSquare, Users, FileText, Newspaper, HelpCircle,
   Map as MapIcon, BarChart3, Bell, Settings, ShieldCheck, Clock, Check, X,
-  LayoutTemplate, KeyRound, ScrollText, LogOut,
+  LayoutTemplate, KeyRound, ScrollText, LogOut, Home, ChevronRight,
 } from "lucide-react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, Tooltip, CartesianGrid } from "recharts";
 import { trendData } from "../../data/content";
@@ -43,28 +44,28 @@ function ApprovalCenter({ compact }: { compact?: boolean }) {
   const list = compact ? drafts.slice(0, 4) : drafts;
 
   return (
-    <div className={compact ? "" : "rounded-2xl border border-border bg-white p-6"}>
+    <div className={compact ? "" : "rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800"}>
       {!compact && (
         <div className="mb-4 flex items-center gap-2">
           <Clock className="h-5 w-5 text-brand-coral" />
-          <h3 className="font-display font-bold text-brand-blue-deep">Konten Menunggu Persetujuan</h3>
+          <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Konten Menunggu Persetujuan</h3>
         </div>
       )}
       {list.length === 0 ? (
-        <p className="rounded-xl bg-brand-cream p-4 text-sm text-muted-foreground">
+        <p className="rounded-xl bg-brand-cream p-4 text-sm text-muted-foreground dark:bg-slate-900 dark:text-slate-300">
           Tidak ada konten yang menunggu persetujuan. 🎉
         </p>
       ) : (
         <div className="space-y-3">
           {list.map((p) => (
-            <div key={p.id} className="rounded-xl bg-brand-cream p-3">
-              <p className="line-clamp-1 text-sm font-semibold text-brand-blue-deep">{p.title}</p>
-              <p className="text-xs text-muted-foreground">{p.type} · draft</p>
+            <div key={p.id} className="rounded-xl bg-brand-cream p-3 dark:bg-slate-800">
+              <p className="line-clamp-1 text-sm font-semibold text-brand-blue-deep dark:text-white">{p.title}</p>
+              <p className="text-xs text-muted-foreground dark:text-slate-400">{p.type} · draft</p>
               <div className="mt-2 flex gap-2">
                 <button onClick={() => approve(p.id, p.type)} className="flex items-center gap-1 rounded-lg bg-brand-blue px-3 py-1 text-xs font-semibold text-white">
                   <Check className="h-3 w-3" /> Terbitkan
                 </button>
-                <button onClick={() => reject(p.id, p.type)} className="flex items-center gap-1 rounded-lg border border-border px-3 py-1 text-xs font-semibold text-brand-blue-deep">
+                <button onClick={() => reject(p.id, p.type)} className="flex items-center gap-1 rounded-lg border border-border px-3 py-1 text-xs font-semibold text-brand-blue-deep dark:text-white dark:border-slate-700">
                   <X className="h-3 w-3" /> Tolak
                 </button>
               </div>
@@ -85,18 +86,66 @@ export function AdminDashboard() {
     articles.filter((a) => a.status === "draft").length + news.filter((n) => n.status === "draft").length;
 
   const kpis = [
-    { label: "Total Pengguna", value: "1.284", delta: "+12%", tone: "text-brand-blue" },
+    { label: "Total Pengguna", value: "1.284", delta: "+12%", tone: "text-brand-blue dark:text-brand-teal" },
     { label: "Menunggu Approval", value: String(draftCount), delta: draftCount ? "perlu tindakan" : "bersih", tone: "text-brand-coral" },
-    { label: "Artikel Terbit", value: String(articles.filter((a) => a.status !== "draft").length), delta: `${news.length} berita`, tone: "text-[#17787d]" },
+    { label: "Artikel Terbit", value: String(articles.filter((a) => a.status !== "draft").length), delta: `${news.length} berita`, tone: "text-[#17787d] dark:text-brand-teal" },
     { label: "Kunjungan Bulan Ini", value: "42.9K", delta: "+8%", tone: "text-brand-red" },
   ];
 
   return (
     <div className="min-h-screen bg-brand-cream dark:bg-[#070d18] transition-colors duration-200">
-      <div className="mx-auto flex max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:px-8">
-        {/* sidebar */}
+      {/* Top Header Bar for Admin */}
+      <div className="border-b border-border bg-white py-3 shadow-sm dark:bg-[#0f1c30] dark:border-slate-800">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-brand-cream px-4 py-2 text-xs font-semibold text-brand-blue-deep shadow-sm transition-all hover:bg-brand-blue hover:text-white dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-brand-teal dark:hover:text-slate-950"
+            >
+              <Home className="h-4 w-4 text-brand-blue dark:text-brand-teal group-hover:text-white" />
+              <span>Kembali ke Website Utama</span>
+            </Link>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="hidden text-xs text-muted-foreground dark:text-slate-300 sm:inline-block">
+              {user?.name} (<span className="font-semibold text-brand-blue dark:text-brand-teal">{user?.role}</span>)
+            </span>
+            <button
+              onClick={logout}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3.5 py-1.5 text-xs font-semibold text-brand-red transition-all hover:bg-brand-red/10 dark:bg-slate-800 dark:border-slate-700"
+            >
+              <LogOut className="h-3.5 w-3.5" /> Keluar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto flex max-w-7xl flex-col lg:flex-row gap-6 px-4 py-6 sm:px-6 lg:px-8">
+        {/* Mobile Nav Tabs (Horizontal Scroll) */}
+        <div className="lg:hidden">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {nav.map((n) => (
+              <button
+                key={n.label}
+                onClick={() => setActiveNav(n.label)}
+                className={`flex shrink-0 items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all ${
+                  n.label === activeNav
+                    ? "bg-brand-blue text-white shadow-sm"
+                    : "bg-white text-brand-blue-deep/70 border border-border dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
+                }`}
+              >
+                <n.icon className="h-3.5 w-3.5" /> {n.label}
+                {n.label === "Approval" && draftCount > 0 && (
+                  <span className="rounded-full bg-brand-coral px-1.5 text-[0.6rem] font-bold text-white">{draftCount}</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop sidebar */}
         <aside className="hidden w-60 shrink-0 lg:block">
-          <div className="sticky top-24 rounded-2xl border border-border bg-white p-3 shadow-sm dark:bg-[#0f1c30] dark:border-slate-800">
+          <div className="sticky top-6 rounded-2xl border border-border bg-white p-3 shadow-sm dark:bg-[#0f1c30] dark:border-slate-800">
             {/* user card */}
             <div className="flex items-center gap-2 rounded-lg bg-brand-cream px-3 py-2 dark:bg-slate-800/80 border border-transparent dark:border-slate-700/50">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue font-display text-sm font-bold text-white shadow-sm">
@@ -143,9 +192,6 @@ export function AdminDashboard() {
                 Masuk sebagai <span className="font-semibold text-brand-blue dark:text-brand-teal">{user?.role}</span> · Yayasan INCLUSA.
               </p>
             </div>
-            <button onClick={logout} className="flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1.5 text-xs font-semibold text-brand-blue-deep dark:bg-slate-800 dark:text-white dark:border-slate-700 lg:hidden">
-              <LogOut className="h-3.5 w-3.5" /> Keluar
-            </button>
           </div>
 
           {/* module views */}
@@ -171,18 +217,18 @@ export function AdminDashboard() {
             <>
               <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
                 {kpis.map((k) => (
-                  <div key={k.label} className="rounded-2xl border border-border bg-white p-5">
-                    <p className="text-xs text-muted-foreground">{k.label}</p>
+                  <div key={k.label} className="rounded-2xl border border-border bg-white p-5 dark:bg-slate-900 dark:border-slate-800">
+                    <p className="text-xs text-muted-foreground dark:text-slate-400">{k.label}</p>
                     <p className={`mt-2 font-display text-2xl font-extrabold ${k.tone}`}>{k.value}</p>
-                    <p className="mt-1 text-xs font-medium text-[#17787d]">{k.delta}</p>
+                    <p className="mt-1 text-xs font-medium text-[#17787d] dark:text-brand-teal">{k.delta}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
                 {/* chart */}
-                <div className="rounded-2xl border border-border bg-white p-6">
-                  <h3 className="font-display font-bold text-brand-blue-deep">Tren Kunjungan & Layanan</h3>
+                <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
+                  <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Tren Kunjungan & Layanan</h3>
                   <div className="mt-4 h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -202,10 +248,10 @@ export function AdminDashboard() {
                 </div>
 
                 {/* approval preview */}
-                <div className="rounded-2xl border border-border bg-white p-6">
+                <div className="rounded-2xl border border-border bg-white p-6 dark:bg-[#0f1c30] dark:border-slate-800">
                   <div className="mb-4 flex items-center gap-2">
                     <Clock className="h-5 w-5 text-brand-coral" />
-                    <h3 className="font-display font-bold text-brand-blue-deep">Approval Center</h3>
+                    <h3 className="font-display font-bold text-brand-blue-deep dark:text-white">Approval Center</h3>
                   </div>
                   <ApprovalCenter compact />
                 </div>
