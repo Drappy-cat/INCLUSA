@@ -12,12 +12,14 @@ import {
   Building2,
   HeartHandshake,
   Quote,
+  Newspaper,
   CheckCircle2,
   ChevronRight,
   ChevronLeft,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { SectionHeading, StatCard, Eyebrow } from "../ui-kit/Shared";
+import { ScrollReveal } from "../ui-kit/ScrollReveal";
 import {
   collabStats,
 } from "../../data/content";
@@ -333,43 +335,46 @@ export function Home() {
       {/* ===== 5 STRATEGIC AREAS ===== */}
       <section className="bg-white py-16 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            center
-            eyebrow={t("areasEyebrow")}
-            title={t("areasTitle")}
-            subtitle={t("areasSubtitle")}
-          />
+          <ScrollReveal>
+            <SectionHeading
+              center
+              eyebrow={t("areasEyebrow")}
+              title={t("areasTitle")}
+              subtitle={t("areasSubtitle")}
+            />
+          </ScrollReveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {strategicAreas.map((m) => (
-              <Link
-                key={m.title}
-                to={m.to}
-                className="group flex flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:border-slate-800"
-              >
-                <div className="flex items-center justify-between">
-                  <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${m.color} text-white`}>
-                    <m.icon className="h-6 w-6" />
+            {strategicAreas.map((m, idx) => (
+              <ScrollReveal key={m.title} staggerIndex={idx} distance={24}>
+                <Link
+                  to={m.to}
+                  className="group flex flex-col rounded-2xl border border-border bg-white p-6 card-hover-lift hover-glow-border dark:bg-slate-900 dark:border-slate-800"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${m.color} text-white`}>
+                      <m.icon className="h-6 w-6 icon-hover-spin" />
+                    </span>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide ${
+                        m.status === "Coming Soon"
+                          ? "bg-brand-maize/20 text-brand-maize"
+                          : "bg-accent text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal"
+                      }`}
+                    >
+                      {m.status === "Coming Soon" ? t("comingSoon") : t("active")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep dark:text-white">
+                    INCLUSA {m.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
+                    {getAreaDesc(m.title) || m.desc}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue dark:text-brand-teal">
+                    {t("btnMore")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
-                  <span
-                    className={`rounded-full px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide ${
-                      m.status === "Coming Soon"
-                        ? "bg-brand-maize/20 text-brand-maize"
-                        : "bg-accent text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal"
-                    }`}
-                  >
-                    {m.status === "Coming Soon" ? t("comingSoon") : t("active")}
-                  </span>
-                </div>
-                <h3 className="mt-4 font-display text-base font-bold text-brand-blue-deep dark:text-white">
-                  INCLUSA {m.title}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
-                  {getAreaDesc(m.title) || m.desc}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue dark:text-brand-teal">
-                  {t("btnMore")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -379,7 +384,7 @@ export function Home() {
       <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
+            <ScrollReveal direction="left">
               <Eyebrow>{t("gisEyebrow")}</Eyebrow>
               <h2 className="mt-3 font-display text-[1.8rem] font-bold leading-tight text-brand-blue-deep dark:text-white">
                 {t("gisTitle")}
@@ -389,11 +394,12 @@ export function Home() {
               </p>
               <Link
                 to="/data-center"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5 animate-cta-pulse"
               >
                 {t("gisButton")} <ArrowRight className="h-4 w-4" />
               </Link>
-            </div>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={200}>
             <div className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900 dark:border-slate-800">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground dark:text-slate-400">
@@ -411,8 +417,8 @@ export function Home() {
                     <Link
                       key={k.name}
                       to="/data-center"
-                      className="group rounded-lg p-3 text-white transition-transform hover:scale-105"
-                      style={{ backgroundColor: `rgba(31, 154, 160, ${intensity})` }}
+                      className="group rounded-lg p-3 text-white transition-all hover:scale-105 animate-pin-pulse"
+                      style={{ backgroundColor: `rgba(31, 154, 160, ${intensity})`, animationDelay: `${Math.random() * 2}s` }}
                     >
                       <p className="text-xs font-semibold leading-tight">{k.name}</p>
                       <p className="mt-1 font-display text-lg font-bold">{k.cases}</p>
@@ -426,6 +432,7 @@ export function Home() {
                 <span>{t("gisHigh")}</span>
               </div>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -433,38 +440,44 @@ export function Home() {
       {/* ===== ARTICLES (Research Center Preview) ===== */}
       <section className="bg-white py-16 dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <SectionHeading eyebrow={t("researchEyebrow")} title={t("researchTitle")} />
-            <Link to="/research" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
-              {t("researchAll")} <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {articles.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-dashed border-border bg-brand-cream/50 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
-              <BookOpen className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
-              <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Artikel Dipublikasikan</p>
-              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan artikel & publikasi riset baru melalui Admin Dashboard.</p>
-              <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
-                Tambah Artikel di Admin <ArrowRight className="h-3.5 w-3.5" />
+          <ScrollReveal>
+            <div className="flex items-end justify-between gap-4">
+              <SectionHeading eyebrow={t("researchEyebrow")} title={t("researchTitle")} />
+              <Link to="/research" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
+                {t("researchAll")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+          </ScrollReveal>
+
+          {articles.length === 0 ? (
+            <ScrollReveal delay={100}>
+              <div className="mt-8 rounded-2xl border border-dashed border-border bg-brand-cream/50 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
+                <BookOpen className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
+                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Artikel Dipublikasikan</p>
+                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan artikel & publikasi riset baru melalui Admin Dashboard.</p>
+                <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
+                  Tambah Artikel di Admin <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </ScrollReveal>
           ) : (
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {articles.slice(0, 3).map((a) => (
-                <article key={a.id} className="group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
-                  {a.image && (
-                    <div className="aspect-[16/10] overflow-hidden">
-                      <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              {articles.slice(0, 3).map((a, idx) => (
+                <ScrollReveal key={a.id} staggerIndex={idx}>
+                  <article className="group overflow-hidden rounded-2xl border border-border bg-white card-hover-lift dark:bg-slate-900 dark:border-slate-800">
+                    {a.image && (
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <ImageWithFallback src={a.image} alt={a.title} className="h-full w-full object-cover img-hover-zoom" />
+                      </div>
+                    )}
+                    <div className="p-5">
+                      <span className="text-xs font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
+                      <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep dark:text-white">{a.title}</h3>
+                      <p className="mt-2 line-clamp-2 text-sm text-muted-foreground dark:text-slate-300">{a.excerpt}</p>
+                      <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{a.date} · {a.readTime}</p>
                     </div>
-                  )}
-                  <div className="p-5">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-brand-coral">{a.category}</span>
-                    <h3 className="mt-2 font-display text-base font-bold leading-snug text-brand-blue-deep dark:text-white">{a.title}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground dark:text-slate-300">{a.excerpt}</p>
-                    <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{a.date} · {a.readTime}</p>
-                  </div>
-                </article>
+                  </article>
+                </ScrollReveal>
               ))}
             </div>
           )}
@@ -493,31 +506,37 @@ export function Home() {
       {/* ===== LATEST NEWS ===== */}
       <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <SectionHeading eyebrow={t("newsEyebrow")} title={t("newsTitle")} />
-            <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
-              {t("newsAll")} <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {news.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-dashed border-border bg-white/60 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
-              <Newspaper className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
-              <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Berita Dipublikasikan</p>
-              <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan berita & kegiatan baru melalui Admin Dashboard.</p>
-              <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
-                Tambah Berita di Admin <ArrowRight className="h-3.5 w-3.5" />
+          <ScrollReveal>
+            <div className="flex items-end justify-between gap-4">
+              <SectionHeading eyebrow={t("newsEyebrow")} title={t("newsTitle")} />
+              <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue dark:text-brand-teal hover:underline sm:inline-flex">
+                {t("newsAll")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+          </ScrollReveal>
+
+          {news.length === 0 ? (
+            <ScrollReveal delay={100}>
+              <div className="mt-8 rounded-2xl border border-dashed border-border bg-white/60 p-8 text-center dark:bg-slate-900/60 dark:border-slate-800">
+                <Newspaper className="mx-auto h-8 w-8 text-brand-blue dark:text-brand-teal" />
+                <p className="mt-2 font-display text-base font-bold text-brand-blue-deep dark:text-white">Belum Ada Berita Dipublikasikan</p>
+                <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300">Tambahkan berita & kegiatan baru melalui Admin Dashboard.</p>
+                <Link to="/admin" className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-blue-dark">
+                  Tambah Berita di Admin <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </ScrollReveal>
           ) : (
             <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {news.slice(0, 4).map((n) => (
-                <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg dark:bg-slate-900 dark:border-slate-800">
-                  <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{n.tag}</span>
-                  <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue dark:text-white dark:group-hover:text-brand-teal">{n.title}</h3>
-                  <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground dark:text-slate-300">{n.excerpt}</p>
-                  <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{n.date} · {n.source}</p>
-                </Link>
+              {news.slice(0, 4).map((n, idx) => (
+                <ScrollReveal key={n.id} staggerIndex={idx}>
+                  <Link to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm card-hover-lift dark:bg-slate-900 dark:border-slate-800">
+                    <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">{n.tag}</span>
+                    <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue dark:text-white dark:group-hover:text-brand-teal">{n.title}</h3>
+                    <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground dark:text-slate-300">{n.excerpt}</p>
+                    <p className="mt-3 text-xs text-muted-foreground dark:text-slate-400">{n.date} · {n.source}</p>
+                  </Link>
+                </ScrollReveal>
               ))}
             </div>
           )}
@@ -527,12 +546,14 @@ export function Home() {
       {/* ===== COLLABORATION PARTNERS (Marquee Placeholder) ===== */}
       <section className="bg-white py-16 overflow-hidden dark:bg-[#0f1c30]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            center
-            eyebrow={t("partnerEyebrow")}
-            title={t("partnerTitle")}
-            subtitle={t("partnerSubtitle")}
-          />
+          <ScrollReveal>
+            <SectionHeading
+              center
+              eyebrow={t("partnerEyebrow")}
+              title={t("partnerTitle")}
+              subtitle={t("partnerSubtitle")}
+            />
+          </ScrollReveal>
 
           {/* Marquee container */}
           <div className="relative mt-10">
@@ -608,30 +629,32 @@ export function Home() {
       {/* ===== CTA ===== */}
       <section className="bg-brand-cream py-16 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-blue via-brand-blue-dark to-brand-blue-deep p-8 text-white shadow-xl sm:p-12">
-            <div className="relative z-10 max-w-2xl">
-              <h2 className="font-display text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl text-white">
-                {t("ctaTitle")}
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-white/90 sm:text-base">
-                {t("ctaSub")}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  to="/kontak"
-                  className="rounded-full bg-brand-maize px-7 py-3 text-sm font-bold text-brand-blue-deep shadow-md transition-all hover:bg-white hover:shadow-lg"
-                >
-                  {t("ctaBtnContact")}
-                </Link>
-                <Link
-                  to="/data-center"
-                  className="rounded-full bg-white/15 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur-sm transition-colors hover:bg-white/25"
-                >
-                  {t("ctaBtnData")}
-                </Link>
+          <ScrollReveal>
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-blue via-brand-blue-dark to-brand-blue-deep p-8 text-white shadow-xl sm:p-12 animate-mesh-shimmer" style={{ backgroundImage: 'linear-gradient(135deg, #1f9aa0, #17787d, #123a40, #17787d, #1f9aa0)' }}>
+              <div className="relative z-10 max-w-2xl">
+                <h2 className="font-display text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl text-white">
+                  {t("ctaTitle")}
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed text-white/90 sm:text-base">
+                  {t("ctaSub")}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    to="/kontak"
+                    className="rounded-full bg-brand-maize px-7 py-3 text-sm font-bold text-brand-blue-deep shadow-md transition-all hover:bg-white hover:shadow-lg hover:-translate-y-0.5"
+                  >
+                    {t("ctaBtnContact")}
+                  </Link>
+                  <Link
+                    to="/data-center"
+                    className="rounded-full bg-white/15 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur-sm transition-all hover:bg-white/25 hover:-translate-y-0.5"
+                  >
+                    {t("ctaBtnData")}
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ScrollReveal } from "../ui-kit/ScrollReveal";
 import { useLanguage } from "../../data/LanguageContext";
 
 const WHATSAPP_NUMBER = "6281100001234";
@@ -80,9 +81,10 @@ export function Kontak() {
       </section>
 
       {/* ─────────────── 2. CONTACT US SECTION (INFO + FORM) ─────────────── */}
-      <section className="bg-brand-cream py-16 sm:py-20">
+      <section className="bg-brand-cream py-16 sm:py-20 dark:bg-[#0b1329]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-xl lg:grid lg:grid-cols-12">
+          <ScrollReveal>
+          <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-xl lg:grid lg:grid-cols-12 dark:bg-slate-900 dark:border-slate-800">
 
             {/* Left Column: Institutional Contact Details */}
             <div className="bg-brand-blue-deep p-8 text-white sm:p-12 lg:col-span-5">
@@ -205,7 +207,7 @@ export function Kontak() {
                       value={form.name}
                       onChange={(e) => setField("name", e.target.value)}
                       placeholder={t("placeholderName")}
-                      className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-brand-blue-deep outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 dark:bg-slate-800 dark:text-white dark:border-slate-700"
+                      className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-brand-blue-deep outline-none input-focus-glow dark:bg-slate-800 dark:text-white dark:border-slate-700"
                     />
                   </div>
 
@@ -272,7 +274,7 @@ export function Kontak() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-blue-dark hover:shadow-lg"
+                      className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-blue-dark hover:shadow-lg hover:-translate-y-0.5 animate-cta-pulse"
                     >
                       {t("btnSubmit")} <ArrowRight className="h-4 w-4" />
                     </button>
@@ -282,6 +284,7 @@ export function Kontak() {
             </div>
 
           </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

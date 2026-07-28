@@ -205,8 +205,6 @@ export const articles: Article[] = [
   },
 ];
 
-export type NewsItem = { id: string; title: string; date: string; source: string; excerpt: string; tag: string; image?: string; body?: string; url?: string; status?: ContentStatus };
-
 export const news: NewsItem[] = [
   {
     id: "n1",

@@ -6,6 +6,8 @@ import {
   Handshake, Lightbulb, Leaf, Linkedin, Mail, Stethoscope, Video
 } from "lucide-react";
 import { SectionHeading, Eyebrow } from "../ui-kit/Shared";
+import { ScrollReveal } from "../ui-kit/ScrollReveal";
+import { useScrollReveal, useCountUp } from "../../hooks/useAnimations";
 import { markUrl } from "../layout/Logo";
 import { organization } from "../../data/content";
 import founderImg from "../../../assets/founder.jpg";
@@ -17,6 +19,39 @@ const avatarTone: Record<string, string> = {
   coral: "bg-brand-coral",
   maize: "bg-brand-maize text-brand-blue-deep",
 };
+
+/* ─── Count-Up Stats Grid (animated numbers) ─── */
+const statsData = [
+  { icon: Building2, target: 50, suffix: "+", title: "Mitra Layanan Kesehatan", desc: "Fasilitas kesehatan dan klinik yang terhubung" },
+  { icon: Users, target: 10, suffix: "k+", title: "Komunitas Terlayani", desc: "Masyarakat yang telah menerima edukasi" },
+  { icon: Video, target: 100, suffix: "+", title: "Media Edukasi", desc: "Artikel, video, dan infografis interaktif" },
+  { icon: Network, target: 15, suffix: "+", title: "Kolaborasi Aktif", desc: "Lembaga pemerintah dan NGO" },
+];
+
+function CountUpStatsGrid() {
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.3 });
+  return (
+    <>
+      {statsData.map((stat, i) => {
+        const count = useCountUp(stat.target, isVisible, 2000);
+        return (
+          <ScrollReveal key={i} staggerIndex={i} distance={20}>
+            <div ref={i === 0 ? ref : undefined} className="group rounded-3xl border border-border bg-white p-8 shadow-sm card-hover-lift dark:bg-slate-900 dark:border-slate-800">
+              <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-teal">
+                <stat.icon className="h-7 w-7 icon-hover-spin" />
+              </div>
+              <h4 className="font-display text-4xl font-bold text-brand-blue-deep dark:text-white tabular-nums">
+                {count}{stat.suffix}
+              </h4>
+              <h5 className="mt-2 font-display text-sm font-bold text-brand-blue dark:text-brand-teal">{stat.title}</h5>
+              <p className="mt-1 text-sm text-muted-foreground dark:text-slate-300">{stat.desc}</p>
+            </div>
+          </ScrollReveal>
+        );
+      })}
+    </>
+  );
+}
 
 export function TentangKami() {
   const { t } = useLanguage();
@@ -104,22 +139,8 @@ export function TentangKami() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 content-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
-               {[
-                 { icon: Building2, count: "50+", title: "Mitra Layanan Kesehatan", desc: "Fasilitas kesehatan dan klinik yang terhubung" },
-                 { icon: Users, count: "10k+", title: "Komunitas Terlayani", desc: "Masyarakat yang telah menerima edukasi" },
-                 { icon: Video, count: "100+", title: "Media Edukasi", desc: "Artikel, video, dan infografis interaktif" },
-                 { icon: Network, count: "15+", title: "Kolaborasi Aktif", desc: "Lembaga pemerintah dan NGO" },
-               ].map((stat, i) => (
-                 <div key={i} className="group rounded-3xl border border-border bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
-                   <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue">
-                     <stat.icon className="h-7 w-7" />
-                   </div>
-                   <h4 className="font-display text-4xl font-bold text-brand-blue-deep">{stat.count}</h4>
-                   <h5 className="mt-2 font-display text-sm font-bold text-brand-blue">{stat.title}</h5>
-                   <p className="mt-1 text-sm text-muted-foreground">{stat.desc}</p>
-                 </div>
-               ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 content-center">
+               <CountUpStatsGrid />
             </div>
           </div>
         </div>
@@ -138,13 +159,15 @@ export function TentangKami() {
                 { icon: Handshake, color: "text-brand-coral", bg: "bg-brand-coral/10", title: "INCLUSA Policy Lab", desc: "Riset kebijakan berbasis bukti, penyusunan naskah akademik, dan advokasi peraturan daerah ramah disabilitas & gender." },
                 { icon: BookOpen, color: "text-brand-blue", bg: "bg-brand-blue/10", title: "INCLUSA Academy", desc: "Program pelatihan bersertifikat dan modul pengembangan kapasitas untuk nakes, pendidik inklusif, dan fasilitator masyarakat." },
               ].map((feature, i) => (
-                <div key={i} className="group rounded-3xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4 dark:bg-[#0f1c30] dark:border-slate-800" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
-                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                    <feature.icon className="h-7 w-7" />
+              <ScrollReveal key={i} staggerIndex={i} distance={24}>
+                <div className="group rounded-3xl border border-border bg-white p-8 shadow-sm card-hover-lift hover-glow-border dark:bg-[#0f1c30] dark:border-slate-800">
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color}`}>
+                    <feature.icon className="h-7 w-7 icon-hover-spin" />
                   </div>
                   <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{feature.title}</h3>
                   <p className="mt-3 text-brand-blue-deep/70 leading-relaxed dark:text-slate-300">{feature.desc}</p>
                 </div>
+              </ScrollReveal>
               ))}
             </div>
 
@@ -154,13 +177,15 @@ export function TentangKami() {
                 { icon: FlaskConical, color: "text-brand-teal", bg: "bg-brand-teal/10", title: "INCLUSA Research & Knowledge Hub", desc: "Pusat publikasi riset, artikel pengetahuan, berita kegiatan, dan inovasi inklusi lintas sektor." },
                 { icon: Stethoscope, color: "text-brand-red", bg: "bg-brand-red/10", title: "INCLUSA Consulting", desc: "Layanan advisory pembangunan inklusif, pendampingan program CSR/ESG, dan audit aksesibilitas fasilitas publik." },
               ].map((feature, i) => (
-                <div key={i} className="group w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-3xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg animate-in fade-in slide-in-from-bottom-4 dark:bg-[#0f1c30] dark:border-slate-800" style={{ animationDelay: `${(i + 3) * 100}ms`, animationFillMode: 'both' }}>
-                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                    <feature.icon className="h-7 w-7" />
+                <ScrollReveal key={i} staggerIndex={i + 3} distance={24} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                <div className="group rounded-3xl border border-border bg-white p-8 shadow-sm card-hover-lift hover-glow-border dark:bg-[#0f1c30] dark:border-slate-800">
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} ${feature.color}`}>
+                    <feature.icon className="h-7 w-7 icon-hover-spin" />
                   </div>
                   <h3 className="font-display text-xl font-bold text-brand-blue-deep dark:text-white">{feature.title}</h3>
                   <p className="mt-3 text-brand-blue-deep/70 leading-relaxed dark:text-slate-300">{feature.desc}</p>
                 </div>
+              </ScrollReveal>
               ))}
             </div>
           </div>

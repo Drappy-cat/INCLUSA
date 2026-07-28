@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { ContentProvider } from "./data/ContentStore";
 import { AuthProvider, useAuth } from "./data/AuthStore";
@@ -22,6 +23,7 @@ import { AdminDashboard } from "./components/pages/AdminDashboard";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { ComingSoon } from "./components/pages/ComingSoon";
 import { Kontak } from "./components/pages/Kontak";
+import { SplashScreen } from "./components/ui-kit/SplashScreen";
 
 import { ThemeProvider } from "./data/ThemeContext";
 import { LanguageProvider } from "./data/LanguageContext";
@@ -32,9 +34,17 @@ function AdminRoute() {
 }
 
 export default function App() {
+  // Only show splash once per browser session
+  const [showSplash, setShowSplash] = useState(
+    () => !sessionStorage.getItem("inclusa_splash_seen")
+  );
+
   return (
     <ThemeProvider>
       <LanguageProvider>
+        {/* Splash Screen overlay */}
+        {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+
         <BrowserRouter>
           <AuthProvider>
             <ContentProvider>

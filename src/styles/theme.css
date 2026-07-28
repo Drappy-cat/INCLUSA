@@ -339,3 +339,129 @@ body {
 .dark .marquee-fade-right {
   background: linear-gradient(to left, #0f1c30 0%, transparent 100%) !important;
 }
+
+/* ────────────── ANIMATION KEYFRAMES & UTILITIES ────────────── */
+
+/* Glow border for cards on hover */
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(52, 190, 196, 0.15), 0 0 20px rgba(52, 190, 196, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(52, 190, 196, 0.3), 0 0 40px rgba(52, 190, 196, 0.1);
+  }
+}
+
+.hover-glow-border:hover {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+/* CTA Pulse shimmer */
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(31, 154, 160, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(31, 154, 160, 0);
+  }
+}
+
+.animate-cta-pulse {
+  animation: ctaPulse 2.5s ease-in-out infinite;
+}
+
+/* GIS pin pulse */
+@keyframes pinPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(52, 190, 196, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(52, 190, 196, 0);
+    transform: scale(1.05);
+  }
+}
+
+.animate-pin-pulse {
+  animation: pinPulse 2s ease-in-out infinite;
+}
+
+/* Gradient mesh shimmer for hero banners */
+@keyframes meshShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-mesh-shimmer {
+  background-size: 200% 200%;
+  animation: meshShimmer 8s ease-in-out infinite;
+}
+
+/* Card hover lift (enhanced) */
+.card-hover-lift {
+  transition: transform 300ms ease-out, box-shadow 300ms ease-out;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card-hover-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(52, 190, 196, 0.08);
+}
+
+/* Icon hover spin */
+.icon-hover-spin {
+  transition: transform 300ms ease-out;
+}
+
+.group:hover .icon-hover-spin {
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* Image zoom on hover (for article cards) */
+.img-hover-zoom {
+  transition: transform 500ms ease-out;
+}
+
+.group:hover .img-hover-zoom {
+  transform: scale(1.05);
+}
+
+/* Input focus ring glow */
+.input-focus-glow:focus {
+  box-shadow: 0 0 0 3px rgba(52, 190, 196, 0.2), 0 0 12px rgba(52, 190, 196, 0.08);
+  border-color: rgba(52, 190, 196, 0.5);
+  outline: none;
+  transition: box-shadow 200ms ease-out, border-color 200ms ease-out;
+}
+
+/* Prefers reduced motion — disable all custom animations */
+@media (prefers-reduced-motion: reduce) {
+  .hover-glow-border:hover,
+  .animate-cta-pulse,
+  .animate-pin-pulse,
+  .animate-mesh-shimmer {
+    animation: none !important;
+  }
+
+  .card-hover-lift:hover {
+    transform: none !important;
+  }
+
+  .group:hover .icon-hover-spin {
+    transform: none !important;
+  }
+
+  .group:hover .img-hover-zoom {
+    transform: none !important;
+  }
+}
