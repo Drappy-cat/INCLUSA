@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { 
   Target, Eye, Users, Network, HeartPulse, Sparkles, ArrowRight,
@@ -11,6 +12,11 @@ import { useScrollReveal, useCountUp } from "../../hooks/useAnimations";
 import { markUrl } from "../layout/Logo";
 import { organization } from "../../data/content";
 import founderImg from "../../../assets/founder.jpg";
+import slider1 from "../../../assets/about-slider-1.png";
+import slider2 from "../../../assets/about-slider-2.png";
+import slider3 from "../../../assets/about-slider-3.jpg";
+import slider4 from "../../../assets/about-slider-4.png";
+import { ImageSlider } from "../ui-kit/ImageSlider";
 import { useLanguage } from "../../data/LanguageContext";
 
 const avatarTone: Record<string, string> = {
@@ -57,43 +63,55 @@ export function TentangKami() {
   const { t } = useLanguage();
   const supervisor = organization[0];
   const devTeam = organization.slice(1);
+  const [bgIndex, setBgIndex] = useState(0);
+  const bgImages = [slider1, slider2, slider3, slider4];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % bgImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <>
       {/* 1. Hero Section (About Us) */}
-      <section id="about-us" className="relative overflow-hidden bg-brand-cream pb-16 pt-24 sm:pt-32 dark:bg-[#0b1329]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="about-us" className="relative overflow-hidden pb-16 pt-24 sm:pt-32 min-h-[500px] lg:min-h-[600px] flex items-center">
+        {/* Background Slider */}
+        {bgImages.map((img, i) => (
+          <div 
+            key={i}
+            className={`absolute inset-0 transition-opacity duration-1000 ${i === bgIndex ? "opacity-100" : "opacity-0"}`}
+          >
+            <img src={img} alt="Background" className="h-full w-full object-cover" />
+          </div>
+        ))}
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-brand-blue-deep/80 dark:bg-[#0b1329]/80"></div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <Eyebrow>{t("aboutEyebrow")}</Eyebrow>
-              <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-brand-blue-deep sm:text-4xl lg:text-5xl dark:text-white">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-maize">{t("aboutEyebrow")}</span>
+              <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                 {t("aboutTitle")}
               </h1>
-              <p className="mt-6 text-lg leading-relaxed text-brand-blue-deep/80 dark:text-slate-300">
+              <p className="mt-6 text-lg leading-relaxed text-slate-200">
                 {t("aboutSub")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#what-we-do" className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-brand-blue-dark hover:shadow-md">
                   {t("heroBtnExplore")}
                 </a>
-                <Link to="/kontak" className="inline-flex items-center gap-2 rounded-full border border-brand-blue-deep/20 bg-transparent px-6 py-3 text-sm font-semibold text-brand-blue-deep transition-all hover:-translate-y-0.5 hover:bg-brand-blue-deep/5 dark:text-white dark:border-slate-700">
+                <Link to="/kontak" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10">
                   {t("navHubungiKami")}
                 </Link>
               </div>
             </div>
-            <div className="relative flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-8 duration-1000">
-               <div className="relative flex h-80 w-80 sm:h-96 sm:w-96 items-center justify-center rounded-full bg-gradient-to-tr from-brand-teal/20 to-brand-maize/20 p-12">
+
+            <div className="relative hidden lg:flex justify-end animate-in fade-in slide-in-from-bottom-8 duration-1000">
+               <div className="relative flex h-80 w-80 sm:h-96 sm:w-96 items-center justify-center p-4">
                  <img src={markUrl} alt="INCLUSA Logo" className="h-full w-full object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105" />
-                 
-                 <div className="absolute top-12 left-0 animate-bounce rounded-2xl bg-white p-3 shadow-lg" style={{ animationDuration: '3s' }}>
-                   <HeartPulse className="h-6 w-6 text-brand-coral" />
-                 </div>
-                 <div className="absolute bottom-12 right-0 animate-bounce rounded-2xl bg-white p-3 shadow-lg" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-                   <Network className="h-6 w-6 text-brand-blue" />
-                 </div>
-                 <div className="absolute top-1/2 -right-4 animate-bounce rounded-2xl bg-white p-3 shadow-lg" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }}>
-                   <Sparkles className="h-6 w-6 text-brand-maize" />
-                 </div>
                </div>
             </div>
           </div>

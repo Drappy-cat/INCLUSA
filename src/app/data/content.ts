@@ -411,8 +411,6 @@ export const organization: TeamMember[] = [
   { id: "o2", name: "[Nama Developer 1]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D1", tone: "teal" },
   { id: "o3", name: "[Nama Developer 2]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D2", tone: "coral" },
   { id: "o4", name: "[Nama Developer 3]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D3", tone: "maize" },
-  { id: "o5", name: "[Nama Developer 4]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D4", tone: "blue" },
-  { id: "o6", name: "[Nama Developer 5]", role: "[Peran / Posisi]", focus: "[Deskripsi fokus pekerjaan atau tanggung jawab]", initials: "D5", tone: "teal" },
 ];
 
 // ===== Modul Education Center (Coming Soon) =====
