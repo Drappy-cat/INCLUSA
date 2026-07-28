@@ -183,40 +183,43 @@ export const articles: Article[] = [
   },
 ];
 
-export type NewsItem = { id: string; title: string; date: string; source: string; excerpt: string; tag: string; image?: string; body?: string; status?: ContentStatus };
+export type NewsItem = { id: string; title: string; date: string; source: string; excerpt: string; tag: string; image?: string; body?: string; url?: string; status?: ContentStatus };
 
 export const news: NewsItem[] = [
   {
     id: "n1",
-    title: "Dinkes Sidoarjo Luncurkan Program Skrining HIV Keliling",
+    title: "Dinkes Sidoarjo Luncurkan Program Skrining Keliling",
     date: "18 Juli 2026",
     source: "Dinas Kesehatan Sidoarjo",
     tag: "Program",
-    excerpt: "Mobil layanan VCT keliling menjangkau 18 kecamatan untuk mempermudah akses tes HIV bagi masyarakat.",
+    excerpt: "Mobil layanan keliling menjangkau 18 kecamatan untuk mempermudah akses layanan dan pendampingan bagi masyarakat.",
+    url: "https://dinkes.sidoarjo.go.id",
   },
   {
     id: "n2",
-    title: "Kolaborasi Yayasan & 26 Sekolah untuk Edukasi Remaja",
+    title: "Kolaborasi INCLUSA & 26 Sekolah untuk Edukasi Inklusi Remaja",
     date: "14 Juli 2026",
     source: "Dinas Pendidikan",
     tag: "Kolaborasi",
-    excerpt: "Program pendidikan kesehatan reproduksi kini masuk ke kurikulum ekstrakurikuler di sekolah menengah.",
+    excerpt: "Program pendidikan kesehatan reproduksi dan kesetaraan kini masuk ke kurikulum ekstrakurikuler di sekolah menengah.",
+    url: "https://dispendik.sidoarjo.go.id",
   },
   {
     id: "n3",
-    title: "Peringatan Hari AIDS Sedunia 2026 di Alun-Alun Sidoarjo",
+    title: "Kampanye Pembangunan Inklusif 2026 di Alun-Alun Sidoarjo",
     date: "1 Juli 2026",
-    source: "Yayasan INCLUSA",
+    source: "INCLUSA Institute",
     tag: "Acara",
-    excerpt: "Ribuan warga mengikuti kampanye 'Bersama Akhiri AIDS' dengan tes gratis dan seminar publik.",
+    excerpt: "Ribuan warga mengikuti kampanye kesadaran hak disabilitas dan perempuan dengan konseling gratis dan seminar publik.",
   },
   {
     id: "n4",
-    title: "Cakupan ARV Sidoarjo Naik Menjadi 72% di Semester I",
+    title: "Cakupan Pendampingan Disabilitas Sidoarjo Naik di Semester I",
     date: "25 Juni 2026",
-    source: "Dinas Kesehatan Sidoarjo",
+    source: "Dinas Sosial & INCLUSA",
     tag: "Capaian",
-    excerpt: "Peningkatan kepatuhan pengobatan berkat pendampingan konselor sebaya dan sistem pengingat digital.",
+    excerpt: "Peningkatan akses layanan berkat pendampingan konselor komunitas dan sistem pemetaan data digital.",
+    url: "https://dinsos.sidoarjo.go.id",
   },
 ];
 

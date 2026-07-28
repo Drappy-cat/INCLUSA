@@ -478,15 +478,15 @@ export function Home() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-4">
           <SectionHeading eyebrow="Kabar Terkini" title="Berita & Kegiatan INCLUSA" />
-          <Link to="/research" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
+          <Link to="/research?tab=berita" className="hidden shrink-0 items-center gap-1 font-semibold text-brand-blue hover:underline sm:inline-flex">
             Semua berita <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {news.slice(0, 4).map((n) => (
-            <Link key={n.id} to="/research" className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
+            <Link key={n.id} to={`/berita/${n.id}`} className="group flex flex-col rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
               <span className="w-fit rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-blue">{n.tag}</span>
-              <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep">{n.title}</h3>
+              <h3 className="mt-3 font-display text-base font-bold leading-snug text-brand-blue-deep group-hover:text-brand-blue">{n.title}</h3>
               <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{n.excerpt}</p>
               <p className="mt-3 text-xs text-muted-foreground">{n.date} · {n.source}</p>
             </Link>

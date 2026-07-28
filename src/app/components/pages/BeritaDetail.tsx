@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { ArrowLeft, Building2, Calendar } from "lucide-react";
+import { ArrowLeft, Building2, Calendar, ExternalLink } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useContent } from "../../data/ContentStore";
 
@@ -59,6 +59,24 @@ export function BeritaDetail() {
           <p key={i}>{p}</p>
         ))}
       </div>
+
+      {item.url && (
+        <div className="mt-10 rounded-2xl border border-brand-blue/20 bg-brand-cream p-6">
+          <h4 className="font-display font-bold text-brand-blue-deep">Sumber Berita Asli</h4>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Berita ini bersumber dari <span className="font-semibold text-brand-blue-deep">{item.source}</span>.
+            Anda dapat membuka tautan resmi sumber asli di bawah ini:
+          </p>
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-blue/90 hover:shadow"
+          >
+            Kunjungi Sumber Berita Asli <ExternalLink className="h-4 w-4" />
+          </a>
+        </div>
+      )}
     </article>
   );
 }

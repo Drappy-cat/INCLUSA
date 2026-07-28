@@ -50,7 +50,7 @@ export default function App() {
           <Route path="/peta" element={<Navigate to="/data-center" replace />} />
           <Route path="/artikel" element={<Navigate to="/research" replace />} />
           <Route path="/artikel/:id" element={<ArtikelDetail />} />
-          <Route path="/berita" element={<Navigate to="/research" replace />} />
+          <Route path="/berita" element={<Navigate to="/research?tab=berita" replace />} />
           <Route path="/berita/:id" element={<BeritaDetail />} />
           <Route path="/edukasi" element={<Navigate to="/academy" replace />} />
 

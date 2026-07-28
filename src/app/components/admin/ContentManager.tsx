@@ -251,7 +251,7 @@ function ArticleManager() {
 // ===========================================================================
 // Manajer Berita
 // ===========================================================================
-const emptyNews = { title: "", tag: "Program", source: "", excerpt: "", date: "", image: "", body: "", status: "published" as ContentStatus };
+const emptyNews = { title: "", tag: "Program", source: "", url: "", excerpt: "", date: "", image: "", body: "", status: "published" as ContentStatus };
 
 function NewsManager() {
   const { news, addNews, updateNews, deleteNews } = useContent();
@@ -271,7 +271,7 @@ function NewsManager() {
 
   const startEdit = (n: NewsItem) => {
     setEditing(n.id);
-    setForm({ title: n.title, tag: n.tag, source: n.source, excerpt: n.excerpt, date: n.date, image: n.image ?? "", body: n.body ?? "", status: n.status ?? "published" });
+    setForm({ title: n.title, tag: n.tag, source: n.source, url: n.url ?? "", excerpt: n.excerpt, date: n.date, image: n.image ?? "", body: n.body ?? "", status: n.status ?? "published" });
   };
 
   return (
@@ -294,9 +294,14 @@ function NewsManager() {
               <input value={form.date} onChange={(e) => set("date", e.target.value)} className={inputCls} placeholder={todayLabel()} />
             </Field>
           </div>
-          <Field label="Sumber">
-            <input value={form.source} onChange={(e) => set("source", e.target.value)} className={inputCls} placeholder="Dinas Kesehatan Sidoarjo" />
-          </Field>
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Nama Sumber">
+              <input value={form.source} onChange={(e) => set("source", e.target.value)} className={inputCls} placeholder="Dinas Kesehatan Sidoarjo" />
+            </Field>
+            <Field label="Link Sumber Berita (URL Asli)">
+              <input value={form.url} onChange={(e) => set("url", e.target.value)} className={inputCls} placeholder="https://..." />
+            </Field>
+          </div>
           <Field label="Ringkasan">
             <textarea value={form.excerpt} onChange={(e) => set("excerpt", e.target.value)} rows={2} className={inputCls} placeholder="Ringkasan singkat berita…" />
           </Field>
