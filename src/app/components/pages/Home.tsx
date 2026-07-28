@@ -316,7 +316,7 @@ export function HeroSlideshow() {
 /* ─────────────── MAIN HOME COMPONENT ─────────────── */
 export function Home() {
   const { t } = useLanguage();
-  const { articles: allArticles, news: allNews, kecamatan: kecamatanData } = useContent();
+  const { articles: allArticles, news: allNews, kecamatan: kecamatanData, partners } = useContent();
   const articles = allArticles.filter(isPublished);
   const news = allNews.filter(isPublished);
 
@@ -561,40 +561,33 @@ export function Home() {
 
             {/* Scrolling track */}
             <div className="flex items-center gap-6 animate-marquee">
-              {/* Partner slots — showing available collaboration slots */}
-              {[
-                "Kementerian Sosial",
-                "UNICEF",
-                "Dinas Pendidikan",
-                "Rumah Sakit Mitra",
-                "CSR Corporate",
-                "Pemerintah Daerah",
-                "Universitas Mitra",
-                "NGO Internasional",
-                "Lembaga Riset",
-                "Komunitas Lokal",
-                "Kementerian Sosial",
-                "UNICEF",
-                "Dinas Pendidikan",
-                "Rumah Sakit Mitra",
-                "CSR Corporate",
-                "Pemerintah Daerah",
-                "Universitas Mitra",
-                "NGO Internasional",
-                "Lembaga Riset",
-                "Komunitas Lokal",
-              ].map((name, i) => (
+              {(partners.length > 0
+                ? [...partners, ...partners, ...partners]
+                : []
+              ).map((p, i) => (
                 <div
-                  key={`${name}-${i}`}
+                  key={`${p.id}-${i}`}
                   className="flex h-20 w-44 shrink-0 flex-col items-center justify-center rounded-2xl border border-border/70 bg-white/90 px-3 shadow-sm transition-all hover:border-brand-teal/50 hover:shadow-md dark:bg-slate-800 dark:border-slate-700"
                 >
-                  <div className="h-5 w-16 rounded bg-gray-200/80 dark:bg-slate-700 mb-1" />
-                  <span className="text-[0.68rem] font-bold text-brand-blue-deep dark:text-slate-100 text-center leading-tight">
-                    {name}
+                  {p.logo ? (
+                    <ImageWithFallback src={p.logo} alt={p.name} className="h-7 max-w-[100px] object-contain mb-1" />
+                  ) : (
+                    <div className="h-5 w-16 rounded bg-gray-200/80 dark:bg-slate-700 mb-1 flex items-center justify-center text-[0.6rem] text-muted-foreground font-semibold">
+                      {p.category || "Mitra"}
+                    </div>
+                  )}
+                  <span className="text-[0.68rem] font-bold text-brand-blue-deep dark:text-slate-100 text-center leading-tight line-clamp-1">
+                    {p.name}
                   </span>
-                  <span className="mt-1 flex items-center gap-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 text-[0.58rem] font-semibold text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-600/20">
-                    <span className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
-                    Available Slot
+                  <span
+                    className={`mt-1 flex items-center gap-1 rounded-full px-2 py-0.5 text-[0.58rem] font-semibold ${
+                      p.badgeType === "slot"
+                        ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-600/20"
+                        : "bg-brand-teal/20 text-brand-blue dark:text-brand-teal"
+                    }`}
+                  >
+                    {p.badgeType === "slot" && <span className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />}
+                    {p.badgeText || "Mitra"}
                   </span>
                 </div>
               ))}

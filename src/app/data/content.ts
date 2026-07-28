@@ -423,3 +423,24 @@ export const eduModules: EduModule[] = [
   { id: "m4", title: "Digital Library", audience: "Peneliti", desc: "Perpustakaan digital jurnal, laporan, dan data terbuka HIV/AIDS Sidoarjo.", icon: "Library", status: "Segera" },
   { id: "m5", title: "Marketplace", audience: "Komunitas", desc: "Marketplace edukasi untuk berbagi & mengakses konten kelas kolaboratif.", icon: "Store", status: "Roadmap" },
 ];
+
+// ===== Modul Mitra Kolaborasi / Partner System =====
+export type PartnerItem = {
+  id: string;
+  name: string;
+  category?: string;
+  logo?: string;
+  badgeText?: string;
+  badgeType?: "active" | "slot";
+  url?: string;
+  status?: ContentStatus;
+};
+
+export const defaultPartners: PartnerItem[] = [
+  { id: "p1", name: "Kementerian Sosial RI", category: "Lembaga Pemerintah", badgeText: "Mitra Strategis", badgeType: "active" },
+  { id: "p2", name: "UNICEF Indonesia", category: "NGO Internasional", badgeText: "Mitra Aktif", badgeType: "active" },
+  { id: "p3", name: "Dinas Kesehatan Sidoarjo", category: "Pemerintah Daerah", badgeText: "Mitra Aktif", badgeType: "active" },
+  { id: "p4", name: "Universitas Airlangga", category: "Perguruan Tinggi", badgeText: "Mitra Riset", badgeType: "active" },
+  { id: "p5", name: "Dinas Pendidikan Sidoarjo", category: "Pemerintah Daerah", badgeText: "Mitra Edukasi", badgeType: "active" },
+  { id: "p6", name: "Slot Kemitraan Terbuka", category: "Pemerintah & Privat", badgeText: "Available Slot", badgeType: "slot" },
+];

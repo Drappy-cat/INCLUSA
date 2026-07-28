@@ -4,32 +4,35 @@ import {
   news as seedNews,
   faqs as seedFaqs,
   kecamatanData as seedKecamatan,
+  defaultPartners as seedPartners,
   type Article,
   type NewsItem,
   type Faq,
   type Kecamatan,
+  type PartnerItem,
 } from "./content";
 
 // ---------------------------------------------------------------------------
-// Content Store — pondasi manajemen konten & data (berita, artikel, FAQ, GIS).
+// Content Store — pondasi manajemen konten & data (berita, artikel, FAQ, GIS, Mitra).
 // Data diseed dari content.ts, lalu dipersist ke localStorage sehingga konten
 // yang dikelola lewat Admin Dashboard tetap tersimpan di sesi berikutnya.
-// Ini pondasi front-end; siap ditingkatkan ke Supabase bila diperlukan.
 // ---------------------------------------------------------------------------
 
-const STORAGE_KEY = "inclusa:content:v5";
+const STORAGE_KEY = "inclusa:content:v6";
 
 export type FaqItem = Faq & { id: string };
 
 export type NewArticle = Omit<Article, "id">;
 export type NewNews = Omit<NewsItem, "id">;
 export type NewFaq = Omit<FaqItem, "id">;
+export type NewPartner = Omit<PartnerItem, "id">;
 
 type StoreData = {
   articles: Article[];
   news: NewsItem[];
   faqs: FaqItem[];
   kecamatan: Kecamatan[];
+  partners: PartnerItem[];
 };
 
 type ContentState = StoreData & {
@@ -45,6 +48,9 @@ type ContentState = StoreData & {
   updateFaq: (id: string, f: NewFaq) => void;
   deleteFaq: (id: string) => void;
   updateKecamatan: (name: string, patch: Partial<Kecamatan>) => void;
+  addPartner: (p: NewPartner) => void;
+  updatePartner: (id: string, p: NewPartner) => void;
+  deletePartner: (id: string) => void;
   reset: () => void;
 };
 
@@ -73,22 +79,24 @@ function seed(): StoreData {
     news: [],
     faqs: seedFaqs.map((f, i) => ({ ...f, id: f.id ?? `faq-seed-${i}` })),
     kecamatan: seedKecamatan.map((k) => ({ ...k })),
+    partners: seedPartners.map((p) => ({ ...p })),
   };
 }
 
 function loadInitial(): StoreData {
   if (typeof window !== "undefined") {
     try {
-      // Clear legacy storage keys to wipe old mock articles & news
+      // Clear legacy storage keys to update schema
       localStorage.removeItem("inclusa:content:v1");
       localStorage.removeItem("inclusa:content:v2");
       localStorage.removeItem("inclusa:content:v3");
       localStorage.removeItem("inclusa:content:v4");
+      localStorage.removeItem("inclusa:content:v5");
 
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const p = JSON.parse(raw);
-        if (p.articles && p.news && p.faqs && p.kecamatan) return p as StoreData;
+        if (p.articles && p.news && p.faqs && p.kecamatan && p.partners) return p as StoreData;
       }
     } catch {
       // abaikan localStorage korup → jatuh ke seed default
@@ -134,6 +142,12 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       setData((s) => ({ ...s, faqs: s.faqs.filter((x) => x.id !== id) })),
     updateKecamatan: (name, patch) =>
       setData((s) => ({ ...s, kecamatan: s.kecamatan.map((k) => (k.name === name ? { ...k, ...patch } : k)) })),
+    addPartner: (p) =>
+      setData((s) => ({ ...s, partners: [{ ...p, id: genId("partner") }, ...s.partners] })),
+    updatePartner: (id, p) =>
+      setData((s) => ({ ...s, partners: s.partners.map((x) => (x.id === id ? { ...p, id } : x)) })),
+    deletePartner: (id) =>
+      setData((s) => ({ ...s, partners: s.partners.filter((x) => x.id !== id) })),
     reset: () => setData(seed()),
   };
 

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import {
   LayoutDashboard, CheckSquare, Users, FileText, Newspaper, HelpCircle,
   Map as MapIcon, BarChart3, Bell, Settings, ShieldCheck, Clock, Check, X,
-  LayoutTemplate, KeyRound, ScrollText, LogOut, Home, ChevronRight,
+  LayoutTemplate, KeyRound, ScrollText, LogOut, Home, ChevronRight, Handshake,
 } from "lucide-react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, Tooltip, CartesianGrid } from "recharts";
 import { trendData } from "../../data/content";
@@ -13,9 +13,11 @@ import { ContentManager } from "../admin/ContentManager";
 import { FaqManager } from "../admin/FaqManager";
 import { GisDataManager } from "../admin/GisDataManager";
 import { UsersManager } from "../admin/UsersManager";
+import { PartnerManager } from "../admin/PartnerManager";
 
 const nav = [
   { icon: LayoutDashboard, label: "Dashboard" },
+  { icon: Handshake, label: "Mitra Kolaborasi" },
   { icon: CheckSquare, label: "Approval" },
   { icon: Newspaper, label: "Berita" },
   { icon: FileText, label: "Artikel" },
@@ -195,6 +197,7 @@ export function AdminDashboard() {
           </div>
 
           {/* module views */}
+          {activeNav === "Mitra Kolaborasi" && <div className="mt-6"><PartnerManager /></div>}
           {activeNav === "Berita" && <div className="mt-6"><ContentManager kind="news" /></div>}
           {activeNav === "Artikel" && <div className="mt-6"><ContentManager kind="article" /></div>}
           {activeNav === "FAQ" && <div className="mt-6"><FaqManager /></div>}
