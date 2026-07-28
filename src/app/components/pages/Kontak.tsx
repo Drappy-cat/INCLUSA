@@ -106,8 +106,8 @@ export function Kontak() {
                     <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-maize" />
                     <div>
                       <p className="font-semibold text-white">Alamat Kantor</p>
-                      <p className="mt-0.5 leading-relaxed text-white/70">
-                        Jl. Sunandar Priyo Sudarmo, Sidoarjo, Jawa Timur, Indonesia
+                      <p className="mt-0.5 leading-relaxed text-white/60 italic">
+                        Akan diperbarui
                       </p>
                     </div>
                   </div>
@@ -116,12 +116,9 @@ export function Kontak() {
                     <Mail className="h-5 w-5 shrink-0 text-brand-maize" />
                     <div>
                       <p className="font-semibold text-white">Email Kemitraan</p>
-                      <a
-                        href={`mailto:${CONTACT_EMAIL}`}
-                        className="text-white/80 hover:text-brand-maize hover:underline"
-                      >
-                        {CONTACT_EMAIL}
-                      </a>
+                      <p className="text-white/60 italic">
+                        Akan diperbarui
+                      </p>
                     </div>
                   </div>
 
@@ -129,7 +126,7 @@ export function Kontak() {
                     <Phone className="h-5 w-5 shrink-0 text-brand-maize" />
                     <div>
                       <p className="font-semibold text-white">Telepon / WhatsApp</p>
-                      <p className="text-white/80">+62 811-0000-1234</p>
+                      <p className="text-white/60 italic">Akan diperbarui</p>
                     </div>
                   </div>
                 </div>
