@@ -511,39 +511,42 @@ export function Home() {
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-brand-cream to-transparent" />
 
             {/* Scrolling track */}
-            <div className="flex items-center gap-8 animate-marquee">
-              {/* Placeholder partner logos — will be replaced with real logos */}
+            <div className="flex items-center gap-6 animate-marquee">
+              {/* Partner slots — showing available collaboration slots */}
               {[
-                "Pemerintah Daerah",
-                "Universitas Mitra",
-                "NGO Internasional",
                 "Kementerian Sosial",
                 "UNICEF",
                 "Dinas Pendidikan",
                 "Rumah Sakit Mitra",
                 "CSR Corporate",
+                "Pemerintah Daerah",
+                "Universitas Mitra",
+                "NGO Internasional",
                 "Lembaga Riset",
                 "Komunitas Lokal",
-                // Duplicate for seamless loop
-                "Pemerintah Daerah",
-                "Universitas Mitra",
-                "NGO Internasional",
+                // Duplicate for seamless infinite loop
                 "Kementerian Sosial",
                 "UNICEF",
                 "Dinas Pendidikan",
                 "Rumah Sakit Mitra",
                 "CSR Corporate",
+                "Pemerintah Daerah",
+                "Universitas Mitra",
+                "NGO Internasional",
                 "Lembaga Riset",
                 "Komunitas Lokal",
               ].map((name, i) => (
                 <div
                   key={`${name}-${i}`}
-                  className="flex h-16 w-36 shrink-0 flex-col items-center justify-center rounded-xl border border-border/50 bg-white/80 px-3 shadow-sm"
+                  className="flex h-20 w-44 shrink-0 flex-col items-center justify-center rounded-2xl border border-border/70 bg-white/90 px-3 shadow-sm transition-all hover:border-brand-teal/50 hover:shadow-md"
                 >
-                  {/* TODO: Replace with actual partner logo images */}
-                  <div className="h-6 w-16 rounded bg-gray-200" />
-                  <span className="mt-1.5 text-[0.6rem] font-medium text-muted-foreground text-center leading-tight">
+                  <div className="h-5 w-16 rounded bg-gray-200/80 mb-1" />
+                  <span className="text-[0.68rem] font-bold text-brand-blue-deep text-center leading-tight">
                     {name}
+                  </span>
+                  <span className="mt-1 flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[0.58rem] font-semibold text-emerald-700 ring-1 ring-emerald-600/20">
+                    <span className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
+                    Available Slot
                   </span>
                 </div>
               ))}
